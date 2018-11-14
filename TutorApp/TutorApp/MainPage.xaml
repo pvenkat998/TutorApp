@@ -21,6 +21,10 @@
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
                 Clicked="ButtonClicked"/>
+        <Button Text="Signup"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="Signup"/>
         
     </StackLayout>
 

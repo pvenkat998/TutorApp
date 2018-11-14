@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TutorApp.Views.Menu.MasterPage">
+    <ContentPage.Content>
+        <StackLayout x:Name="MasterStack" VerticalOptions="FillAndExpand">
+            
+            <StackLayout x:Name="Top">
+                <Label Test="Tutor Project app" HorizontalOptions="Center" FontSize="Large"/>
+            </StackLayout>
+            <StackLayout x:Name="Mid" VerticalOptions="FillAndExpand">
+                <ListView x:Name="listview" SeparatorColor="None"></ListView>
+            </StackLayout>
+            <StackLayout x:Name="Bot">
+                <Button Text="Logout"></Button>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

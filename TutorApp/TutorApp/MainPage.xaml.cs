@@ -25,5 +25,10 @@ namespace TutorApp
                 number = new Random().Next(1, 4).ToString();
             }
         }
+        void Signup(object sender, EventArgs e)
+        {
+            NavigationPage Detail = new NavigationPage(new Signup());
+        }
+        
     }
 }
