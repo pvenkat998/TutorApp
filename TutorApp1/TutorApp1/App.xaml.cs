@@ -1,10 +1,10 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using TutorApp.Views;
+using TutorApp1.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace TutorApp
+namespace TutorApp1
 {
     public partial class App : Application
     {

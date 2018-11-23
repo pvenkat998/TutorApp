@@ -27,8 +27,7 @@ namespace TutorApp
         }
         void Signup(object sender, EventArgs e)
         {
-            NavigationPage Detail = new NavigationPage(new Signup());
+            NavigationPage Detail = new NavigationPage(new  Signup());
         }
-        
     }
 }

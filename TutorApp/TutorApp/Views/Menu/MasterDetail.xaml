@@ -5,7 +5,7 @@
              xmlns:detailviews="clr-namespace:TutorApp.Views.DetailViews;assembly=TutorApp"
              x:Class="TutorApp.Views.Menu.MasterDetail">
     <MasterDetailPage.Master>
-        <Local:MasterPage />
+    <MasterPage />
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
             <NavigationPage>
