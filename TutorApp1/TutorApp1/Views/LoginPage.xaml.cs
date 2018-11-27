@@ -37,11 +37,14 @@ namespace TutorApp1.Views
             if (user.CheckInformation())
             {
                 DisplayAlert("Login", "Login Success", "Oke");
+                App.UserDatabase.SaveUser(user);
             }
             else
             {
                 DisplayAlert("Login", "Login fail", "whateva");
             }
+
+
         }
     }
 }
