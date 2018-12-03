@@ -1,26 +1,22 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using TutorApp2.Models;
-using System.Data;
-using MySql.Data.MySqlClient;
-
 namespace TutorApp2.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
-    {
-        public LoginPage()
-        {
-            InitializeComponent();
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class Signup : ContentPage
+	{
+		public Signup ()
+		{
+			InitializeComponent ();
             Init();
         }
-
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
@@ -32,18 +28,17 @@ namespace TutorApp2.Views
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
         }
-        
         private void SignIn(object sender, EventArgs e)
         {
-            string txtSysLog="";
-            var cs ="";
+            string txtSysLog = "";
+            var cs = "";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
 
             MySqlConnection cur = new MySqlConnection("Server=db4free.net;Port=3306;Database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
             try
             {
                 cs = string.Format("Server=db4free.net;Port=3306;database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
-                
+
                 using (var db = new MySqlConnection(cs))
                 {
                     db.Open();
@@ -60,21 +55,7 @@ namespace TutorApp2.Views
                 cur.Close();
             }
             string a = "hi";
-            DisplayAlert( cs, a, txtSysLog);//do my sql updarte db
-
-
-        }
-        void Redirsignup(object sender, EventArgs e)
-        {
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (user.CheckInformation())
-            {
-                DisplayAlert("Login2", "Login Success2", "Oke2");//do my sql updarte db
-            }
-            else
-            {
-                DisplayAlert("Login2", "Login fail2", "whateva2");
-            }
+            DisplayAlert(cs, a, txtSysLog);//do my sql updarte db
 
 
         }
