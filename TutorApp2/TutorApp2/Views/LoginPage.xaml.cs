@@ -64,19 +64,9 @@ namespace TutorApp2.Views
 
 
         }
-        void Redirsignup(object sender, EventArgs e)
+        async Task Redirsignup(object sender, EventArgs e)
         {
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (user.CheckInformation())
-            {
-                DisplayAlert("Login2", "Login Success2", "Oke2");//do my sql updarte db
-            }
-            else
-            {
-                DisplayAlert("Login2", "Login fail2", "whateva2");
-            }
-
-
+            await Navigation.PushModalAsync(new Signup());
         }
     }
 }
