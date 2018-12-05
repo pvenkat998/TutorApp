@@ -52,12 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hangfire.MySql.Core_MySql.Data">
-      <Version>2.1.7</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core">
-      <Version>1.1.0</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Azure.Mobile.Client">
       <Version>2.0.0</Version>
     </PackageReference>
@@ -67,8 +61,32 @@
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Npgsql">
+      <Version>4.0.3</Version>
+    </PackageReference>
     <PackageReference Include="System.Buffers">
       <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.InteropServices">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Encoding">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading">
+      <Version>4.3.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
@@ -116,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TutorApp2\TutorApp2.csproj">
-      <Project>{6BA909B3-AAD0-4F70-BBF3-F0DB78B66C23}</Project>
+      <Project>{f6c91378-feb4-4abd-9591-0e4e594d7340}</Project>
       <Name>TutorApp2</Name>
     </ProjectReference>
   </ItemGroup>

@@ -8,16 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TutorApp2.Models;
 using System.Data;
-using Dapper;
-using Hangfire.Annotations;
-using Hangfire.Logging;
-using Hangfire.MySql.Core.JobQueue;
-using Hangfire.MySql.Core.Monitoring;
-using Hangfire.Server;
-using Hangfire.Storage;
-using Hangfire.Common;
-using Hangfire.States;
 using MySql.Data.MySqlClient;
+using Npgsql;
 
 namespace TutorApp2.Views
 {
@@ -48,24 +40,21 @@ namespace TutorApp2.Views
             string txtSysLog="";
             var cs ="we";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            string ConnectionString = "server=pvenkat998.czpzqegto9at.ap-northeast-1.rds.amazonaws.com; uid =pvenkat998;port=3306;pwd=Asshole!;database=pvenkat998";
-            string ConnectionString2 = "Server=db4free.net;Database=tutorapp123;Uid =tutorapp123;Pwd=12345678";
-            MySqlConnection cConn = new MySqlConnection(ConnectionString2);
-
+            string ConnectionString = "server=tutorappmaria.czpzqegto9at.ap-northeast-1.rds.amazonaws.com;port=3306; uid =tutorappmaria;pwd=Asshole!;database=tutorappmaria";
+            string ConnectionString2 = "Server=db4free.net;Uid =tutorapp123;Pwd=12345678;Database=tutorapp123;";
             try
             {
-                txtSysLog = "Connected";
-                cConn.Open();
+                NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
+                txtSysLog="there is meaning to live";
+                connection.Open();
             }
             catch (Exception ex)
             {
-                a = "Not Connected ...";
-
-                txtSysLog = ex.Message;
+                Console.WriteLine(ex.ToString());
+                txtSysLog = ex.ToString();
             }
 
 
-            cConn.Close();
             DisplayAlert( cs, txtSysLog, a);//do my sql updarte db
 
 

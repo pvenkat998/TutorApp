@@ -52,7 +52,7 @@ namespace TutorApp2.Views
             }
             finally
             {
-                cur.Close();
+                db.Close();
             }
             string a = "hi";
             DisplayAlert(cs, a, txtSysLog);//do my sql updarte db
