@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +6,7 @@ using System.Threading.Tasks;
 using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MySql.Data.MySqlClient;
 
 namespace TutorApp2.Views
 {
@@ -35,12 +35,11 @@ namespace TutorApp2.Views
             var cs = "";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
 
-            MySqlConnection cur = new MySqlConnection("Server=db4free.net;Port=3306;Database=tutorapp123;User Id=tutorapp123;Password=12345678;charset=utf8");
+            MySqlConnection db = new MySqlConnection("Server=db4free.net;Port=3306;Database=tutorapp123;User Id=tutorapp123;Password=12345678;charset=utf8");
+
             try
             {
-                cs = string.Format("Server=db4free.net;Port=3306;database=tutorapp123;User Id=tutorapp123;Password=12345678;charset=utf8");
-
-                using (var db = new MySqlConnection(cs))
+ 
                 {
                     db.Open();
                     txtSysLog = "success";

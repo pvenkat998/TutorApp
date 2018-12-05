@@ -23,7 +23,7 @@
                 <Label x:Name="Lbl_Password" Text="Password" />
                 <Entry x:Name="Entry_Password" Placeholder="Password"/>
                 <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignIn"/>
-                <Button x:Name="Btn_Redirsignup" Text="Sign in" Clicked="Redirsignup"/>
+                <Button x:Name="Btn_Redirsignup" Text="Sign up" Clicked="Redirsignup"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
