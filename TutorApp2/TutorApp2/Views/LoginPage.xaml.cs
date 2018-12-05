@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using TutorApp2.Models;
 using System.Data;
 using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace TutorApp2.Views
 {
@@ -35,38 +36,34 @@ namespace TutorApp2.Views
         
         private void SignIn(object sender, EventArgs e)
         {
+            string a = "hi";
             string txtSysLog="";
             var cs ="";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
 
-            MySqlConnection cur = new MySqlConnection("Server=db4free.net;Port=3306;Database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
+            string ConnectionString = "server=pvenkat998.czpzqegto9at.ap-northeast-1.rds.amazonaws.com; uid =pvenkat998;port=3306;pwd=Asshole!;database=pvenkat998";
+            string ConnectionString2 = "Server=db4free.net;Database=tutorapp123;Uid =tutorapp123;Pwd=12345678;";
+            MySqlConnection cConn = new MySqlConnection(ConnectionString2);
+
             try
             {
-                cs = string.Format("Server=db4free.net;Port=3306;database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
-                
-                using (var db = new MySqlConnection(cs))
-                {
-                    db.Open();
-                    txtSysLog = "success";
-                    db.Close();
-                }
+                cConn.Open();
+                cConn.Close();
+                txtSysLog = "Connected";
             }
             catch (Exception ex)
             {
-                txtSysLog = ex.ToString();
+                a = "Not Connected ...";
+    
+                txtSysLog = ex.Message;
             }
-            finally
-            {
-                cur.Close();
-            }
-            string a = "hi";
-            DisplayAlert( cs, a, txtSysLog);//do my sql updarte db
+            DisplayAlert( cs, txtSysLog, a);//do my sql updarte db
 
 
         }
-        async Task Redirsignup(object sender, EventArgs e)
+        void Redirsignup(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new Signup());
+            Navigation.PushModalAsync(new Signup());
         }
     }
 }

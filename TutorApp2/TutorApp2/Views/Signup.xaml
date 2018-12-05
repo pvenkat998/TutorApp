@@ -26,7 +26,7 @@
                 <Entry x:Name="Entry_Email" Placeholder="Email"/>
                 <Label x:Name="Lbl_Address" Text="Address" />
                 <Entry x:Name="Entry_Address" Placeholder="Address"/>
-                <Button x:Name="Btn_Signup" Text="Sign in" Clicked="Signup"/>
+                <Button x:Name="Btn_Signup" Text="Sign in" Clicked="Signup1"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

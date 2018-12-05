@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 namespace TutorApp2.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -25,19 +26,19 @@ namespace TutorApp2.Views
             ActivitySpinner.IsVisible = false;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
-            Entry_Password.Completed += (s, e) => SignIn(s, e);
+            Entry_Password.Completed += (s, e) => Signup1(s, e);
 
         }
-        private void SignIn(object sender, EventArgs e)
+        private void Signup1(object sender, EventArgs e)
         {
             string txtSysLog = "";
             var cs = "";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
 
-            MySqlConnection cur = new MySqlConnection("Server=db4free.net;Port=3306;Database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
+            MySqlConnection cur = new MySqlConnection("Server=db4free.net;Port=3306;Database=tutorapp123;User Id=tutorapp123;Password=12345678;charset=utf8");
             try
             {
-                cs = string.Format("Server=db4free.net;Port=3306;database=signin;User Id=tutorapp123;Password=12345678;charset=utf8");
+                cs = string.Format("Server=db4free.net;Port=3306;database=tutorapp123;User Id=tutorapp123;Password=12345678;charset=utf8");
 
                 using (var db = new MySqlConnection(cs))
                 {
