@@ -48,10 +48,10 @@ namespace TutorApp2.Views
             );
 
             //MA - -------------  solve ma?----------------------
-            analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
+        //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
               credentials,
               RegionEndpoint.APNortheast1, // Region
-              APP_ID // app id
+       //       APP_ID // app id
             );
             var loggingConfig = AWSConfigs.LoggingConfig;
             loggingConfig.LogMetrics = true;
