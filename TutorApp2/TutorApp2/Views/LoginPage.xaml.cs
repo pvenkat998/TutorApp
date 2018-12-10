@@ -10,6 +10,12 @@ using TutorApp2.Models;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Npgsql;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+using Amazon;
+using Amazon.S3;
+using Amazon.CognitoIdentity;
 
 namespace TutorApp2.Views
 {
@@ -36,6 +42,26 @@ namespace TutorApp2.Views
         
         private void SignIn(object sender, EventArgs e)
         {
+            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
+                "ap-northeast-1:c16e10cd-af5b-41c6-9f1b-4eea7605c361", // Identity pool ID
+                RegionEndpoint.APNortheast1 // Region
+            );
+
+            //MA - -------------  solve ma?----------------------
+            analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
+              credentials,
+              RegionEndpoint.APNortheast1, // Region
+              APP_ID // app id
+            );
+            var loggingConfig = AWSConfigs.LoggingConfig;
+            loggingConfig.LogMetrics = true;
+            loggingConfig.LogResponses = ResponseLoggingOption.Always;
+            loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
+            loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
+
+            AWSConfigs.AWSRegion = "APNortheast1";
+            IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.USEast1);
+
             string a = "hi";
             string txtSysLog="";
             var cs ="we";
@@ -64,4 +90,6 @@ namespace TutorApp2.Views
             Navigation.PushModalAsync(new Signup());
         }
     }
+
+
 }
