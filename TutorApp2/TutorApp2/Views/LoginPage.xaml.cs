@@ -40,11 +40,12 @@ namespace TutorApp2.Views
             string txtSysLog="";
             var cs ="we";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            string ConnectionString = "server=tutorappmaria.czpzqegto9at.ap-northeast-1.rds.amazonaws.com;port=3306; uid =tutorappmaria;pwd=Asshole!;database=tutorappmaria";
+
+            string ConnectionString = "server=tutorappmaria.czpzqegto9at.ap-northeast-1.rds.amazonaws.com;port=3306; User Id=tutorappmaria;Password=Asshole!;database=tutorappmaria";
             string ConnectionString2 = "Server=db4free.net;Uid =tutorapp123;Pwd=12345678;Database=tutorapp123;";
             try
             {
-                NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
+                NpgsqlConnection connection = new NpgsqlConnection(ConnectionString2);
                 txtSysLog="there is meaning to live";
                 connection.Open();
             }
