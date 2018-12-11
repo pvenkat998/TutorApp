@@ -16,7 +16,10 @@ using System.Collections.ObjectModel;
 using Amazon;
 using Amazon.S3;
 using Amazon.CognitoIdentity;
-
+using Amazon.MobileAnalytics.MobileAnalyticsManager;
+using Amazon.MobileAnalytics;
+using Amazon.S3.Transfer;
+using System.IO;
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -30,6 +33,8 @@ namespace TutorApp2.Views
 
         void Init()
         {
+            System.Diagnostics.Debug.WriteLine("test1");
+
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
@@ -39,13 +44,20 @@ namespace TutorApp2.Views
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
         }
-        
+
         private void SignIn(object sender, EventArgs e)
         {
+
+
+            User user = new User(Entry_Username.Text, Entry_Password.Text);
+
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-                "ap-northeast-1:c16e10cd-af5b-41c6-9f1b-4eea7605c361", // Identity pool ID
+                "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
                 RegionEndpoint.APNortheast1 // Region
             );
+
+
+           // IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
 
             //MA - -------------  solve ma?----------------------
         //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
@@ -59,26 +71,16 @@ namespace TutorApp2.Views
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
 
-            AWSConfigs.AWSRegion = "APNortheast1";
-            IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.USEast1);
+            AWSConfigsS3.UseSignatureVersion4 = true;
+            var s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
+            var transferUtility = new TransferUtility(s3Client);
+            System.Diagnostics.Debug.WriteLine("test2");
+        //    transferUtility.Upload("C:/Users/VENKAT GOD/AppData/Roaming/test.pdf", "tutorapp","12");
 
             string a = "hi";
             string txtSysLog="";
             var cs ="we";
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-            string ConnectionString = "server=tutorappmaria.czpzqegto9at.ap-northeast-1.rds.amazonaws.com;port=3306; uid =tutorappmaria;pwd=Asshole!;database=tutorappmaria";
-            string ConnectionString2 = "Server=db4free.net;Uid =tutorapp123;Pwd=12345678;Database=tutorapp123;";
-            try
-            {
-                NpgsqlConnection connection = new NpgsqlConnection(ConnectionString);
-                txtSysLog="there is meaning to live";
-                connection.Open();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                txtSysLog = ex.ToString();
-            }
+
 
 
             DisplayAlert( cs, txtSysLog, a);//do my sql updarte db

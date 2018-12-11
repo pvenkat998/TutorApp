@@ -52,11 +52,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AWSSDK.CognitoIdentity">
+      <Version>3.3.2.54</Version>
+    </PackageReference>
+    <PackageReference Include="AWSSDK.CognitoSync">
+      <Version>3.3.1.63</Version>
+    </PackageReference>
     <PackageReference Include="AWSSDK.Core">
       <Version>3.3.29.13</Version>
     </PackageReference>
+    <PackageReference Include="AWSSDK.DynamoDBv2">
+      <Version>3.3.15.1</Version>
+    </PackageReference>
+    <PackageReference Include="AWSSDK.MobileAnalytics">
+      <Version>3.3.2.15</Version>
+    </PackageReference>
     <PackageReference Include="AWSSDK.S3">
-      <Version>3.3.31</Version>
+      <Version>3.3.30</Version>
+    </PackageReference>
+    <PackageReference Include="AWSSDK.SimpleNotificationService">
+      <Version>3.3.3.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Azure.Mobile.Client">
       <Version>2.0.0</Version>

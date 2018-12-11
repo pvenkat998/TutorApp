@@ -7,6 +7,11 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.Drawing;
+using Amazon;
+using Amazon.S3;
+using Amazon.CognitoIdentity;
+using Amazon.MobileAnalytics.MobileAnalyticsManager;
+using Amazon.MobileAnalytics;
 
 namespace TutorApp2.Droid
 {
