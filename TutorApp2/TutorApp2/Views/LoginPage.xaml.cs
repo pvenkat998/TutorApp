@@ -16,13 +16,24 @@ using System.Collections.ObjectModel;
 using Amazon;
 using Amazon.S3;
 using Amazon.CognitoIdentity;
-using Amazon.MobileAnalytics.MobileAnalyticsManager;
-using Amazon.MobileAnalytics;
-using Amazon.S3.Transfer;
-using System.IO;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2;
+
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [DynamoDBTable("User_info")]
+    public class User_info
+    {
+        [DynamoDBHashKey]    // Hash key.
+        public int Id { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+      //  public int Price { get; set; }
+        public string email { get; set; }
+        public string address { get; set; }
+    }
+
     public partial class LoginPage : ContentPage
     {
         public LoginPage()
@@ -33,8 +44,6 @@ namespace TutorApp2.Views
 
         void Init()
         {
-            System.Diagnostics.Debug.WriteLine("test1");
-
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
@@ -44,44 +53,44 @@ namespace TutorApp2.Views
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
         }
-
+        
         private void SignIn(object sender, EventArgs e)
         {
-
-
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-                "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
+             "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
                 RegionEndpoint.APNortheast1 // Region
             );
 
-
-           // IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
-
             //MA - -------------  solve ma?----------------------
         //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
-              credentials,
-              RegionEndpoint.APNortheast1, // Region
+             //s credentials,
+             // RegionEndpoint.APNortheast1, // Region
        //       APP_ID // app id
-            );
             var loggingConfig = AWSConfigs.LoggingConfig;
             loggingConfig.LogMetrics = true;
             loggingConfig.LogResponses = ResponseLoggingOption.Always;
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
+            RegionEndpoint region = RegionEndpoint.APNortheast1;
+            AWSConfigs.AWSRegion = "APNortheast1";
+            IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
 
-            AWSConfigsS3.UseSignatureVersion4 = true;
-            var s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
-            var transferUtility = new TransferUtility(s3Client);
-            System.Diagnostics.Debug.WriteLine("test2");
-        //    transferUtility.Upload("C:/Users/VENKAT GOD/AppData/Roaming/test.pdf", "tutorapp","12");
-
+            var dbclient = new AmazonDynamoDBClient(credentials, region);
+            DynamoDBContext context = new DynamoDBContext(dbclient);
+            User_info songOfIceAndFire = new User_info()
+            {
+                Id = 1,
+                username = "Game Of Thrones",
+                password = "978-0553593716",
+                email = "819@gmail.com",
+                address = "GRRM"
+            };
+            context.SaveAsync(songOfIceAndFire);  //change Save to SaveAsync
+            
             string a = "hi";
             string txtSysLog="";
             var cs ="we";
-
-
+            User user = new User(Entry_Username.Text, Entry_Password.Text);
 
             DisplayAlert( cs, txtSysLog, a);//do my sql updarte db
 
