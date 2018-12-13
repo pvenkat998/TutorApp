@@ -18,21 +18,11 @@ using Amazon.S3;
 using Amazon.CognitoIdentity;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2;
-
+using Amazon.SecurityToken;
+using Amazon.Runtime;
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [DynamoDBTable("User_info")]
-    public class User_info
-    {
-        [DynamoDBHashKey]    // Hash key.
-        public int Id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-      //  public int Price { get; set; }
-        public string email { get; set; }
-        public string address { get; set; }
-    }
 
     public partial class LoginPage : ContentPage
     {
@@ -53,47 +43,66 @@ namespace TutorApp2.Views
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
         }
-        
+        [DynamoDBTable("user_info")]
+        public class user_info
+        {
+            [DynamoDBHashKey]    // Hash key.
+            public int id { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
+            //  public int Price { get; set; }
+            public string email { get; set; }
+            public string address { get; set; }
+        }
         private void SignIn(object sender, EventArgs e)
         {
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
              "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
                 RegionEndpoint.APNortheast1 // Region
             );
+            AWSConfigs.AWSRegion = "APNortheast1";
 
             //MA - -------------  solve ma?----------------------
-        //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
-             //s credentials,
-             // RegionEndpoint.APNortheast1, // Region
-       //       APP_ID // app id
+            //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
+            //s credentials,
+            // RegionEndpoint.APNortheast1, // Region
+            //       APP_ID // app id
             var loggingConfig = AWSConfigs.LoggingConfig;
             loggingConfig.LogMetrics = true;
             loggingConfig.LogResponses = ResponseLoggingOption.Always;
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
             RegionEndpoint region = RegionEndpoint.APNortheast1;
-            AWSConfigs.AWSRegion = "APNortheast1";
             IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
 
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            User_info songOfIceAndFire = new User_info()
-            {
-                Id = 1,
-                username = "Game Of Thrones",
-                password = "978-0553593716",
-                email = "819@gmail.com",
-                address = "GRRM"
-            };
-            context.SaveAsync(songOfIceAndFire);  //change Save to SaveAsync
             
-            string a = "hi";
-            string txtSysLog="";
-            var cs ="we";
+            user_info tosave_info = new user_info()
+                {
+                      id = 2,
+                    username = "Game Of Thrones",
+                    password = "978-0553593716",
+                    email = "819@gmail.comasd",
+                    address = "GRRM"
+                };
+            context.SaveAsync(tosave_info);
+          //  user_info retrievedBook = context.LoadFromXaml<user_info>(1);
+
+
+
+            var title = "we";
+            string textbox = "";
+            string button = "hi";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
+            if (1==1) {
+                DisplayAlert(title, textbox, button);//do my sql updarte db
+            }
+            else
+            {
+                DisplayAlert(title, textbox, button);//do my sql updarte db
 
-            DisplayAlert( cs, txtSysLog, a);//do my sql updarte db
-
+            }
 
         }
         void Redirsignup(object sender, EventArgs e)
