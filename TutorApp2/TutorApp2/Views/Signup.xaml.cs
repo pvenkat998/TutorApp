@@ -30,7 +30,9 @@ namespace TutorApp2.Views
             ActivitySpinner.IsVisible = false;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
-            Entry_Password.Completed += (s, e) => Signup1(s, e);
+            Entry_Password.Completed += (s, e) => Entry_Email.Focus();
+            Entry_Email.Completed += (s, e) => Entry_Address.Focus();
+            Entry_Address.Completed += (s, e) => Signup1(s, e);
 
         }
         [DynamoDBTable("registered_userdata")]
