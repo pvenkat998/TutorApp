@@ -6,8 +6,8 @@
   <StackLayout>
     <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
-              HasUnevenRows="true"
-              ItemsSource="{Binding MenuItems}">
+              HasUnevenRows="true">
+            //  ItemsSource="{Binding MenuItems}">
       <ListView.Header>
         <Grid BackgroundColor="#03A9F4">
           <Grid.ColumnDefinitions>
@@ -28,6 +28,15 @@
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>
+      
+       <ListView.ItemsSource>
+          <x:Array Type="{x:Type local:MasterPageItem}">
+              <local:MasterPageItem Title="Contacts" IconSource="contacts.png" TargetType="{x:Type local:ContactsPage}" />
+              <local:MasterPageItem Title="TodoList" IconSource="todo.png" TargetType="{x:Type local:TodoListPage}" />
+              <local:MasterPageItem Title="Reminders" IconSource="reminders.png" TargetType="{x:Type local:ReminderPage}" />
+          </x:Array>
+      </ListView.ItemsSource>
+      
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
