@@ -88,9 +88,17 @@ namespace TutorApp2.Views
                 };
             context.SaveAsync(tosave_info);
           //  user_info retrievedBook = context.LoadFromXaml<user_info>(1);
-
-
-
+         // picture
+             const string AWS_ACCESS_KEY = "put_your_AWS_access_key_here";
+            const string AWS_SECRET_KEY = "put_your_AWS_secret_key _here";
+            AmazonS3 client = new AmazonS3(AWS_ACCESS_KEY, AWS_SECRET_KEY)
+            <appSettings>
+                <add key="AWSAccessKey" value="put_your_AWS_access_key_here"/>
+                <add key="AWSSecretKey" value="put_your_AWS_secret_key _here"/>
+            <appSettings>
+            // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
+            
+            
             var title = "we";
             string textbox = "";
             string button = "hi";
