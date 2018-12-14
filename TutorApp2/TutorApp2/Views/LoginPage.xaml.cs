@@ -95,8 +95,9 @@ namespace TutorApp2.Views
             string textbox = "";
             string button = "hi";
             User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (1==1) {
+            if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
                 DisplayAlert(title, textbox, button);//do my sql updarte db
+                Navigation.PushModalAsync(new Home());
             }
             else
             {
