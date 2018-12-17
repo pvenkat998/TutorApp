@@ -43,8 +43,8 @@ namespace TutorApp2.Views
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
         }
-        [DynamoDBTable("user_info")]
-        public class user_info
+        [DynamoDBTable("registered_userdata")]
+        public class registered_userdata
         {
             [DynamoDBHashKey]    // Hash key.
             public int id { get; set; }
@@ -77,40 +77,24 @@ namespace TutorApp2.Views
 
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            
-            user_info tosave_info = new user_info()
-                {
-                      id = 2,
-                    username = "Game Of Thrones",
-                    password = "978-0553593716",
-                    email = "819@gmail.comasd",
-                    address = "GRRM"
-                };
-            context.SaveAsync(tosave_info);
-          //  user_info retrievedBook = context.LoadFromXaml<user_info>(1);
-         // picture
-             const string AWS_ACCESS_KEY = "put_your_AWS_access_key_here";
-            const string AWS_SECRET_KEY = "put_your_AWS_secret_key _here";
-            AmazonS3 client = new AmazonS3(AWS_ACCESS_KEY, AWS_SECRET_KEY)
-            <appSettings>
-                <add key="AWSAccessKey" value="put_your_AWS_access_key_here"/>
-                <add key="AWSSecretKey" value="put_your_AWS_secret_key _here"/>
-            <appSettings>
+
+       //     registered_userdata retrievedBook =  context.LoadAsync<registered_userdata>("admin");
+            // picture
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
-            
-            
+
+
             var title = "we";
-            string textbox = "";
+            string textbox = "w";
             string button = "hi";
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
             if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
-                DisplayAlert(title, textbox, button);//do my sql updarte db
+                DisplayAlert("yay", "yay", "yay");//do my sql updarte db
                 Navigation.PushModalAsync(new Home());
+                Console.WriteLine("True!");
             }
             else
             {
-                DisplayAlert(title, textbox, button);//do my sql updarte db
-
+                DisplayAlert(Entry_Username.Text, Entry_Password.Text, button);//do my sql updarte db
+                Console.WriteLine("False!");
             }
 
         }

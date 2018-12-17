@@ -10,8 +10,7 @@ using System.Drawing;
 using Amazon;
 using Amazon.S3;
 using Amazon.CognitoIdentity;
-using Amazon.MobileAnalytics.MobileAnalyticsManager;
-using Amazon.MobileAnalytics;
+using System.Net.Http;
 
 namespace TutorApp2.Droid
 {

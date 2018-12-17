@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="using:TutorApp2.Views"
              x:Class="TutorApp2.Views.HomeMaster"
              Title="Master">
   <StackLayout>
@@ -29,13 +30,6 @@
         </Grid>
       </ListView.Header>
       
-       <ListView.ItemsSource>
-          <x:Array Type="{x:Type local:MasterPageItem}">
-              <local:MasterPageItem Title="Contacts" IconSource="contacts.png" TargetType="{x:Type local:ContactsPage}" />
-              <local:MasterPageItem Title="TodoList" IconSource="todo.png" TargetType="{x:Type local:TodoListPage}" />
-              <local:MasterPageItem Title="Reminders" IconSource="reminders.png" TargetType="{x:Type local:ReminderPage}" />
-          </x:Array>
-      </ListView.ItemsSource>
       
       <ListView.ItemTemplate>
         <DataTemplate>

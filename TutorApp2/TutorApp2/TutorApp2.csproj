@@ -14,9 +14,9 @@
     <PackageReference Include="AWSSDK.CognitoSync" Version="3.3.1.63" />
     <PackageReference Include="AWSSDK.Core" Version="3.3.29.13" />
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.15.1" />
-    <PackageReference Include="AWSSDK.MobileAnalytics" Version="3.3.2.15" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.30" />
     <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.3.3.3" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.NETCore.Targets.NETFramework" Version="4.6.0" />
     <PackageReference Include="MySqlConnector" Version="0.47.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
@@ -26,6 +26,7 @@
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
     <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Memory" Version="4.5.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
@@ -33,6 +34,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Home.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HomeDetail.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\HomeMaster.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Views\HomeMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -41,12 +54,15 @@
   <ItemGroup>
     <EmbeddedResource Update="Views\Home.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomeDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomeMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -54,5 +70,9 @@
     <EmbeddedResource Update="Views\Signup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Backup\" />
   </ItemGroup>
 </Project>
