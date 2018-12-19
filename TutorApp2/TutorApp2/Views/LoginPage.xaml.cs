@@ -44,15 +44,17 @@ namespace TutorApp2.Views
 
         }
         [DynamoDBTable("registered_userdata")]
-        public class registered_userdata
+        public class Book
         {
             [DynamoDBHashKey]    // Hash key.
+            public string email { get; set; }
+            public string add_ku_sort { get; set; }
             public int id { get; set; }
             public string username { get; set; }
             public string password { get; set; }
             //  public int Price { get; set; }
-            public string email { get; set; }
             public string address { get; set; }
+            //  public string datetime { get; set; }
         }
         private void SignIn(object sender, EventArgs e)
         {
@@ -75,19 +77,19 @@ namespace TutorApp2.Views
             RegionEndpoint region = RegionEndpoint.APNortheast1;
             IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
 
+
+
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-
-       //     registered_userdata retrievedBook =  context.LoadAsync<registered_userdata>("admin");
+            Book retrievedBook = context.LoadAsync<Book>("admin","kanagawa").Result;
+          
             // picture
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
-
-
             var title = "we";
             string textbox = "w";
-            string button = "hi";
+            string button = retrievedBook.id.ToString();
             if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
-                DisplayAlert("yay", "yay", "yay");//do my sql updarte db
+                DisplayAlert("yay", textbox, button);//do my sql updarte db
                 Navigation.PushModalAsync(new Home());
                 Console.WriteLine("True!");
             }

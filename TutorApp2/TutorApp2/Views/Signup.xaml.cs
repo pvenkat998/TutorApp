@@ -40,6 +40,7 @@ namespace TutorApp2.Views
         {
             [DynamoDBHashKey]    // Hash key.
             public string email { get; set; }
+            [DynamoDBRangeKey]
             public string add_ku_sort { get; set; }
             public int id { get; set; }
             public string username { get; set; }
