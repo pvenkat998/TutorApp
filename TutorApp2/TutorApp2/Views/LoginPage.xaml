@@ -6,15 +6,11 @@
         <StackLayout x:Name="MasterLayout">
 
             <StackLayout  x:Name="LogoStack">
-                <Image x:Name="LoginIcon" Source="LoginIcon.jpg" Margin="0,80,0,0"/>
+                <Image x:Name="LoginIcon" Source="LoginIcon.jpg"/>
             </StackLayout>
 
 
             <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand" >
-                <StackLayout.Padding>
-                    <OnIdiom x:TypeArguments="Thickness"  Phone="40,0,40,0" Tablet="140,150,140,0">
-                    </OnIdiom>
-                </StackLayout.Padding>
 
                 <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"/>
 

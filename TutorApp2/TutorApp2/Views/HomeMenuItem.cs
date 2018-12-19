@@ -9,10 +9,7 @@ namespace TutorApp2.Views
 
     public class HomeMenuItem
     {
-        public HomeMenuItem()
-        {
-            TargetType = typeof(HomeDetail);
-        }
+      
         public int Id { get; set; }
         public string Title { get; set; }
 

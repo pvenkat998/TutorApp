@@ -33,11 +33,11 @@ namespace TutorApp2.Views
             {
                 MenuItems = new ObservableCollection<HomeMenuItem>(new[]
                 {
-                    new HomeMenuItem { Id = 0, Title = "Page 1" },
-                    new HomeMenuItem { Id = 1, Title = "Page 2" },
-                    new HomeMenuItem { Id = 2, Title = "Page 3" },
-                    new HomeMenuItem { Id = 3, Title = "Page 4" },
-                    new HomeMenuItem { Id = 4, Title = "Page 5" },
+                    new HomeMenuItem { Id = 0, Title = "Page 1" ,TargetType= typeof(HomeDetail)},
+                    new HomeMenuItem { Id = 1, Title = "Page 2",TargetType= typeof(HomeDetail2) },
+                    new HomeMenuItem { Id = 2, Title = "Page 3" ,TargetType= typeof(HomeDetail)},
+                    new HomeMenuItem { Id = 3, Title = "Page 4" ,TargetType= typeof(HomeDetail)},
+                    new HomeMenuItem { Id = 4, Title = "Page 5" ,TargetType= typeof(HomeDetail)},
                 });
             }
             
