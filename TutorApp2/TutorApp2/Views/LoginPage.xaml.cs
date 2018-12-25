@@ -15,11 +15,16 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using Amazon;
 using Amazon.S3;
+using Amazon.S3.Model;
 using Amazon.CognitoIdentity;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2;
 using Amazon.SecurityToken;
 using Amazon.Runtime;
+using Amazon.S3.Transfer;
+using System.IO;
+using System.Threading;
+
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -34,6 +39,9 @@ namespace TutorApp2.Views
 
         void Init()
         {
+           // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
+            LoginIcon.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
+            Lbl_Username.Text = "why always me?";
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
@@ -56,12 +64,18 @@ namespace TutorApp2.Views
             public string address { get; set; }
             //  public string datetime { get; set; }
         }
+        private void WriteFileProgress(object sender, WriteObjectProgressArgs args)
+        {
+            // show progress
+            System.Diagnostics.Debug.WriteLine("=======UpdateFileProgress=======");
+        }
         private void SignIn(object sender, EventArgs e)
         {
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
              "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
                 RegionEndpoint.APNortheast1 // Region
             );
+            RegionEndpoint region = RegionEndpoint.APNortheast1;
             AWSConfigs.AWSRegion = "APNortheast1";
 
             //MA - -------------  solve ma?----------------------
@@ -74,19 +88,41 @@ namespace TutorApp2.Views
             loggingConfig.LogResponses = ResponseLoggingOption.Always;
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
-            RegionEndpoint region = RegionEndpoint.APNortheast1;
-            IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
+         //   IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
 
 
 
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             Book retrievedBook = context.LoadAsync<Book>("admin","kanagawa").Result;
-          
+
+            AWSConfigsS3.UseSignatureVersion4 = true;
+            var s3Client = new AmazonS3Client(credentials, region);
+            var transferUtility = new TransferUtility(s3Client);
             // picture
+            string textbox = "w";
+            try
+            {
+
+                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                request.BucketName = "tutorapp";
+                request.Key = "Capture.PNG";
+                request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
+                textbox = request.FilePath;
+                TransferUtility tu = new TransferUtility(s3Client);
+                request.WriteObjectProgressEvent += WriteFileProgress;
+
+                System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
+                tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                textbox = "fuck u bik";
+                System.Diagnostics.Debug.WriteLine("=====ERROR ========");
+            }
+            
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
             var title = "we";
-            string textbox = "w";
             string button = retrievedBook.id.ToString();
             if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
                 DisplayAlert("yay", textbox, button);//do my sql updarte db

@@ -6,7 +6,7 @@
         <StackLayout x:Name="MasterLayout">
 
             <StackLayout  x:Name="LogoStack">
-                <Image x:Name="LoginIcon" Source="LoginIcon.jpg"/>
+                <Image x:Name="LoginIcon"/>
             </StackLayout>
 
 
