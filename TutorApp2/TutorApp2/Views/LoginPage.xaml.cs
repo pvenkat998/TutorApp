@@ -99,7 +99,9 @@ namespace TutorApp2.Views
             AWSConfigsS3.UseSignatureVersion4 = true;
             var s3Client = new AmazonS3Client(credentials, region);
             var transferUtility = new TransferUtility(s3Client);
-            // picture
+
+
+            // picture download success
             string textbox = "w";
             try
             {
@@ -120,7 +122,19 @@ namespace TutorApp2.Views
                 textbox = "fuck u bik";
                 System.Diagnostics.Debug.WriteLine("=====ERROR ========");
             }
-            
+            // picture upload trial 
+
+            TransferUtility utility = new TransferUtility(s3Client);
+            // making a TransferUtilityUploadRequest instance
+            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
+
+            // subdirectory and bucket name
+            uprequest.BucketName = "tutorapp" + @"/" + "profilepic";
+
+            uprequest.Key = Entry_Username.Text + "_" + "pp1.jpg"; //file name up in S3
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG"); //local file name
+            utility.UploadAsync(uprequest); //commensing the transfer
+
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
             var title = "we";
             string button = retrievedBook.id.ToString();
