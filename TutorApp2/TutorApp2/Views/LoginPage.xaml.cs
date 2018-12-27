@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TutorApp2.Models;
@@ -24,6 +23,10 @@ using Amazon.Runtime;
 using Amazon.S3.Transfer;
 using System.IO;
 using System.Threading;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
+using XPA_PickMedia_XLabs_XFP;
 
 namespace TutorApp2.Views
 {
@@ -31,6 +34,7 @@ namespace TutorApp2.Views
 
     public partial class LoginPage : ContentPage
     {
+        CameraViewModel cameraOps = null;
         public LoginPage()
         {
             InitializeComponent();
@@ -39,7 +43,10 @@ namespace TutorApp2.Views
 
         void Init()
         {
-           // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
+            // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
+            cameraOps = new CameraViewModel();
+
+
             LoginIcon.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
             Lbl_Username.Text = "why always me?";
             BackgroundColor = Constants.BackgroundColor;
@@ -69,8 +76,63 @@ namespace TutorApp2.Views
             // show progress
             System.Diagnostics.Debug.WriteLine("=======UpdateFileProgress=======");
         }
+        public interface IFileAccess
+        {
+            bool Exists(string filename);
+            string FullPath(string filename);
+            void WriteStream(string filename, Stream streamIn);
+        }
+        public class FileAccess : IFileAccess
+        {
+            public bool Exists(string filename)
+            {
+                var filePath = GetFilePath(filename);
+
+                if (File.Exists(filePath))
+                {
+                    FileInfo finf = new FileInfo(filePath);
+                    return finf.Length > 0;
+                }
+                else
+                    return false;
+            }
+
+            public string FullPath(string filename)
+            {
+                var filePath = GetFilePath(filename);
+                return filePath;
+            }
+
+            static string GetFilePath(string filename)
+            {
+                var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var filePath = Path.Combine(documentsPath, filename);
+                return filePath;
+            }
+
+            public void WriteStream(string filename, Stream streamIn)
+            {
+                var filePath = GetFilePath(filename);
+                using (var fs = File.Create(filePath))
+                {
+                    streamIn.CopyTo(fs);
+                }
+            }
+        }
+        private async void Imageselect(object sender, EventArgs e)
+        {   //camera call
+
+            CameraViewModel cameraOps = new CameraViewModel();
+            await cameraOps.SelectPicture();
+            imgPicked.Source = cameraOps.ImageSource;
+            entDetails.Text = "";
+        }
+
+
         private void SignIn(object sender, EventArgs e)
         {
+            
+
             // Initialize
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
              "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
@@ -155,6 +217,7 @@ namespace TutorApp2.Views
         {
             Navigation.PushModalAsync(new Signup());
         }
+        
     }
 
 

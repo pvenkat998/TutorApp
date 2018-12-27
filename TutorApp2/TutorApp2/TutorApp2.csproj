@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TutorApp2</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +23,7 @@
     <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.15.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.30" />
     <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.3.3.3" />
+    <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.NETCore.Targets.NETFramework" Version="4.6.0" />
     <PackageReference Include="MySqlConnector" Version="0.47.1" />
@@ -37,6 +39,7 @@
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
   </ItemGroup>
 
   <ItemGroup>

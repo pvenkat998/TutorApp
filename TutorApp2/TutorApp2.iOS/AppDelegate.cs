@@ -4,6 +4,9 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services;
 
 namespace TutorApp2.iOS
 {
@@ -24,8 +27,16 @@ namespace TutorApp2.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            #region Resolver Init
+            SimpleContainer container = new SimpleContainer();
+            container.Register<IDevice>(t => AppleDevice.CurrentDevice);
+            container.Register<IDisplay>(t => t.Resolve<IDevice>().Display);
+            container.Register<INetwork>(t => t.Resolve<IDevice>().Network);
 
+            Resolver.SetResolver(container.GetResolver());
+            #endregion
             return base.FinishedLaunching(app, options);
         }
+
     }
 }
