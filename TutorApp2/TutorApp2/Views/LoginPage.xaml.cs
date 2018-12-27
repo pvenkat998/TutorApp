@@ -71,6 +71,7 @@ namespace TutorApp2.Views
         }
         private void SignIn(object sender, EventArgs e)
         {
+            // Initialize
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
              "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
                 RegionEndpoint.APNortheast1 // Region
@@ -83,19 +84,20 @@ namespace TutorApp2.Views
             //s credentials,
             // RegionEndpoint.APNortheast1, // Region
             //       APP_ID // app id
+
+            //Enter Dynamo
             var loggingConfig = AWSConfigs.LoggingConfig;
             loggingConfig.LogMetrics = true;
             loggingConfig.LogResponses = ResponseLoggingOption.Always;
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
-         //   IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APNortheast1);
-
-
-
+            //Basic getinfo
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             Book retrievedBook = context.LoadAsync<Book>("admin","kanagawa").Result;
 
+
+            //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
             var s3Client = new AmazonS3Client(credentials, region);
             var transferUtility = new TransferUtility(s3Client);
@@ -136,7 +138,6 @@ namespace TutorApp2.Views
             utility.UploadAsync(uprequest); //commensing the transfer
 
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
-            var title = "we";
             string button = retrievedBook.id.ToString();
             if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
                 DisplayAlert("yay", textbox, button);//do my sql updarte db
