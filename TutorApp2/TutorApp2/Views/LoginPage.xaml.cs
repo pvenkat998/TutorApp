@@ -27,6 +27,8 @@ using XLabs.Ioc;
 using XLabs.Platform.Device;
 using XLabs.Platform.Services.Media;
 using XPA_PickMedia_XLabs_XFP;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 
 namespace TutorApp2.Views
 {
@@ -121,11 +123,23 @@ namespace TutorApp2.Views
         }
         private async void Imageselect(object sender, EventArgs e)
         {   //camera call
+            await CrossMedia.Current.Initialize();
 
-            CameraViewModel cameraOps = new CameraViewModel();
-            await cameraOps.SelectPicture();
-            imgPicked.Source = cameraOps.ImageSource;
-            entDetails.Text = "";
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                Directory = "Sample",
+                Name = "test.jpg"
+            });
+
+            if (file == null)
+                return;
+
+            imgPicked.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                file.Dispose();
+                return stream;
+            });
         }
 
 
