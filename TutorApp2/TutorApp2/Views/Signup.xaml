@@ -23,6 +23,9 @@
                 <Label x:Name="Lbl_Address" Text="Address" />
                 <Entry x:Name="Entry_Address" Placeholder="Address"/>
                 <Button x:Name="Btn_Signup" Text="Sign in" Clicked="Signup1"/>
+                <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
+                <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
+                <Image x:Name="imgPicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

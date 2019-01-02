@@ -26,9 +26,10 @@ using System.Threading;
 using XLabs.Ioc;
 using XLabs.Platform.Device;
 using XLabs.Platform.Services.Media;
-using XPA_PickMedia_XLabs_XFP;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace TutorApp2.Views
 {
@@ -36,7 +37,8 @@ namespace TutorApp2.Views
 
     public partial class LoginPage : ContentPage
     {
-        CameraViewModel cameraOps = null;
+        string uppath = "";
+
         public LoginPage()
         {
             InitializeComponent();
@@ -46,10 +48,8 @@ namespace TutorApp2.Views
         void Init()
         {
             // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
-            cameraOps = new CameraViewModel();
 
-
-            LoginIcon.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
+            LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
             Lbl_Username.Text = "why always me?";
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
@@ -78,70 +78,90 @@ namespace TutorApp2.Views
             // show progress
             System.Diagnostics.Debug.WriteLine("=======UpdateFileProgress=======");
         }
-        public interface IFileAccess
-        {
-            bool Exists(string filename);
-            string FullPath(string filename);
-            void WriteStream(string filename, Stream streamIn);
-        }
-        public class FileAccess : IFileAccess
-        {
-            public bool Exists(string filename)
-            {
-                var filePath = GetFilePath(filename);
-
-                if (File.Exists(filePath))
-                {
-                    FileInfo finf = new FileInfo(filePath);
-                    return finf.Length > 0;
-                }
-                else
-                    return false;
-            }
-
-            public string FullPath(string filename)
-            {
-                var filePath = GetFilePath(filename);
-                return filePath;
-            }
-
-            static string GetFilePath(string filename)
-            {
-                var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                var filePath = Path.Combine(documentsPath, filename);
-                return filePath;
-            }
-
-            public void WriteStream(string filename, Stream streamIn)
-            {
-                var filePath = GetFilePath(filename);
-                using (var fs = File.Create(filePath))
-                {
-                    streamIn.CopyTo(fs);
-                }
-            }
-        }
         private async void Imageselect(object sender, EventArgs e)
+        {   //gallery call
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    CompressionQuality = 92
+                });
+
+                if (file == null)
+                    return;
+
+                path.Text = file.Path;
+                uppath = file.Path;
+                imgPicked.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+
+        }
+        private async void Takephoto(object sender, EventArgs e)
         {   //camera call
             await CrossMedia.Current.Initialize();
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-            {
-                Directory = "Sample",
-                Name = "test.jpg"
-            });
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
-            if (file == null)
-                return;
-
-            imgPicked.Source = ImageSource.FromStream(() =>
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
             {
-                var stream = file.GetStream();
-                file.Dispose();
-                return stream;
-            });
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    AllowCropping = true,
+                    CompressionQuality = 92,
+                    Directory = "Sample",
+                    Name = "test.jpg"
+                });
+
+                if (file == null)
+                    return;
+
+                path.Text = file.Path;
+                uppath = file.Path;
+
+                imgPicked.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
         }
-
 
         private void SignIn(object sender, EventArgs e)
         {
@@ -209,8 +229,9 @@ namespace TutorApp2.Views
             // subdirectory and bucket name
             uprequest.BucketName = "tutorapp" + @"/" + "profilepic";
 
-            uprequest.Key = Entry_Username.Text + "_" + "pp1.jpg"; //file name up in S3
+            uprequest.Key = Entry_Username.Text + "_" + "workz.jpg"; //file name up in S3
             uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG"); //local file name
+            uprequest.FilePath = uppath;
             utility.UploadAsync(uprequest); //commensing the transfer
 
             // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
