@@ -30,6 +30,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Amazon.DynamoDBv2.DocumentModel;
 
 namespace TutorApp2.Views
 {
@@ -48,6 +49,9 @@ namespace TutorApp2.Views
         void Init()
         {
             // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
+            //dynamo query test
+
+
 
             LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
             Lbl_Username.Text = "why always me?";
@@ -168,11 +172,7 @@ namespace TutorApp2.Views
             
 
             // Initialize
-            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-             "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
-                RegionEndpoint.APNortheast1 // Region
-            );
-            RegionEndpoint region = RegionEndpoint.APNortheast1;
+
             AWSConfigs.AWSRegion = "APNortheast1";
 
             //MA - -------------  solve ma?----------------------
@@ -188,14 +188,14 @@ namespace TutorApp2.Views
             loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
             loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
             //Basic getinfo
-            var dbclient = new AmazonDynamoDBClient(credentials, region);
+            var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             Book retrievedBook = context.LoadAsync<Book>("admin","kanagawa").Result;
 
 
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
-            var s3Client = new AmazonS3Client(credentials, region);
+            var s3Client = new AmazonS3Client(App.credentials, App.region);
             var transferUtility = new TransferUtility(s3Client);
 
 
@@ -248,8 +248,32 @@ namespace TutorApp2.Views
             }
 
         }
+        public async Task QueryAsync(AWSCredentials credentials, RegionEndpoint region)
+        {
+            var client = new AmazonDynamoDBClient(credentials, region);
+            DynamoDBContext context = new DynamoDBContext(client);
+
+            var search = context.FromQueryAsync<Book>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            {
+                IndexName = "password",
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Author", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
+            });
+
+            Console.WriteLine("items retrieved");
+
+            var searchResponse = await search.GetRemainingAsync();
+            foreach(var s in searchResponse)
+            {
+                Console.WriteLine(s.ToString());
+            }
+// searchResponse.ForEach((s) = > {
+// Console.WriteLine(s.ToString());});
+
+        }
         void Redirsignup(object sender, EventArgs e)
         {
+            QueryAsync(App.credentials, App.region);
+            DisplayAlert(Entry_Username.Text, Entry_Password.Text, "w");
             Navigation.PushModalAsync(new Signup());
         }
         
