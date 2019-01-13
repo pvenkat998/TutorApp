@@ -181,7 +181,7 @@ namespace TutorApp2.Views
             }
             catch (Exception ex)
             {
-                textbox = "fuck u bik";
+                textbox = " u bik";
                 System.Diagnostics.Debug.WriteLine("=====ERROR ========");
             }
 
@@ -215,6 +215,7 @@ namespace TutorApp2.Views
 
             };
             context.SaveAsync(tosave_info);
+
             DisplayAlert(title, textbox, button);//do my sql updarte db
             var passdata = new PassDataEP
             {

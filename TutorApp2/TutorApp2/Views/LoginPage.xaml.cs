@@ -255,8 +255,9 @@ namespace TutorApp2.Views
 
             var search = context.FromQueryAsync<Book>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
-                IndexName = "password",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Author", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
+                IndexName = "password-index",
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
+               
             });
 
             Console.WriteLine("items retrieved");
@@ -264,15 +265,15 @@ namespace TutorApp2.Views
             var searchResponse = await search.GetRemainingAsync();
             foreach(var s in searchResponse)
             {
-                Console.WriteLine(s.ToString());
+                Console.WriteLine(s.email.ToString());
             }
 // searchResponse.ForEach((s) = > {
 // Console.WriteLine(s.ToString());});
 
         }
-        void Redirsignup(object sender, EventArgs e)
+        async void Redirsignup(object sender, EventArgs e)
         {
-            QueryAsync(App.credentials, App.region);
+            await QueryAsync(App.credentials, App.region);
             DisplayAlert(Entry_Username.Text, Entry_Password.Text, "w");
             Navigation.PushModalAsync(new Signup());
         }
