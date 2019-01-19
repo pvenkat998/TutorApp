@@ -48,13 +48,7 @@ namespace TutorApp2.Views
 
         void Init()
         {
-            // LoginIcon.Source = Device.RuntimePlatform == Device.Android ? ImageSource.FromFile("LoginIcon.jpg") : ImageSource.FromFile("Images/LoginIcon.jpg");
-            //dynamo query test
-
-
-
             LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
-            Lbl_Username.Text = "why always me?";
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
@@ -63,19 +57,6 @@ namespace TutorApp2.Views
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
             Entry_Password.Completed += (s, e) => SignIn(s, e);
 
-        }
-        [DynamoDBTable("registered_userdata")]
-        public class Book
-        {
-            [DynamoDBHashKey]    // Hash key.
-            public string email { get; set; }
-            public string add_ku_sort { get; set; }
-            public int id { get; set; }
-            public string username { get; set; }
-            public string password { get; set; }
-            //  public int Price { get; set; }
-            public string address { get; set; }
-            //  public string datetime { get; set; }
         }
         private void WriteFileProgress(object sender, WriteObjectProgressArgs args)
         {
@@ -180,70 +161,52 @@ namespace TutorApp2.Views
             //s credentials,
             // RegionEndpoint.APNortheast1, // Region
             //       APP_ID // app id
-
-            //Enter Dynamo
-            var loggingConfig = AWSConfigs.LoggingConfig;
-            loggingConfig.LogMetrics = true;
-            loggingConfig.LogResponses = ResponseLoggingOption.Always;
-            loggingConfig.LogMetricsFormat = LogMetricsFormatOption.JSON;
-            loggingConfig.LogTo = LoggingOptions.SystemDiagnostics;
-            //Basic getinfo
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            Book retrievedBook = context.LoadAsync<Book>("admin","kanagawa").Result;
-
+            App.registered_userdata retrievedBook;
+            retrievedBook = context.LoadAsync<App.registered_userdata>(Entry_Username.Text,"kanagawa").Result;
+            App.cur_user.address = retrievedBook.address;
 
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
             var s3Client = new AmazonS3Client(App.credentials, App.region);
             var transferUtility = new TransferUtility(s3Client);
 
+          //  string button = retrievedBook.id.ToString();
+            if (retrievedBook!= null) {
+                // picture download success
+                string textbox = "w";
+                string check = "1";
+                try
+                {
 
-            // picture download success
-            string textbox = "w";
-            try
-            {
+                    TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                    request.BucketName = "tutorapp" + @"/" + "profilepic"; 
+                    request.Key = Entry_Username.Text + "_dp.jpg"; 
+                    request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "dpuser.jpg");
+                    textbox = request.FilePath;
+                    TransferUtility tu = new TransferUtility(s3Client);
+                    request.WriteObjectProgressEvent += WriteFileProgress;
 
-                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
-                request.BucketName = "tutorapp";
-                request.Key = "Capture.PNG";
-                request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
-                textbox = request.FilePath;
-                TransferUtility tu = new TransferUtility(s3Client);
-                request.WriteObjectProgressEvent += WriteFileProgress;
+                    System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
+                    tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+                    App.dp_img_path = request.FilePath;
+                }
 
-                System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
-                tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                textbox = "fuck u bik";
-                System.Diagnostics.Debug.WriteLine("=====ERROR ========");
-            }
-            // picture upload trial 
-
-            TransferUtility utility = new TransferUtility(s3Client);
-            // making a TransferUtilityUploadRequest instance
-            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
-
-            // subdirectory and bucket name
-            uprequest.BucketName = "tutorapp" + @"/" + "profilepic";
-
-            uprequest.Key = Entry_Username.Text + "_" + "workz.jpg"; //file name up in S3
-            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG"); //local file name
-            uprequest.FilePath = uppath;
-            utility.UploadAsync(uprequest); //commensing the transfer
-
-            // https://www.codeproject.com/Articles/186132/Beginning-with-Amazon-S3
-            string button = retrievedBook.id.ToString();
-            if (Entry_Username.Text=="admin"&&Entry_Password.Text=="admin") {
-                DisplayAlert("yay", textbox, button);//do my sql updarte db
+                catch (Exception ex)
+                {
+                    textbox = "wololooooo";
+                    System.Diagnostics.Debug.WriteLine("=====ERROR ========");
+                }
+                //
+                DisplayAlert("yay", textbox, check);//do my sql updarte db
                 Navigation.PushModalAsync(new Home());
                 Console.WriteLine("True!");
             }
             else
             {
-                DisplayAlert(Entry_Username.Text, Entry_Password.Text, button);//do my sql updarte db
+                path.Text = "user doesnt exist";
+                DisplayAlert(Entry_Username.Text, Entry_Password.Text, "ww");//do my sql updarte db
                 Console.WriteLine("False!");
             }
 
@@ -253,7 +216,7 @@ namespace TutorApp2.Views
             var client = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(client);
 
-            var search = context.FromQueryAsync<Book>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            var search = context.FromQueryAsync<App.registered_userdata>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "password-index",
                 Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
@@ -267,8 +230,6 @@ namespace TutorApp2.Views
             {
                 Console.WriteLine(s.email.ToString());
             }
-// searchResponse.ForEach((s) = > {
-// Console.WriteLine(s.ToString());});
 
         }
         async void Redirsignup(object sender, EventArgs e)

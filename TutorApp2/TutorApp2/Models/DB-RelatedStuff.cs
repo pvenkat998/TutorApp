@@ -23,7 +23,7 @@ namespace TutorApp2.Models
             var client = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(client);
 
-            var search = context.FromQueryAsync<Views.LoginPage.Book>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            var search = context.FromQueryAsync<App.registered_userdata>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "password-index",
                 Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
@@ -61,7 +61,7 @@ namespace TutorApp2.Models
         { 
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            Book retrievedBook = context.LoadAsync<Book>("admin", "kanagawa").Result;
+            App.registered_userdata retrievedBook = context.LoadAsync<App.registered_userdata>("admin", "kanagawa").Result;
         }
 
 //------------------save a new thing to the db
@@ -80,7 +80,7 @@ namespace TutorApp2.Models
                 // datetime =  text
 
             };
-            context.SaveAsync(tosave_info);
+            await context.SaveAsync(tosave_info);
         }
         ////////////////////////////////////////////////////////        ------------------------------------------------------------------------
         //-----------------------------enter s3=---------------------------------------------=

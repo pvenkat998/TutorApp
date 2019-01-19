@@ -18,8 +18,9 @@ namespace TutorApp2.Views
             InitializeComponent();
             img.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
             img.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
+            img.Source = App.dp_img_path;
             txt.Text = "i am a retard";
-            txt.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
+            txt.Text = App.cur_user.address;
 
 
         }

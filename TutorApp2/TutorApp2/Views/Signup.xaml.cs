@@ -44,20 +44,6 @@ namespace TutorApp2.Views
             Entry_Address.Completed += (s, e) => Signup1(s, e);
 
         }
-        [DynamoDBTable("registered_userdata")]
-        public class registered_userdata
-        {
-            [DynamoDBHashKey]    // Hash key.
-            public string email { get; set; }
-            [DynamoDBRangeKey]
-            public string add_ku_sort { get; set; }
-            public int id { get; set; }
-            public string username { get; set; }
-            public string password { get; set; }
-            //  public int Price { get; set; }
-            public string address { get; set; }
-            //  public string datetime { get; set; }
-        }
         private async void Imageselect(object sender, EventArgs e)
         {   //gallery call
             await CrossMedia.Current.Initialize();
@@ -203,7 +189,7 @@ namespace TutorApp2.Views
             DynamoDBContext context = new DynamoDBContext(dbclient);
             DateTime now = DateTime.Now.ToLocalTime();
             string text = now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-            registered_userdata tosave_info = new registered_userdata()
+            App.registered_userdata tosave_info = new App.registered_userdata()
             {
                 email = Entry_Email.Text,
                 add_ku_sort="kanagawa",
