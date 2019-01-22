@@ -194,6 +194,7 @@ namespace TutorApp2.Views
                 password = Entry_Password.Text,
                 stud_teach = Entry_stud_teach.SelectedItem.ToString(),
                 surname = Entry_surname.Text,
+                gender=Entry_sex.SelectedItem.ToString(),
                 age = Entry_age.Text,
                 address = Entry_address.Text,
                 bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString(),
@@ -207,7 +208,6 @@ namespace TutorApp2.Views
             };
             context.SaveAsync(tosave_info);
 
-            DisplayAlert(title, textbox, button);//do my sql updarte db
             var dir =new LoginPage();
             Navigation.PushModalAsync(dir);
 

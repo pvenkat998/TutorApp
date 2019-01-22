@@ -34,6 +34,16 @@
                     <Label x:Name="Lbl_surname" Text="surname" />
                     <Entry x:Name="Entry_surname" Placeholder="surname"/>
 
+                    <Label x:Name="Lbl_sex" Text="sex" />
+                    <Picker x:Name="Entry_sex" Title="性別">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>男</x:String>
+                                <x:String>女</x:String>
+                                <x:String>その他</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                     <Label x:Name="Lbl_age" Text="age" />
                     <Entry x:Name="Entry_age" Placeholder="age"/>
 

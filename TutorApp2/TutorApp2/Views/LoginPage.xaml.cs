@@ -235,7 +235,6 @@ namespace TutorApp2.Views
         async void Redirsignup(object sender, EventArgs e)
         {
            // await QueryAsync(App.credentials, App.region);
-            DisplayAlert(Entry_Username.Text, Entry_Password.Text, "w");
             Navigation.PushModalAsync(new Signup());
         }
         

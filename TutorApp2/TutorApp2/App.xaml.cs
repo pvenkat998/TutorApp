@@ -25,6 +25,7 @@ namespace TutorApp2
             public string password { get; set; }
             public string stud_teach { get; set; }
             public string surname { get; set; }
+            public string gender { get; set; }
             public string age { get; set; }
             public string address { get; set; }
             public string bach_or_mast { get; set; }
