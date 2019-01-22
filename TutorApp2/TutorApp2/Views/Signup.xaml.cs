@@ -34,14 +34,14 @@ namespace TutorApp2.Views
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
-            Lbl_Username.TextColor = Constants.MainTextColor;
+            Lbl_Email.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
-            Entry_Username.Completed += (s, e) => Entry_Password.Focus();
+            Entry_surname.Completed += (s, e) => Entry_Password.Focus();
             Entry_Password.Completed += (s, e) => Entry_Email.Focus();
-            Entry_Email.Completed += (s, e) => Entry_Address.Focus();
-            Entry_Address.Completed += (s, e) => Signup1(s, e);
+            Entry_Email.Completed += (s, e) => Entry_address.Focus();
+            Entry_address.Completed += (s, e) => Signup1(s, e);
 
         }
         private async void Imageselect(object sender, EventArgs e)
@@ -136,7 +136,6 @@ namespace TutorApp2.Views
             var title = "登録完了";
             string textbox = "登録完了";
             string button = "はい！";
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
 
             //cred region
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
@@ -189,27 +188,27 @@ namespace TutorApp2.Views
             DynamoDBContext context = new DynamoDBContext(dbclient);
             DateTime now = DateTime.Now.ToLocalTime();
             string text = now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
-            App.registered_userdata tosave_info = new App.registered_userdata()
+            App.userdata_v1 tosave_info = new App.userdata_v1()
             {
                 email = Entry_Email.Text,
-                add_ku_sort="kanagawa",
-                id = 2,
-                username = Entry_Username.Text,
                 password = Entry_Password.Text,
-                address = Entry_Address.Text,
-               // datetime =  text
+                stud_teach = Entry_stud_teach.SelectedItem.ToString(),
+                surname = Entry_surname.Text,
+                age = Entry_age.Text,
+                address = Entry_address.Text,
+                bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString(),
+                gakunen = Entry_gakunen.SelectedItem.ToString(),
+                karui_major = Entry_karui_major.Text,
+                high_school = Entry_high_school.Text,
+                strong_subject = Entry_strong_subject.Text,
+                station = Entry_station.Text,
+                // datetime =  text
 
             };
             context.SaveAsync(tosave_info);
 
             DisplayAlert(title, textbox, button);//do my sql updarte db
-            var passdata = new PassDataEP
-            {
-                Email = Entry_Username.Text,
-            password = Entry_Password.Text
-            };
             var dir =new LoginPage();
-            dir.BindingContext = passdata;
             Navigation.PushModalAsync(dir);
 
 

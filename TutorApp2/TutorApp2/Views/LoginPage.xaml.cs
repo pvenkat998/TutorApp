@@ -163,8 +163,8 @@ namespace TutorApp2.Views
             //       APP_ID // app id
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            App.registered_userdata retrievedBook;
-            retrievedBook = context.LoadAsync<App.registered_userdata>(Entry_Username.Text,"kanagawa").Result;
+            App.userdata_v1 retrievedBook;
+            retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
             App.cur_user.address = retrievedBook.address;
 
             //Enter S3
@@ -216,7 +216,7 @@ namespace TutorApp2.Views
             var client = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(client);
 
-            var search = context.FromQueryAsync<App.registered_userdata>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "password-index",
                 Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
@@ -234,7 +234,7 @@ namespace TutorApp2.Views
         }
         async void Redirsignup(object sender, EventArgs e)
         {
-            await QueryAsync(App.credentials, App.region);
+           // await QueryAsync(App.credentials, App.region);
             DisplayAlert(Entry_Username.Text, Entry_Password.Text, "w");
             Navigation.PushModalAsync(new Signup());
         }

@@ -9,24 +9,77 @@
                 <Image x:Name="LoginIcon" Source="LoginIcon.jpg"/>
             </StackLayout>
 
+            <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-            <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand" >
+                <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand" >
 
-                <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"/>
+                    <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"/>
 
-                <Label x:Name="Lbl_Username" Text="Username" />
-                <Entry x:Name="Entry_Username" Placeholder="Username"/>
-                <Label x:Name="Lbl_Password" Text="Password" />
-                <Entry x:Name="Entry_Password" Placeholder="Password"/>
-                <Label x:Name="Lbl_Email" Text="Email" />
-                <Entry x:Name="Entry_Email" Placeholder="Email"/>
-                <Label x:Name="Lbl_Address" Text="Address" />
-                <Entry x:Name="Entry_Address" Placeholder="Address"/>
-                <Button x:Name="Btn_Signup" Text="Sign in" Clicked="Signup1"/>
-                <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
-                <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
-                <Image x:Name="imgPicked"/>
-            </StackLayout>
+                    <Label x:Name="Lbl_Email" Text="Email" />
+                    <Entry x:Name="Entry_Email" Placeholder="Email"/>
+
+                    <Label x:Name="Lbl_Password" Text="Password" />
+                    <Entry x:Name="Entry_Password" Placeholder="Password"/>
+
+                    <Label x:Name="Lbl_stud_teach" Text="stud_teach" />
+                    <Picker x:Name="Entry_stud_teach" Title="学生か先生">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>学生</x:String>
+                                <x:String>先生</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label x:Name="Lbl_surname" Text="surname" />
+                    <Entry x:Name="Entry_surname" Placeholder="surname"/>
+
+                    <Label x:Name="Lbl_age" Text="age" />
+                    <Entry x:Name="Entry_age" Placeholder="age"/>
+
+                    <Label x:Name="Lbl_address" Text="address" />
+                    <Entry x:Name="Entry_address" Placeholder="address"/>
+
+                    <Label x:Name="Lbl_bach_or_mast" Text="bach_or_mast" />
+                    <Picker x:Name="Entry_bach_or_mast" Title="bach_or_mast">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>学部</x:String>
+                                <x:String>大学院</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label x:Name="Lbl_gakunen" Text="gakunen" />
+                    <Picker x:Name="Entry_gakunen" Title="学年">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:Int16}">
+                                <x:Int16>1</x:Int16>
+                                <x:Int16>2</x:Int16>
+                                <x:Int16>3</x:Int16>
+                                <x:Int16>4</x:Int16>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label x:Name="Lbl_karui_major" Text="karui_major" />
+                    <Entry x:Name="Entry_karui_major" Placeholder="karui_major"/>
+
+                    <Label x:Name="Lbl_high_school" Text="high_school" />
+                    <Entry x:Name="Entry_high_school" Placeholder="high_school"/>
+
+                    <Label x:Name="Lbl_strong_subject" Text="strong_subject" />
+                    <Entry x:Name="Entry_strong_subject" Placeholder="strong_subject"/>
+
+                    <Label x:Name="Lbl_station" Text="station" />
+                    <Entry x:Name="Entry_station" Placeholder="station"/>
+
+                    <Button x:Name="Btn_Signup" Text="Sign UPP!!" Clicked="Signup1"/>
+                    <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
+                    <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
+                    <Image x:Name="imgPicked"/>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

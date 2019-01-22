@@ -23,7 +23,7 @@ namespace TutorApp2.Models
             var client = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(client);
 
-            var search = context.FromQueryAsync<App.registered_userdata>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "password-index",
                 Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
@@ -61,7 +61,7 @@ namespace TutorApp2.Models
         { 
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
-            App.registered_userdata retrievedBook = context.LoadAsync<App.registered_userdata>("admin", "kanagawa").Result;
+            App.userdata_v1 retrievedBook = context.LoadAsync<App.userdata_v1>("admin", "kanagawa").Result;
         }
 
 //------------------save a new thing to the db

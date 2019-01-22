@@ -16,19 +16,23 @@ namespace TutorApp2
        RegionEndpoint.APNortheast1 // Region
    );
         public static RegionEndpoint region = RegionEndpoint.APNortheast1;
-        [DynamoDBTable("registered_userdata")]
-        public class registered_userdata
+        [DynamoDBTable("userdata_v1")]
+        public class userdata_v1
         {
             [DynamoDBHashKey]    // Hash key.
             public string email { get; set; }
             [DynamoDBRangeKey]
-            public string add_ku_sort { get; set; }
-            public int id { get; set; }
-            public string username { get; set; }
             public string password { get; set; }
-            //  public int Price { get; set; }
+            public string stud_teach { get; set; }
+            public string surname { get; set; }
+            public string age { get; set; }
             public string address { get; set; }
-            //  public string datetime { get; set; }
+            public string bach_or_mast { get; set; }
+            public string gakunen { get; set; }
+            public string karui_major { get; set; }
+            public string high_school { get; set; }
+            public string strong_subject { get; set; }
+            public string station { get; set; }
         }
         public static Image dp_img;
         public static string dp_img_path;
