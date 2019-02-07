@@ -59,13 +59,34 @@ namespace TutorApp2.Views
                     System.Diagnostics.Debug.WriteLine("=====ERROR ========");
                 }
             }
-            ListOfTeachers listteach = new ListOfTeachers();
-           // listteach.image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
-            listteach.name = searchResponse[0].surname.ToString();
-            listteach.gakunen = searchResponse[0].gakunen.ToString();
-            listteach.kamoku = searchResponse[0].strong_subject.ToString();
-            listteach.moyori = searchResponse[0].station.ToString();
-            BindingContext = listteach;
+            /*    ListOfTeachers listteach =();
+               // listteach.image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
+                listteach.name = searchResponse[0].surname.ToString();
+                listteach.gakunen = searchResponse[0].gakunen.ToString();
+                listteach.kamoku = searchResponse[0].strong_subject.ToString();
+                listteach.moyori = searchResponse[0].station.ToString(); 
+                */
+            int size = searchResponse.Count;
+            List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
+            System.Diagnostics.Debug.WriteLine("=====GGWP ======== "+size);
+            Image img2;
+            img.Source= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
+            for (int i = 0; i < 10&&i<size; i++)
+            {
+
+                {
+                    listteachlist.Add(new ListOfTeachers
+                {
+                    name = searchResponse[i].surname.ToString(),
+                    gakunen = searchResponse[i].gakunen.ToString(),
+                    kamoku = searchResponse[i].strong_subject.ToString(),
+                    moyori = searchResponse[i].station.ToString(),
+                    image = img,
+                }
+                );
+                }
+            }
+            BindingContext = listteachlist;
             img.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
             img.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
             img.Source = App.dp_img_path;

@@ -14,11 +14,23 @@
         <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
             
             <StackLayout Padding="10">
-                <Label Text="{Binding gakunen}" ></Label>
-                <Label Text="{Binding name}"></Label>
-                <Label Text="{Binding kamoku}" ></Label>
-                <Label Text="{Binding moyori}" ></Label>
-                <Image Source="{Binding image}" />
+                <ListView ItemsSource="{Binding .}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout>
+                                        <Label Text="{Binding gakunen}" ></Label>
+                                        <Label Text="{Binding name}"></Label>
+                                        <Label Text="{Binding kamoku}" ></Label>
+                                        <Label Text="{Binding moyori}" ></Label>
+                                        <Image Source="{Binding image}" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </ScrollView>
 
