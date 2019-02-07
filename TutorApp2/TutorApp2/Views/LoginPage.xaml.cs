@@ -165,7 +165,6 @@ namespace TutorApp2.Views
             DynamoDBContext context = new DynamoDBContext(dbclient);
             App.userdata_v1 retrievedBook;
             retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-            App.cur_user.address = retrievedBook.address;
 
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
@@ -199,6 +198,7 @@ namespace TutorApp2.Views
                     System.Diagnostics.Debug.WriteLine("=====ERROR ========");
                 }
                 //
+                App.cur_user.address = retrievedBook.address;
                 DisplayAlert("yay", textbox, check);//do my sql updarte db
                 Navigation.PushModalAsync(new Home());
                 Console.WriteLine("True!");

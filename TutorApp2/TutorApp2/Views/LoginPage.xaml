@@ -4,6 +4,7 @@
              
              x:Class="TutorApp2.Views.LoginPage">
     <ContentPage.Content>
+        
         <StackLayout x:Name="MasterLayout">
 
             <StackLayout  x:Name="LogoStack">

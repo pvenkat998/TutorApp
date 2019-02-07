@@ -3,8 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TutorApp2.Views.HomeDetail"
              Title="Detail">
-  <StackLayout Padding="10">
-    <Label x:Name="txt" Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
-        <Image x:Name="img" />
+    <StackLayout x:Name="MasterLayout">
+
+        <StackLayout Padding="10">
+            <Label x:Name="txt" Text="教師一覧"/>
+            <Image x:Name="img" />
+            <Label x:Name="t1" Text="教師一覧"/>
+        </StackLayout>
+        
+        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+            
+            <StackLayout Padding="10">
+                <Label Text="{Binding gakunen}" ></Label>
+                <Label Text="{Binding name}"></Label>
+                <Label Text="{Binding kamoku}" ></Label>
+                <Label Text="{Binding moyori}" ></Label>
+                <Image Source="{Binding image}" />
+            </StackLayout>
+        </ScrollView>
+
     </StackLayout>
 </ContentPage>
