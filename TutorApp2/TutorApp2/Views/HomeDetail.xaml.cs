@@ -6,6 +6,7 @@ using Amazon.S3;
 using Amazon.S3.Transfer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace TutorApp2.Views
         public HomeDetail()
         {
             InitializeComponent();
-
+            //-----------------------BACKEND--------------------------
+            //download data from query
             // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);
@@ -34,7 +36,7 @@ namespace TutorApp2.Views
             });
             Console.WriteLine("items retrieved");
 
-
+            //download images
             var searchResponse = search.GetRemainingAsync().Result;
             foreach (var s in searchResponse)
             {
@@ -43,13 +45,22 @@ namespace TutorApp2.Views
                 //pic
                 var s3Client = new AmazonS3Client(App.credentials, App.region);
                 var transferUtility = new TransferUtility(s3Client);
+                var list = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "*");
+
+                if (list.Length > 0)
+                {
+                    for (int i = 0; i < list.Length; i++)
+                    {
+                       // File.Delete(list[i]);
+                    }
+                }
                 try
                 {
 
                     TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
                     request.BucketName = "tutorapp" + @"/" + "profilepic";
                     request.Key = s.email.ToString() + "_dp.jpg";
-                    request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
+                    request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.email.ToString() + "_dp.jpg");
                     TransferUtility tu = new TransferUtility(s3Client);
                     System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
                     tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
@@ -69,11 +80,11 @@ namespace TutorApp2.Views
             int size = searchResponse.Count;
             List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
             System.Diagnostics.Debug.WriteLine("=====GGWP ======== "+size);
-            Image img2;
-            img.Source= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
+            string imgsrc;
+            //ASSIGNING CELLS
             for (int i = 0; i < 10&&i<size; i++)
             {
-
+                imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), searchResponse[i].email.ToString() + "_dp.jpg");
                 {
                     listteachlist.Add(new ListOfTeachers
                 {
@@ -81,18 +92,26 @@ namespace TutorApp2.Views
                     gakunen = searchResponse[i].gakunen.ToString(),
                     kamoku = searchResponse[i].strong_subject.ToString(),
                     moyori = searchResponse[i].station.ToString(),
-                    image = img,
+                   // moyori = imgsrc,
+                    image = imgsrc,
                 }
                 );
                 }
             }
             BindingContext = listteachlist;
+
+            //-----------------------------------FRONTEND-----------------------
             img.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
             img.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
             img.Source = App.dp_img_path;
-            txt.Text = "i am a retard";
+            txt.Text = "pro";
             txt.Text = App.cur_user.address;
+        }
 
+        async void OnTapped(object sender, EventArgs e)
+        {
+            var action = await DisplayActionSheet("ActionSheet: Send to?", "Cancel", null, "Email", "Twitter", "Facebook");
+            Debug.WriteLine("Action: " + action);
         }
 
     }

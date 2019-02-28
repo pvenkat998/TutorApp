@@ -31,6 +31,7 @@ using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Amazon.DynamoDBv2.DocumentModel;
+using Xamarin.Essentials;
 
 namespace TutorApp2.Views
 {
@@ -44,8 +45,48 @@ namespace TutorApp2.Views
         {
             InitializeComponent();
             Init();
+            test();
         }
+        async void test()
+        {
+            Xamarin.Essentials.Location userlocation = new Xamarin.Essentials.Location(42.358056, -71.063611);
+            Xamarin.Essentials.Location tarlocation = new Xamarin.Essentials.Location(37.783333, -122.416667);
 
+            try
+            {
+                var useraddress = "渋谷駅";
+                var userlocations = await Geocoding.GetLocationsAsync(useraddress);
+                userlocation = userlocations?.FirstOrDefault();
+                if (userlocation != null)
+                {
+                    Console.WriteLine($"Latitude: {userlocation.Latitude}, Longitude: {userlocation.Longitude}, Altitude: {userlocation.Altitude}");
+                    longi.Text = userlocation.Longitude.ToString();
+                    lat.Text = userlocation.Latitude.ToString();
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Feature not supported on device
+            }
+            catch (Exception ex)
+            {
+                // Handle exception that may have occurred in geocoding
+            }
+            try
+            {
+                var taraddress = "原宿駅";
+                var tarlocations = await Geocoding.GetLocationsAsync(taraddress);
+                tarlocation = tarlocations?.FirstOrDefault();
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+            }
+            catch (Exception ex)
+            {
+            }
+             double miles = Xamarin.Essentials.Location.CalculateDistance(userlocation, tarlocation, DistanceUnits.Kilometers);
+            dist.Text = miles.ToString();
+        }
         void Init()
         {
             LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
@@ -164,8 +205,9 @@ namespace TutorApp2.Views
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             App.userdata_v1 retrievedBook;
-            retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-
+     //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
+            retrievedBook = context.LoadAsync<App.userdata_v1>("admin", "admin").Result;
+     //       ---------------------------DANGER========================
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
             var s3Client = new AmazonS3Client(App.credentials, App.region);

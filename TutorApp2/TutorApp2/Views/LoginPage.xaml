@@ -15,7 +15,9 @@
             <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand" >
 
                 <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"/>
-
+                <Label x:Name="lat" Text=""></Label>
+                <Label x:Name="longi" Text=""></Label>
+                <Label x:Name="dist" Text=""></Label>
                 <Label x:Name="Lbl_Username" Text="Username" />
                 <Entry x:Name="Entry_Username" Placeholder="Username" Text="{Binding Email}"/>
                 <Label x:Name="Lbl_Password" Text="Password" />

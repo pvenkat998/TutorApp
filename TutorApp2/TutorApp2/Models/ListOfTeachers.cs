@@ -13,6 +13,6 @@ namespace TutorApp2.Models
         public string gakunen { get; set; }
         public string kamoku { get; set; }
         public string moyori { get; set; }
-        public Image image  {get;set;}
+        public string image  {get;set;}
     }
 }
