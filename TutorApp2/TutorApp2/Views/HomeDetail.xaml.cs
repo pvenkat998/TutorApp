@@ -24,7 +24,7 @@ namespace TutorApp2.Views
         {
             InitializeComponent();
             //-----------------------BACKEND--------------------------
-            //download data from query
+            //download data from query DB
             // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);
@@ -45,15 +45,6 @@ namespace TutorApp2.Views
                 //pic
                 var s3Client = new AmazonS3Client(App.credentials, App.region);
                 var transferUtility = new TransferUtility(s3Client);
-                var list = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "*");
-
-                if (list.Length > 0)
-                {
-                    for (int i = 0; i < list.Length; i++)
-                    {
-                       // File.Delete(list[i]);
-                    }
-                }
                 try
                 {
 
@@ -88,6 +79,7 @@ namespace TutorApp2.Views
                 {
                     listteachlist.Add(new ListOfTeachers
                 {
+                    email=searchResponse[i].email.ToString(),
                     name = searchResponse[i].surname.ToString(),
                     gakunen = searchResponse[i].gakunen.ToString(),
                     kamoku = searchResponse[i].strong_subject.ToString(),
@@ -108,9 +100,27 @@ namespace TutorApp2.Views
             txt.Text = App.cur_user.address;
         }
 
-        async void OnTapped(object sender, EventArgs e)
+        async void OnTapped(object sender, TappedEventArgs e)
         {
-            var action = await DisplayActionSheet("ActionSheet: Send to?", "Cancel", null, "Email", "Twitter", "Facebook");
+            var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
+            if (action== "プロフィールをみる")
+            {
+                App.User_Recepient.Email = e.Parameter.ToString();
+                await Navigation.PushModalAsync(new ProfilePage());
+            }
+            if (action == "メッセージする")
+            {
+                App.User_Recepient.Email = e.Parameter.ToString();
+                App.User_Recepient.Username = "vv";
+
+                await Navigation.PushModalAsync(new MessagePage());
+            }
+            if (action == "通報する")
+            {
+                txt.Text = "reported";
+                await DisplayAlert("通報できた", "通報できた", "ww");//do my sql updarte db
+
+            }
             Debug.WriteLine("Action: " + action);
         }
 

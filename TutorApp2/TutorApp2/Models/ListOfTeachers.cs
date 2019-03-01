@@ -9,6 +9,7 @@ namespace TutorApp2.Models
 {
     public class ListOfTeachers
     {
+        public string email { get; set; }
         public string name { get; set; }
         public string gakunen { get; set; }
         public string kamoku { get; set; }

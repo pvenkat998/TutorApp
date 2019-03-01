@@ -19,11 +19,11 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout BackgroundColor="#eee"
-                        Orientation="Vertical">
+                        Orientation="Vertical" x:Name="{Binding email}">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTapped" CommandParameter="{Binding email}"/>
+                                    </StackLayout.GestureRecognizers>
                                     <StackLayout Orientation="Horizontal" >
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnTapped"/>
-                                        </StackLayout.GestureRecognizers>
                                         <Image Source="{Binding image}" />
                                         <Label Text="{Binding name}"
                                 TextColor="#f35e20" />

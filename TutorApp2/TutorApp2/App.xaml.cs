@@ -5,6 +5,7 @@ using TutorApp2.Views;
 using Amazon.CognitoIdentity;
 using Amazon;
 using Amazon.DynamoDBv2.DataModel;
+using TutorApp2.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -45,6 +46,11 @@ namespace TutorApp2
             public static string username { get; set; }
             public static string password { get; set; }
             public static string address { get; set; }
+        }
+        public static class User_Recepient
+        {
+            public static string Email { get; set; }
+            public static string Username { get; set; }
         }
         public App()
         {

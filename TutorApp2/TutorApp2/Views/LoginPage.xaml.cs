@@ -274,12 +274,12 @@ namespace TutorApp2.Views
             }
 
         }
-        async void Redirsignup(object sender, EventArgs e)
+        void Redirsignup(object sender, EventArgs e)
         {
-           // await QueryAsync(App.credentials, App.region);
+            // await QueryAsync(App.credentials, App.region);
             Navigation.PushModalAsync(new Signup());
         }
-        
+
     }
 
 
