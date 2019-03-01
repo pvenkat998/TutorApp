@@ -100,7 +100,7 @@ namespace TutorApp2.Views
             txt.Text = App.cur_user.address;
         }
 
-        async void OnTapped(object sender, TappedEventArgs e)
+        async  Task OnTapped(object sender, TappedEventArgs e)
         {
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
             if (action== "プロフィールをみる")

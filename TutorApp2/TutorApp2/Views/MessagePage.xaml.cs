@@ -40,7 +40,7 @@ namespace TutorApp2.Views
         {
             throw new NotImplementedException();
         }
-
+        /*
         void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
            // MessagesListView.SelectedItem = null;
@@ -51,7 +51,8 @@ namespace TutorApp2.Views
          //   MessagesListView.SelectedItem = null;
 
         }
-    
+        */
+
     }
 
 }

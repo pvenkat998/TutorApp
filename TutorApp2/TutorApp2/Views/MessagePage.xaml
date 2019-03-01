@@ -26,8 +26,6 @@
 			ItemTemplate="{StaticResource MessageTemplateSelector}" 
 			ItemsSource="{Binding Messages}" 
 			HasUnevenRows="True" 
-			ItemSelected="MyListView_OnItemSelected" 
-			ItemTapped="MyListView_OnItemTapped" 
 			SeparatorVisibility="None" />
 
         <!-- Entry and Send button in Row 1 -->
