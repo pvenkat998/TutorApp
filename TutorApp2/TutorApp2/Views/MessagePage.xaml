@@ -3,9 +3,9 @@
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="TutorApp2.MessagePage" 
-		xmlns:local="clr-namespace:TutorApp2.Models;assembly=TutorApp2"
+		xmlns:local="clr-namespace:TutorApp2;assembly=TutorApp2"
     xmlns:local1="clr-namespace:TutorApp2.CustomCells"
-    BindingContext="{StaticResource MainChatViewModel}">
+    BindingContext="{x:Static local:ViewModelLocator.MainChatViewModel}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Location" Command="{Binding LocationCommand}"/>
     </ContentPage.ToolbarItems>

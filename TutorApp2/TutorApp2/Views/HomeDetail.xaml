@@ -21,7 +21,7 @@
                                 <StackLayout BackgroundColor="#eee"
                         Orientation="Vertical" x:Name="{Binding email}">
                                     <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnTapped" CommandParameter="{Binding email}"/>
+                                        <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
                                     </StackLayout.GestureRecognizers>
                                     <StackLayout Orientation="Horizontal" >
                                         <Image Source="{Binding image}" />

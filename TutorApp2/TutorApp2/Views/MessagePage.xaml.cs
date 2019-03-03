@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TutorApp2.Models;
+using TutorApp2.CustomCells;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,12 +36,11 @@ namespace TutorApp2.Views
 
         }
 
-
         private void InitializeComponent()
         {
             throw new NotImplementedException();
         }
-        /*
+
         void MyListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
            // MessagesListView.SelectedItem = null;
@@ -51,7 +51,6 @@ namespace TutorApp2.Views
          //   MessagesListView.SelectedItem = null;
 
         }
-        */
 
     }
 

@@ -100,17 +100,20 @@ namespace TutorApp2.Views
             txt.Text = App.cur_user.address;
         }
 
-        async  Task OnTapped(object sender, TappedEventArgs e)
+        private async  void  OnTapped2(object sender, EventArgs e)
         {
+            StackLayout t = (StackLayout)sender;
+            string te = t.ToString();
+            txt.Text = te;
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
             if (action== "プロフィールをみる")
             {
-                App.User_Recepient.Email = e.Parameter.ToString();
+                App.User_Recepient.Email = te;
                 await Navigation.PushModalAsync(new ProfilePage());
             }
             if (action == "メッセージする")
             {
-                App.User_Recepient.Email = e.Parameter.ToString();
+                App.User_Recepient.Email = te;
                 App.User_Recepient.Username = "vv";
 
                 await Navigation.PushModalAsync(new MessagePage());
