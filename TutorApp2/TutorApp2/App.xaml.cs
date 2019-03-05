@@ -6,6 +6,7 @@ using Amazon.CognitoIdentity;
 using Amazon;
 using Amazon.DynamoDBv2.DataModel;
 using TutorApp2.Models;
+using System.Collections.Generic;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -38,6 +39,7 @@ namespace TutorApp2
         }
         public static Image dp_img;
         public static string dp_img_path;
+        public static List<MessageDynamo> messearchResponse;
         public static class cur_user
         {
             public static string email { get; set; }

@@ -25,9 +25,22 @@ namespace TutorApp2.Views
             InitializeComponent();
             //-----------------------BACKEND--------------------------
             //download data from query DB
-            // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
+            //DOWNLOAD MESSAGES DATA
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);
+            var searchm = context.FromQueryAsync<MessageDynamo>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            {
+                IndexName = "Sender-index",
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Sender", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "a")
+
+            });
+            Console.WriteLine("items retrieved");
+
+            //download images
+            App.messearchResponse = searchm.GetRemainingAsync().Result;
+            // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
+          //  var client = new AmazonDynamoDBClient(App.credentials, App.region);
+         //   DynamoDBContext context = new DynamoDBContext(client);
             var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "stud_teach-index",

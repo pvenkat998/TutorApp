@@ -105,7 +105,7 @@
                         <RowDefinition Height="100"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Entry Grid.Row="0"  Grid.Column="0" x:Name="Messagetosend" VerticalOptions="End" HorizontalOptions="StartAndExpand"></Entry>
