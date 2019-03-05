@@ -44,7 +44,7 @@
                                 TextColor="#f35e20" />
                                             <StackLayout  HorizontalOptions="StartAndExpand" VerticalOptions="Start"  Grid.Row="0" Grid.Column="1">
                                                 <Frame OutlineColor="Black" VerticalOptions="Fill" >
-                                                    <Label HorizontalOptions="EndAndExpand" TextColor="Blue"  Text="tettt" VerticalOptions="Fill"  ></Label>
+                                                    <Label HorizontalOptions="EndAndExpand" TextColor="Blue"  Text="{Binding text}" VerticalOptions="Fill"  ></Label>
                                                 </Frame>
                                             </StackLayout>
                                             <Label FontSize="Micro" Grid.Row="1" Grid.Column="1" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
@@ -84,7 +84,7 @@
                                                 </Frame.BackgroundColor>
                                                 <StackLayout  Grid.Row="0" Grid.Column="1"  HorizontalOptions="StartAndExpand" VerticalOptions="Start">
                                                     <Frame OutlineColor="Black" Grid.Row="0" Grid.Column="1"  >
-                                                        <Label HorizontalOptions="EndAndExpand" VerticalOptions ="End" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="tettt"></Label>
+                                                        <Label HorizontalOptions="EndAndExpand" VerticalOptions ="End" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="{Binding text}"></Label>
                                                     </Frame>
                                                 </StackLayout>
                                             </Frame>
@@ -105,7 +105,7 @@
                         <RowDefinition Height="100"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="100"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Entry Grid.Row="0"  Grid.Column="0" x:Name="Messagetosend" VerticalOptions="End" HorizontalOptions="StartAndExpand"></Entry>

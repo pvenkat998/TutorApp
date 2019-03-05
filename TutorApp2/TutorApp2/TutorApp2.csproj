@@ -18,10 +18,12 @@
 
   <ItemGroup>
     <None Remove="Images\LoginIcon.jpg" />
+    <None Remove="Views\LoginIcon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Images\LoginIcon.jpg" />
+    <EmbeddedResource Include="Views\LoginIcon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
