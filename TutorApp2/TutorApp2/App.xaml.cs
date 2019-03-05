@@ -73,24 +73,6 @@ namespace TutorApp2
         {
             // Handle when your app resumes
         }
-        public static class ViewModelLocator
-        {
-            static MainChatViewModel chatVM;
-            public static MainChatViewModel MainChatViewModel
-            {
-                get
-                {
-                    if (chatVM == null)
-                    {
-                        chatVM = new MainChatViewModel();
-                        chatVM.InitializeMock();
-                    }
-                    return chatVM;
-
-                }
-            }
-
-        }
 
     }
 }

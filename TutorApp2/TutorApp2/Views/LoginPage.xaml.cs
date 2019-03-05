@@ -279,6 +279,11 @@ namespace TutorApp2.Views
             // await QueryAsync(App.credentials, App.region);
             Navigation.PushModalAsync(new Signup());
         }
+        void Messageredir(object sender, EventArgs e)
+        {
+            // await QueryAsync(App.credentials, App.region);
+            Navigation.PushModalAsync(new MessagePageSimple());
+        }
 
     }
 

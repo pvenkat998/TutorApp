@@ -58,10 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CustomCells\IncomingViewCell.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="CustomCells\OutgoingViewCell.xaml">
+    <EmbeddedResource Update="Views\MessagePageSimple.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Help.xaml">
@@ -95,6 +92,7 @@
 
   <ItemGroup>
     <Folder Include="Backup\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -105,12 +103,6 @@
 
   <ItemGroup>
     <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="CustomCells\IncomingViewCell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="CustomCells\OutgoingViewCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="MainPage.xaml">

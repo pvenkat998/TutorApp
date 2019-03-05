@@ -169,7 +169,6 @@ namespace TutorApp2.Views
                 textbox = " u bik";
                 System.Diagnostics.Debug.WriteLine("=====ERROR ========");
             }
-
             TransferUtility utility = new TransferUtility(s3Client);
             // making a TransferUtilityUploadRequest instance
             TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
@@ -182,12 +181,18 @@ namespace TutorApp2.Views
             if (uppath != "") { 
             uprequest.FilePath = uppath;
             }
+
+            System.Diagnostics.Debug.WriteLine(uprequest.FilePath);
+            System.Diagnostics.Debug.WriteLine("=====IOS1 error========");
+            System.Diagnostics.Debug.WriteLine("=====IOS3 error========");
             utility.UploadAsync(uprequest);
             //commensing the transfer
             var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
+
             DateTime now = DateTime.Now.ToLocalTime();
             string text = now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
+
             App.userdata_v1 tosave_info = new App.userdata_v1()
             {
                 email = Entry_Email.Text,

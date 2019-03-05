@@ -2,17 +2,10 @@
 <ContentPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="TutorApp2.MessagePage" 
+		x:Class="TutorApp2.MainChatPage" 
 		xmlns:local="clr-namespace:TutorApp2;assembly=TutorApp2"
-    xmlns:local1="clr-namespace:TutorApp2.CustomCells"
-    BindingContext="{x:Static local:ViewModelLocator.MainChatViewModel}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Location" Command="{Binding LocationCommand}"/>
-    </ContentPage.ToolbarItems>
+    xmlns:local1="clr-namespace:TutorApp2.CustomCells">
     <ContentPage.Resources>
-        <ResourceDictionary>
-            <local1:MyDataTemplateSelector x:Key="MessageTemplateSelector"/>
-        </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowSpacing="0" ColumnSpacing="0">
         <Grid.RowDefinitions>
@@ -21,13 +14,6 @@
         </Grid.RowDefinitions>
 
         <!--Messages in Row 0 -->
-        <ListView 
-			x:Name="MessagesListView" 
-			ItemTemplate="{StaticResource MessageTemplateSelector}" 
-			ItemsSource="{Binding Messages}" 
-			HasUnevenRows="True" 
-			SeparatorVisibility="None" />
-
         <!-- Entry and Send button in Row 1 -->
         <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="10" BackgroundColor="#EFEFEF">
             <Entry 
