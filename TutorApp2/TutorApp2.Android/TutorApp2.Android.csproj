@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Amazon.SQS.ExtendedClient">
+      <Version>1.2.1</Version>
+    </PackageReference>
     <PackageReference Include="AWSSDK.CognitoIdentity">
       <Version>3.3.2.54</Version>
     </PackageReference>

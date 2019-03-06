@@ -7,6 +7,7 @@ using Amazon;
 using Amazon.DynamoDBv2.DataModel;
 using TutorApp2.Models;
 using System.Collections.Generic;
+using Amazon.DynamoDBv2;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -40,6 +41,7 @@ namespace TutorApp2
         public static Image dp_img;
         public static string dp_img_path;
         public static List<MessageDynamo> messearchResponse;
+        public static List<MessageDynamo> messearchResponse2;
         public static class cur_user
         {
             public static string email { get; set; }

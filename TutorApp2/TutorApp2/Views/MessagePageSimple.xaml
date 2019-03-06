@@ -7,14 +7,14 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
-                <Label Text="Welcome to Xamarin.Forms!"
+                <Label x:Name="ww" Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             </StackLayout>
 
             <!--Messages in Row 0 -->
             <StackLayout Padding="30">
-                <ListView ItemsSource="{Binding .}">
+                <ListView x:Name="msg" ItemsSource="{Binding .}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -83,8 +83,8 @@
                                                     <OnPlatform x:TypeArguments="Color" iOS="#F5F5F5" Android="White"/>
                                                 </Frame.BackgroundColor>
                                                 <StackLayout  Grid.Row="0" Grid.Column="1"  HorizontalOptions="StartAndExpand" VerticalOptions="Start">
-                                                    <Frame OutlineColor="Black" Grid.Row="0" Grid.Column="1"  >
-                                                        <Label HorizontalOptions="EndAndExpand" VerticalOptions ="End" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="{Binding text}"></Label>
+                                                    <Frame OutlineColor="Black" VerticalOptions="Fill"  >
+                                                        <Label HorizontalOptions="EndAndExpand" VerticalOptions ="Fill" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="{Binding text}"></Label>
                                                     </Frame>
                                                 </StackLayout>
                                             </Frame>
@@ -92,6 +92,7 @@
 
                                         </Grid>
                                     </StackLayout>
+                                    
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

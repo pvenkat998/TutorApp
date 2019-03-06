@@ -14,7 +14,7 @@ namespace TutorApp2.Views
 	{
 		public ProfilePage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
 		}
 	}
 }

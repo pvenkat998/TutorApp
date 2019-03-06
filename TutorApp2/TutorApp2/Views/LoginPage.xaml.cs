@@ -240,6 +240,7 @@ namespace TutorApp2.Views
                     System.Diagnostics.Debug.WriteLine("=====ERROR ========");
                 }
                 //
+                App.cur_user.email = retrievedBook.email;
                 App.cur_user.address = retrievedBook.address;
                 DisplayAlert("yay", textbox, check);//do my sql updarte db
                 Navigation.PushModalAsync(new Home());

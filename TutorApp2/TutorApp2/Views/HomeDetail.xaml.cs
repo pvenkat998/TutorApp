@@ -23,24 +23,36 @@ namespace TutorApp2.Views
         public HomeDetail()
         {
             InitializeComponent();
-            //-----------------------BACKEND--------------------------
-            //download data from query DB
-            //DOWNLOAD MESSAGES DATA
+            //-----------------------BACKEND--------------------------      
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);
+
+            //download data from query DB
+            //DOWNLOAD MESSAGES DATA
+            /*
             var searchm = context.FromQueryAsync<MessageDynamo>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "Sender-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Sender", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "a")
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Sender", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, App.cur_user.email)
 
             });
             Console.WriteLine("items retrieved");
-
-            //download images
+            
             App.messearchResponse = searchm.GetRemainingAsync().Result;
+            var searchm2 = context.FromQueryAsync<MessageDynamo>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            {
+                IndexName = "Reciever-index",
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Reciever", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, App.cur_user.email)
+
+            });
+            Console.WriteLine("items retrieved");
+        
+            //download images
+            App.messearchResponse2 = searchm2.GetRemainingAsync().Result;
             // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
-          //  var client = new AmazonDynamoDBClient(App.credentials, App.region);
-         //   DynamoDBContext context = new DynamoDBContext(client);
+            //  var client = new AmazonDynamoDBClient(App.credentials, App.region);
+            //   DynamoDBContext context = new DynamoDBContext(client);
+                */
             var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "stud_teach-index",
@@ -113,11 +125,11 @@ namespace TutorApp2.Views
             txt.Text = App.cur_user.address;
         }
 
-        private async  void  OnTapped2(object sender, EventArgs e)
+        private async void OnTapped2(object sender, EventArgs e)
         {
-            StackLayout t = (StackLayout)sender;
-            string te = t.ToString();
-            txt.Text = te;
+            TappedEventArgs eventargs = e as TappedEventArgs;
+
+            string te = eventargs.Parameter.ToString();
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
             if (action== "プロフィールをみる")
             {
@@ -129,12 +141,12 @@ namespace TutorApp2.Views
                 App.User_Recepient.Email = te;
                 App.User_Recepient.Username = "vv";
 
-                await Navigation.PushModalAsync(new MessagePage());
+                await Navigation.PushModalAsync(new MessagePageSimple());
             }
             if (action == "通報する")
             {
                 txt.Text = "reported";
-                await DisplayAlert("通報できた", "通報できた", "ww");//do my sql updarte db
+                await DisplayAlert("通報できた", "通報できた", te);//do my sql updarte db
 
             }
             Debug.WriteLine("Action: " + action);

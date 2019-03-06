@@ -148,6 +148,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Amazon.SQS.ExtendedClient">
+      <Version>1.2.1</Version>
+    </PackageReference>
     <PackageReference Include="AWSSDK.CognitoIdentity">
       <Version>3.3.2.74</Version>
     </PackageReference>
