@@ -283,6 +283,8 @@ namespace TutorApp2.Views
         void Messageredir(object sender, EventArgs e)
         {
             // await QueryAsync(App.credentials, App.region);
+            App.cur_user.email = "admin";
+            App.User_Recepient.Email = "dummy1";
             Navigation.PushModalAsync(new MessagePageSimple());
         }
 

@@ -133,11 +133,12 @@ namespace TutorApp2.Views
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
             if (action== "プロフィールをみる")
             {
-                App.User_Recepient.Email = te;
+                App.Target_Prof.Email = te;
                 await Navigation.PushModalAsync(new ProfilePage());
             }
             if (action == "メッセージする")
             {
+                var tarprof = App.searchResponse.Single(r => r.email == te);
                 App.User_Recepient.Email = te;
                 App.User_Recepient.Username = "vv";
 
