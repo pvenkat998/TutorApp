@@ -62,8 +62,8 @@ namespace TutorApp2.Views
             Console.WriteLine("items retrieved");
 
             //download images
-            var searchResponse = search.GetRemainingAsync().Result;
-            foreach (var s in searchResponse)
+            App.searchResponse = search.GetRemainingAsync().Result;
+            foreach (var s in App.searchResponse)
             {
                 t1.Text = s.email.ToString();
                 Console.WriteLine(s.email.ToString());
@@ -93,22 +93,22 @@ namespace TutorApp2.Views
                 listteach.kamoku = searchResponse[0].strong_subject.ToString();
                 listteach.moyori = searchResponse[0].station.ToString(); 
                 */
-            int size = searchResponse.Count;
+            int size = App.searchResponse.Count;
             List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
             System.Diagnostics.Debug.WriteLine("=====GGWP ======== "+size);
             string imgsrc;
             //ASSIGNING CELLS
             for (int i = 0; i < 10&&i<size; i++)
             {
-                imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), searchResponse[i].email.ToString() + "_dp.jpg");
+                imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg");
                 {
                     listteachlist.Add(new ListOfTeachers
                 {
-                    email=searchResponse[i].email.ToString(),
-                    name = searchResponse[i].surname.ToString(),
-                    gakunen = searchResponse[i].gakunen.ToString(),
-                    kamoku = searchResponse[i].strong_subject.ToString(),
-                    moyori = searchResponse[i].station.ToString(),
+                    email=App.searchResponse[i].email.ToString(),
+                    name = App.searchResponse[i].surname.ToString(),
+                    gakunen = App.searchResponse[i].gakunen.ToString(),
+                    kamoku = App.searchResponse[i].gender.ToString(),
+                    moyori = App.searchResponse[i].station.ToString(),
                    // moyori = imgsrc,
                     image = imgsrc,
                 }
@@ -133,12 +133,12 @@ namespace TutorApp2.Views
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
             if (action== "プロフィールをみる")
             {
+                App.tarprof = App.searchResponse.Single(r => r.email == te);
                 App.Target_Prof.Email = te;
                 await Navigation.PushModalAsync(new ProfilePage());
             }
             if (action == "メッセージする")
             {
-                var tarprof = App.searchResponse.Single(r => r.email == te);
                 App.User_Recepient.Email = te;
                 App.User_Recepient.Username = "vv";
 

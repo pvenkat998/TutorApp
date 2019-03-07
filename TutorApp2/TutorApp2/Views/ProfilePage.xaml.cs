@@ -14,6 +14,7 @@ namespace TutorApp2.Views
 	{
 		public ProfilePage ()
 		{
+            BindingContext = App.tarprof;
             InitializeComponent();
 		}
 	}

@@ -30,12 +30,14 @@ namespace TutorApp2
             public string surname { get; set; }
             public string gender { get; set; }
             public string age { get; set; }
-            public string address { get; set; }
             public string bach_or_mast { get; set; }
             public string gakunen { get; set; }
             public string karui_major { get; set; }
             public string high_school { get; set; }
-            public string strong_subject { get; set; }
+            public string chuugaku_juken { get; set; }
+            public string shidoukanou { get; set; }
+            public string shidoukeiken { get; set; }
+            public string hitokoto { get; set; }
             public string station { get; set; }
         }
         public static Image dp_img;
@@ -43,6 +45,7 @@ namespace TutorApp2
         public static List<MessageDynamo> messearchResponse;
         public static List<MessageDynamo> messearchResponse2;
         public static List<userdata_v1> searchResponse;
+        public static userdata_v1 tarprof;
         public static class cur_user
         {
             public static string email { get; set; }

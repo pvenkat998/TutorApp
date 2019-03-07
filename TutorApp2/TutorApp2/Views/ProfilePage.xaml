@@ -7,6 +7,16 @@
             <Label Text="Welcome to Profile Page.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding stud_teach}"
+                                TextColor="#f35e20" />
+            <Label Text="{Binding gakunen}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
+            <Label Text="{Binding gender}"
+                                TextColor="#f35e20" />
+            <Label Text="{Binding bach_or_mast}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -47,9 +47,6 @@
                     <Label x:Name="Lbl_age" Text="age" />
                     <Entry x:Name="Entry_age" Placeholder="age"/>
 
-                    <Label x:Name="Lbl_address" Text="address" />
-                    <Entry x:Name="Entry_address" Placeholder="address"/>
-
                     <Label x:Name="Lbl_bach_or_mast" Text="bach_or_mast" />
                     <Picker x:Name="Entry_bach_or_mast" Title="bach_or_mast">
                         <Picker.ItemsSource>
@@ -78,8 +75,15 @@
                     <Label x:Name="Lbl_high_school" Text="high_school" />
                     <Entry x:Name="Entry_high_school" Placeholder="high_school"/>
 
-                    <Label x:Name="Lbl_strong_subject" Text="strong_subject" />
-                    <Entry x:Name="Entry_strong_subject" Placeholder="strong_subject"/>
+                    <Label x:Name="Lbl_chuugaku_juken" Text="chuugaku_juken" />
+                    <Entry x:Name="Entry_chuugaku_juken" Placeholder="chuugaku_juken"/>
+                    <Label x:Name="Lbl_shidoukanou" Text="shidoukanou" />
+                    <Entry x:Name="Entry_shidoukanou" Placeholder="shidoukanou"/>
+
+                    <Label x:Name="Lbl_shidoukeiken" Text="shidoukeiken" />
+                    <Entry x:Name="Entry_shidoukeiken" Placeholder="shidoukeiken"/>
+                    <Label x:Name="Lbl_hitokoto" Text="hitokoto" />
+                    <Entry x:Name="Entry_hitokoto" Placeholder="hitokoto"/>
 
                     <Label x:Name="Lbl_station" Text="station" />
                     <Entry x:Name="Entry_station" Placeholder="station"/>

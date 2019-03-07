@@ -241,7 +241,6 @@ namespace TutorApp2.Views
                 }
                 //
                 App.cur_user.email = retrievedBook.email;
-                App.cur_user.address = retrievedBook.address;
                 DisplayAlert("yay", textbox, check);//do my sql updarte db
                 Navigation.PushModalAsync(new Home());
                 Console.WriteLine("True!");
@@ -254,27 +253,7 @@ namespace TutorApp2.Views
             }
 
         }
-        public async Task QueryAsync(AWSCredentials credentials, RegionEndpoint region)
-        {
-            var client = new AmazonDynamoDBClient(credentials, region);
-            DynamoDBContext context = new DynamoDBContext(client);
-
-            var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
-            {
-                IndexName = "password-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("password", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "asd")
-               
-            });
-
-            Console.WriteLine("items retrieved");
-
-            var searchResponse = await search.GetRemainingAsync();
-            foreach(var s in searchResponse)
-            {
-                Console.WriteLine(s.email.ToString());
-            }
-
-        }
+        
         void Redirsignup(object sender, EventArgs e)
         {
             // await QueryAsync(App.credentials, App.region);

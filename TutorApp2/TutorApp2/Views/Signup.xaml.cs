@@ -40,8 +40,8 @@ namespace TutorApp2.Views
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             Entry_surname.Completed += (s, e) => Entry_Password.Focus();
             Entry_Password.Completed += (s, e) => Entry_Email.Focus();
-            Entry_Email.Completed += (s, e) => Entry_address.Focus();
-            Entry_address.Completed += (s, e) => Signup1(s, e);
+            Entry_Email.Completed += (s, e) => Entry_station.Focus();
+            Entry_station.Completed += (s, e) => Signup1(s, e);
 
         }
         private async void Imageselect(object sender, EventArgs e)
@@ -201,12 +201,14 @@ namespace TutorApp2.Views
                 surname = Entry_surname.Text,
                 gender=Entry_sex.SelectedItem.ToString(),
                 age = Entry_age.Text,
-                address = Entry_address.Text,
                 bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString(),
                 gakunen = Entry_gakunen.SelectedItem.ToString(),
                 karui_major = Entry_karui_major.Text,
                 high_school = Entry_high_school.Text,
-                strong_subject = Entry_strong_subject.Text,
+                chuugaku_juken = Entry_chuugaku_juken.Text,
+                shidoukanou = Entry_shidoukanou.Text,
+                shidoukeiken = Entry_shidoukeiken.Text,
+                hitokoto = Entry_hitokoto.Text,
                 station = Entry_station.Text,
                 // datetime =  text
 
