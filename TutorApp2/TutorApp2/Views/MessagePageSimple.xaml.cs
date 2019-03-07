@@ -60,8 +60,6 @@ namespace TutorApp2.Models
                 Filter=filter
             });
             Console.WriteLine("bb items retrieved");
-
-            //download images
             App.messearchResponse = searchm.GetRemainingAsync().Result;
             QueryFilter filter2 = new QueryFilter();
             filter2.AddCondition("Reciever", QueryOperator.Equal, App.cur_user.email);
@@ -120,7 +118,8 @@ namespace TutorApp2.Models
             {
 
             }
-            return messagelist;
+            List<Message> SortedList = messagelist.OrderBy(o => o.TimeStamp).ToList();
+            return SortedList;
         }
         async Task SaveAsync(MessageDynamo mes)
         {

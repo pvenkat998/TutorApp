@@ -6,5 +6,36 @@
              Title="Detail">
     <StackLayout Padding="10">
         <Label Text="aa i rule bitch This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
+        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+
+            <StackLayout Padding="30">
+                <ListView ItemsSource="{Binding .}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="#eee"
+                        Orientation="Vertical" x:Name="{Binding Reciever}">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <StackLayout Orientation="Horizontal"  >
+                                        <Image Source="{Binding image}" />
+                                        <Label Text="{Binding Text}"
+                                TextColor="#f35e20" />
+                                        <Label Text="{Binding Timestamp}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+
+
     </StackLayout>
+    
 </ContentPage>

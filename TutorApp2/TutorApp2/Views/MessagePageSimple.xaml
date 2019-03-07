@@ -75,20 +75,20 @@
                                           VerticalOptions="Center" Source="LoginIcon.jpg" ></plugin:CircleImage>
                                             <Label Text="{Binding Sender}" Grid.Row="0" Grid.Column="1"
                                 TextColor="#f35e20" HorizontalTextAlignment="End"/>
-                                            <Frame Grid.Row="0"  Grid.Column="1">
+                                    <StackLayout  HorizontalOptions="EndAndExpand" VerticalOptions="Start"  Grid.Row="0" Grid.Column="1" >
+
+                                                <Frame Grid.Row="0"  Grid.Column="1" HorizontalOptions="EndAndExpand">
                                                 <Frame.HasShadow>
                                                     <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true"/>
                                                 </Frame.HasShadow>
                                                 <Frame.BackgroundColor>
                                                     <OnPlatform x:TypeArguments="Color" iOS="#F5F5F5" Android="White"/>
                                                 </Frame.BackgroundColor>
-                                                <StackLayout  Grid.Row="0" Grid.Column="1"  HorizontalOptions="StartAndExpand" VerticalOptions="Start">
-                                                    <Frame OutlineColor="Black" VerticalOptions="Fill"  >
-                                                        <Label HorizontalOptions="EndAndExpand" VerticalOptions ="Fill" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="{Binding text}"></Label>
-                                                    </Frame>
-                                                </StackLayout>
-                                            </Frame>
-                                            <Label Grid.Row="1" FontSize="Micro" Grid.Column="1" HorizontalTextAlignment="End"  Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
+                                                <Label HorizontalOptions="EndAndExpand" VerticalOptions ="Fill" Grid.Row="0" Grid.Column="1" TextColor="Blue"  Text="{Binding text}"></Label>
+                                                </Frame>
+                                    </StackLayout>
+
+                                    <Label Grid.Row="1" FontSize="Micro" Grid.Column="1" HorizontalTextAlignment="End"  Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
 
                                         </Grid>
                                     </StackLayout>
