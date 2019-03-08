@@ -4,7 +4,7 @@
              
              x:Class="TutorApp2.Views.LoginPage">
     <ContentPage.Content>
-        
+        <ScrollView>
         <StackLayout x:Name="MasterLayout">
 
             <StackLayout  x:Name="LogoStack">
@@ -13,6 +13,7 @@
 
 
             <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand" >
+                <Image x:Name="boy"/>
 
                 <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"/>
                 <Label x:Name="lat" Text=""></Label>
@@ -27,10 +28,12 @@
                 <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
                 <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
                 <Button x:Name="Btn_Messageredir" Text="msg" Clicked="Messageredir"/>
+                <Button x:Name="Btn_profileedir" Text="prof" Clicked="Profileredir"/>
                 <Label x:Name="path" Text="pathb4" />
                 <Image x:Name="imgPicked"/>
                 <Entry x:Name="entDetails" VerticalOptions="CenterAndExpand" />
             </StackLayout>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using Amazon;
+using Amazon.CognitoIdentity;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
@@ -8,6 +9,7 @@ using Amazon.SQS;
 using Amazon.SQS.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,7 @@ namespace TutorApp2.Models
         public MessagePageSimple ()
         {
             List<Message> messagelist =  MessageDB();
-          
+
             BindingContext = messagelist;
             InitializeComponent ();
 		}
@@ -50,15 +52,24 @@ namespace TutorApp2.Models
         public List<Message> MessageDB()
         {
             QueryFilter filter = new QueryFilter();
-            filter.AddCondition("Sender", QueryOperator.Equal, App.cur_user.email);
-            filter.AddCondition("Reciever", QueryOperator.Equal, App.User_Recepient.Email);
-            var client = new AmazonDynamoDBClient(App.credentials, App.region);
+            filter.AddCondition("Sender", QueryOperator.Equal, "admin");
+            filter.AddCondition("Reciever", QueryOperator.Equal, "dummy1");
+
+            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
+    "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
+       RegionEndpoint.APNortheast1 // Region
+   );
+         RegionEndpoint region = RegionEndpoint.APNortheast1;
+        var client = new AmazonDynamoDBClient(credentials, region);
+
+            Debug.WriteLine("=====GGWP ======== ");
             DynamoDBContext context = new DynamoDBContext(client);
             var searchm = context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
             {
                 IndexName = "Sender-Reciever-index",
                 Filter=filter
             });
+            Debug.WriteLine("=====GGWP ======== ");
             Console.WriteLine("bb items retrieved");
             App.messearchResponse = searchm.GetRemainingAsync().Result;
             QueryFilter filter2 = new QueryFilter();
@@ -123,7 +134,12 @@ namespace TutorApp2.Models
         }
         async Task SaveAsync(MessageDynamo mes)
         {
-            var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
+            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
+       "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
+          RegionEndpoint.APNortheast1 // Region
+      );
+            RegionEndpoint region = RegionEndpoint.APNortheast1;
+            var dbclient = new AmazonDynamoDBClient(credentials, region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             await context.SaveAsync(mes);
         }

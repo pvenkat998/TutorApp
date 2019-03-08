@@ -17,13 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\download.png" />
+    <None Remove="Images\kuma.jpg" />
     <None Remove="Images\LoginIcon.jpg" />
-    <None Remove="Views\LoginIcon.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\download.png" />
+    <EmbeddedResource Include="Images\kuma.jpg" />
     <EmbeddedResource Include="Images\LoginIcon.jpg" />
-    <EmbeddedResource Include="Views\LoginIcon.jpg" />
   </ItemGroup>
 
   <ItemGroup>

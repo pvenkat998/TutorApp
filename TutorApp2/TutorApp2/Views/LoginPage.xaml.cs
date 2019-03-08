@@ -32,6 +32,7 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Amazon.DynamoDBv2.DocumentModel;
 using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace TutorApp2.Views
 {
@@ -90,6 +91,7 @@ namespace TutorApp2.Views
         void Init()
         {
             LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
+            boy.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
@@ -265,6 +267,25 @@ namespace TutorApp2.Views
             App.cur_user.email = "admin";
             App.User_Recepient.Email = "dummy1";
             Navigation.PushModalAsync(new MessagePageSimple());
+        }
+        void Profileredir(object sender, EventArgs e)
+        {
+            // await QueryAsync(App.credentials, App.region);
+            App.tarprof = new App.userdata_v1 { };
+            App.tarprof.email = "dummy1";
+            App.tarprof.password = "nothing here";
+            App.tarprof.surname = "kuma";
+            App.tarprof.gender = "m";
+            App.tarprof.hitokoto = "俺は海賊王になる男だ";
+            App.tarprof.gakunen = "1";
+            App.tarprof.karui_major = "文科１";
+            App.tarprof.high_school = "la salle";
+            App.tarprof.bach_or_mast = "大学";
+            App.tarprof.chuugaku_juken = "あり";
+            App.tarprof.shidoukanou = "3 years";
+            App.tarprof.shidoukeiken = "1 year";
+            App.tarprof.station = "茗荷谷駅";
+            Navigation.PushModalAsync(new ProfilePage());
         }
 
     }

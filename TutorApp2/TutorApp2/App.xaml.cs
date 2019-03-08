@@ -8,6 +8,7 @@ using Amazon.DynamoDBv2.DataModel;
 using TutorApp2.Models;
 using System.Collections.Generic;
 using Amazon.DynamoDBv2;
+using System.Diagnostics;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -77,7 +78,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            MainPage = new ProfilePage();
         }
 
         protected override void OnStart()
