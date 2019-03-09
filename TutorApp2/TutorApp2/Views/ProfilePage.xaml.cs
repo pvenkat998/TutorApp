@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SkiaSharp;
+using SkiaSharp.Views.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,10 +32,43 @@ namespace TutorApp2.Views
             App.tarprof.shidoukeiken = "1 year";
             App.tarprof.station = "茗荷谷駅";
             BindingContext = App.tarprof;
+
             InitializeComponent();
+            w.LowerChild(canvasView);
             image.Source = ImageSource.FromResource("TutorApp2.Images.kuma.jpg");
             image2.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
+
             // left top   right down padding 
+        }
+        void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs arg)
+        {
+
+            SKPaintSurfaceEventArgs args = arg as SKPaintSurfaceEventArgs;
+            SKImageInfo info = args.Info;
+            SKSurface surface = args.Surface;
+            SKCanvas canvas = surface.Canvas;
+
+            canvas.Clear();
+
+            using (SKPaint paint = new SKPaint())
+            {
+                // Create 300-pixel square centered rectangle
+                float x = (info.Width - 300) / 2;
+                float y = (info.Height - 300) / 2;
+                SKRect rect = new SKRect(x, y, x + 300, y + 300);
+
+                // Create linear gradient from upper-left to lower-right
+                paint.Shader = SKShader.CreateLinearGradient(
+                                    new SKPoint(info.Rect.Left, info.Rect.Top),
+                                    new SKPoint(info.Rect.Right, info.Rect.Bottom),
+                                    new SKColor[] { SKColors.DeepSkyBlue, SKColors.LimeGreen },
+                                    new float[] { 0, 1 },
+                                    SKShaderTileMode.Repeat);
+
+                canvas.DrawRect(info.Rect, paint);
+
+                // Draw the gradient on the rectangle
+        }
         }
     }
 }
