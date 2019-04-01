@@ -196,13 +196,13 @@ namespace TutorApp2.Views
             App.userdata_v1 tosave_info = new App.userdata_v1()
             {
                 email = Entry_Email.Text,
-                password = Entry_Password.Text,
-                stud_teach = Entry_stud_teach.SelectedItem.ToString(),
+             //   password = Entry_Password.Text ?? "a",
+             //   stud_teach = Entry_stud_teach.SelectedItem.ToString() ?? "ga",
                 surname = Entry_surname.Text,
-                gender=Entry_sex.SelectedItem.ToString(),
+             //   gender = Entry_sex.SelectedItem.ToString() ?? "f",
                 age = Entry_age.Text,
-                bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString(),
-                gakunen = Entry_gakunen.SelectedItem.ToString(),
+            //    bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString() ?? "1",
+             //   gakunen = Entry_gakunen.SelectedItem.ToString() ?? "1",
                 karui_major = Entry_karui_major.Text,
                 high_school = Entry_high_school.Text,
                 chuugaku_juken = Entry_chuugaku_juken.Text,
@@ -211,9 +211,15 @@ namespace TutorApp2.Views
                 hitokoto = Entry_hitokoto.Text,
                 station = Entry_station.Text,
                 // datetime =  text
+                gakunen = "12",
+                bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString() ?? "1",
+                gender = Entry_sex.SelectedItem.ToString() ?? "f",
+                password = Entry_Password.Text ?? "a",
+                stud_teach = Entry_stud_teach.SelectedItem.ToString() ?? "ga",
+
 
             };
-            context.SaveAsync(tosave_info);
+            //context.SaveAsync(tosave_info);
 
             var dir =new LoginPage();
             Navigation.PushModalAsync(dir);

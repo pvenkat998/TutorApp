@@ -78,7 +78,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new ProfilePage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
