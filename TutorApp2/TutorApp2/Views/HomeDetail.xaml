@@ -1,43 +1,137 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="TutorApp2.Views.HomeDetail"
              Title="ホーム">
-    <StackLayout x:Name="MasterLayout">
-
-        <StackLayout Padding="10">
-            <Label x:Name="txt" Text="教師一覧"/>
-            <Image x:Name="img" />
-            <Label x:Name="t1" Text="教師一覧"/>
-        </StackLayout>
-        
-        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+    <ContentPage.Content>
+    <Grid x:Name="MasterLayout">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <skia:SKCanvasView x:Name="box1"
+                           VerticalOptions="FillAndExpand"
+                           PaintSurface="OnCanvasViewPaintSurface" Grid.Row="0"></skia:SKCanvasView>
+            <Label Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center">PAHON</Label>
+            <Grid Grid.Row="1" Padding="10,0,10,0" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <input:CheckBox Type="Check" x:Name="man" Grid.Column="0"></input:CheckBox>
+                <input:CheckBox Type="Check" x:Name="woman" Grid.Column="2"></input:CheckBox>
+                <input:CheckBox Type="Check" x:Name="chu" Grid.Column="4"></input:CheckBox>
+                <input:CheckBox Type="Check" x:Name="ri" Grid.Column="6"></input:CheckBox>
+                <input:CheckBox Type="Check" x:Name="bun" Grid.Column="8"></input:CheckBox>
+                <Image Grid.Column="1" x:Name="i1"></Image>
+                <Image Grid.Column="3" x:Name="i2"></Image>
+                <Label Grid.Column="5" x:Name="test">Test</Label>
+                <!--<Label Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Fill">中学受験あり</Label>-->
+                <Label Grid.Column="7" HorizontalOptions="CenterAndExpand">理</Label>
+                <Label Grid.Column="9" HorizontalOptions="CenterAndExpand">文</Label>
+            </Grid>
+            <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
             
             <StackLayout Padding="30">
-                <ListView ItemsSource="{Binding .}">
+                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="220" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout BackgroundColor="#eee"
-                        Orientation="Vertical" x:Name="{Binding email}">
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <StackLayout Orientation="Horizontal"  >
-                                        <Image Source="{Binding image}" />
-                                        <Label Text="{Binding name}"
-                                TextColor="#f35e20" />
-                                        <Label Text="{Binding gakunen}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
-                                        <Label Text="{Binding kamoku}"
-                                TextColor="#f35e20" />
-                                        <Label Text="{Binding moyori}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
+                                <ViewCell>
+                                    <Grid>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="95*" />
+                                            <RowDefinition Height="5*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50*" />
+                                            <ColumnDefinition Width="50*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Left column - BindingContext set to ModelPair.Item1  -->
+
+                                        <Grid Grid.Column="0" BackgroundColor="LightGray">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="60*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
+                                            </Grid.GestureRecognizers>
+                                            <StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                                <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
+                                                    <Label Text="{Binding name}" 
+                                                            HorizontalOptions="EndAndExpand"
+                                                    TextColor="#f35e20" />
+                                                </StackLayout>
+                                            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                                                    <Label Text="{Binding karui_major}"
+                                                            HorizontalOptions="Start"
+                                                        TextColor="#503026" />
+                                                </StackLayout>
+                                            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
+                                                    <Label Text="{Binding chuugaku_juken}"
+                                                        TextColor="#f35e20" />
+                                                </StackLayout>
+                                            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
+                                                    <Label Text="{Binding gakunen}"
+                                                        HorizontalOptions="Start"
+                                                            TextColor="#503026" />
+                                                </StackLayout>
+                                        </Grid>
+                                        <Grid Grid.Column="1" BackgroundColor="LightGray">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="60*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email2}"/>
+                                            </Grid.GestureRecognizers>
+                                            <StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                                <Image Source="{Binding image2}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
+                                                <Label Text="{Binding name2}" 
+                                                            HorizontalOptions="EndAndExpand"
+                                                    TextColor="#f35e20" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                                                <Label Text="{Binding karui_major2}"
+                                                            HorizontalOptions="Start"
+                                                        TextColor="#503026" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
+                                                <Label Text="{Binding chuugaku_juken2}"
+                                                        TextColor="#f35e20" />
+                                            </StackLayout>
+                                            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
+                                                <Label Text="{Binding gakunen2}"
+                                                        HorizontalOptions="Start"
+                                                            TextColor="#503026" />
+                                            </StackLayout>
+                                        </Grid>
+
+                                    </Grid>
+                                </ViewCell> 
                         </DataTemplate>
 
                     </ListView.ItemTemplate>
@@ -45,5 +139,6 @@
             </StackLayout>
         </ScrollView>
 
-    </StackLayout>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

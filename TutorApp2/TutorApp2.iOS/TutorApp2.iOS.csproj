@@ -264,6 +264,9 @@
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.169046-pre5" />
+    <PackageReference Include="Xamarin.Forms.InputKit">
+      <Version>3.0.4</Version>
+    </PackageReference>
     <PackageReference Include="XLabs.Forms">
       <Version>2.3.0-pre05</Version>
     </PackageReference>

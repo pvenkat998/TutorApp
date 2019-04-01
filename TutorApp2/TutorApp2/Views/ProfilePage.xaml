@@ -5,7 +5,7 @@
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="TutorApp2.Views.ProfilePage">
     <ContentPage.Content>
-        <StackLayout x:Name="w">
+        <Grid x:Name="w">
             <skia:SKCanvasView x:Name="canvasView"
                            VerticalOptions="FillAndExpand"
                            PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>
@@ -72,6 +72,6 @@
                 </StackLayout>
             </Frame>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -11,9 +11,15 @@ namespace TutorApp2.Models
     {
         public string email { get; set; }
         public string name { get; set; }
+        public string karui_major { get; set; }
+        public string chuugaku_juken { get; set; }
         public string gakunen { get; set; }
-        public string kamoku { get; set; }
-        public string moyori { get; set; }
-        public string image  {get;set;}
+        public string image  {get;set; }
+        public string email2 { get; set; }
+        public string name2 { get; set; }
+        public string karui_major2 { get; set; }
+        public string chuugaku_juken2 { get; set; }
+        public string gakunen2 { get; set; }
+        public string image2 { get; set; }
     }
 }

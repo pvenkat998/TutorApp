@@ -4,6 +4,8 @@ using Amazon.DynamoDBv2.DataModel;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Transfer;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +24,8 @@ namespace TutorApp2.Views
     {
         public HomeDetail()
         {
+            App.cur_user.email = "admin";
+
             InitializeComponent();
             //-----------------------BACKEND--------------------------      
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
@@ -65,7 +69,6 @@ namespace TutorApp2.Views
             App.searchResponse = search.GetRemainingAsync().Result;
             foreach (var s in App.searchResponse)
             {
-                t1.Text = s.email.ToString();
                 Console.WriteLine(s.email.ToString());
                 //pic
                 var s3Client = new AmazonS3Client(App.credentials, App.region);
@@ -96,36 +99,101 @@ namespace TutorApp2.Views
             int size = App.searchResponse.Count;
             List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
             System.Diagnostics.Debug.WriteLine("=====GGWP ======== "+size);
-            string imgsrc;
+            string imgsrc, imgsrc2;
             //ASSIGNING CELLS
-            for (int i = 0; i < 10&&i<size; i++)
+            for (int i = 0; i < 10&&i<size; i=i+2)
             {
                 imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg");
+           
                 {
-                    listteachlist.Add(new ListOfTeachers
+                    if (size - i != 1) {
+                        imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i + 1].email.ToString() + "_dp.jpg");
+
+                        listteachlist.Add(new ListOfTeachers
                 {
                     email=App.searchResponse[i].email.ToString(),
                     name = App.searchResponse[i].surname.ToString(),
-                    gakunen = App.searchResponse[i].gakunen.ToString(),
-                    kamoku = App.searchResponse[i].gender.ToString(),
-                    moyori = App.searchResponse[i].station.ToString(),
-                   // moyori = imgsrc,
+                    karui_major = App.searchResponse[i].gakunen.ToString(),
+                    chuugaku_juken = App.searchResponse[i].gender.ToString(),
+                    gakunen = App.searchResponse[i].station.ToString(),
                     image = imgsrc,
-                }
+                    email2 = App.searchResponse[i+1].email.ToString(),
+                    name2 = App.searchResponse[i+1].surname.ToString(),
+                    karui_major2 = App.searchResponse[i+1].gakunen.ToString(),
+                    chuugaku_juken2 = App.searchResponse[i+1].gender.ToString(),
+                    gakunen2 = App.searchResponse[i+1].station.ToString(),
+                    image2 = imgsrc2,
+                    }
                 );
+                    }
+                    else
+                    {
+                        listteachlist.Add(new ListOfTeachers
+                        {
+                            email = App.searchResponse[i].email.ToString(),
+                            name = App.searchResponse[i].surname.ToString(),
+                            karui_major = App.searchResponse[i].gakunen.ToString(),
+                            chuugaku_juken = App.searchResponse[i].gender.ToString(),
+                            gakunen = App.searchResponse[i].station.ToString(),
+                            image = imgsrc
+                        }
+                    );
+
+                    }
                 }
             }
             BindingContext = listteachlist;
 
             //-----------------------------------FRONTEND-----------------------
-            img.Source = ImageSource.FromResource("TutorApp2.Images.LoginIcon.jpg");
-            img.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG");
-            img.Source = App.dp_img_path;
-            txt.Text = "pro";
-            txt.Text = App.cur_user.address;
-        }
+            i1.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
+            i2.Source = ImageSource.FromResource("TutorApp2.Images.downloadw.png");
+            if (bun.IsChecked==false)
+            {
+                test.Text = "test success";
+                listteachlist.Add(new ListOfTeachers
+                {
+                    email = App.searchResponse[0].email.ToString(),
+                    name = App.searchResponse[0].surname.ToString(),
+                    karui_major = App.searchResponse[0].gakunen.ToString(),
+                    chuugaku_juken = App.searchResponse[0].gender.ToString(),
+                    gakunen = App.searchResponse[0].station.ToString()
+                });
+                BindingContext = listteachlist;
+            }
 
-        private async void OnTapped2(object sender, EventArgs e)
+        }
+        void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs arg)
+        {
+
+            SKPaintSurfaceEventArgs args = arg as SKPaintSurfaceEventArgs;
+            SKImageInfo info = args.Info;
+            SKSurface surface = args.Surface;
+            SKCanvas canvas = surface.Canvas;
+
+            canvas.Clear();
+
+            using (SKPaint paint = new SKPaint())
+            {
+                // Create 300-pixel square centered rectangle
+                float x = (info.Width - 300) / 2;
+                float y = (info.Height - 300) / 2;
+                SKRect rect = new SKRect(x, y, x + 300, y + 300);
+
+                // Create linear gradient from upper-left to lower-right
+                paint.Shader = SKShader.CreateLinearGradient(
+                                    new SKPoint(info.Rect.Left, info.Rect.Top),
+                                    new SKPoint(info.Rect.Right, info.Rect.Bottom),
+                                    new SKColor[] { SKColors.DeepSkyBlue, SKColors.LimeGreen },
+                                    new float[] { 0, 1 },
+                                    SKShaderTileMode.Repeat);
+
+                canvas.DrawRect(info.Rect, paint);
+
+                // Draw the gradient on the rectangle
+            }
+        }
+  
+    private async void OnTapped2(object sender, EventArgs e)
         {
             TappedEventArgs eventargs = e as TappedEventArgs;
 
@@ -146,7 +214,6 @@ namespace TutorApp2.Views
             }
             if (action == "通報する")
             {
-                txt.Text = "reported";
                 await DisplayAlert("通報できた", "通報できた", te);//do my sql updarte db
 
             }
