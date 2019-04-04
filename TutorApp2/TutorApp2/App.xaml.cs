@@ -50,11 +50,9 @@ namespace TutorApp2
         public static class cur_user
         {
             public static string email { get; set; }
-            public static string add_ku_sort { get; set; }
-            public static int id { get; set; }
+            public static string surname { get; set; }
             public static string username { get; set; }
-            public static string password { get; set; }
-            public static string address { get; set; }
+            public static string grade { get; set; }
         }
         public static class User_Recepient
         {
@@ -78,7 +76,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new HomeDetail();
+            MainPage = new Forum();
         }
 
         protected override void OnStart()

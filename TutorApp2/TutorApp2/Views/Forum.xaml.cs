@@ -44,7 +44,10 @@ namespace TutorApp2.Views
             // Console.WriteLine(s.ToString());});
 
         }
-
+        private async void AddPost(object sender,EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NewPost());
+        }
         private async void OnTapped3(object sender, EventArgs e)
         {
             TappedEventArgs eventargs = e as TappedEventArgs;

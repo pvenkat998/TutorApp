@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TutorApp2.Views.NewPost">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="60*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"   >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Text="Back" Grid.Column="0" Clicked="Back"
+                                                            HorizontalOptions="Center"
+                                                    TextColor="#f35e20" />
+                <Label Text="NEW POST" Grid.Column="1"
+                                                            HorizontalOptions="Center"
+                                                    TextColor="#f35e20" />
+                <Button Text="NEW POST" Grid.Column="2" Clicked="NewPost1"
+                                                            HorizontalOptions="Center"
+                                                    TextColor="#f35e20" />
+            </Grid>
+            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
+                <Entry x:Name="PostTitle"
+                                                    TextColor="#f35e20" />
+            </StackLayout>
+            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                <Entry x:Name="PostCont"
+                                                        TextColor="#503026" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

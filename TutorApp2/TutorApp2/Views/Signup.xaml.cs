@@ -219,7 +219,7 @@ namespace TutorApp2.Views
 
 
             };
-            //context.SaveAsync(tosave_info);
+            context.SaveAsync(tosave_info);
 
             var dir =new LoginPage();
             Navigation.PushModalAsync(dir);
