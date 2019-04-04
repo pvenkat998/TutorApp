@@ -35,7 +35,7 @@ namespace TutorApp2.Views
                 {
                     new HomeMenuItem { Id = 0, Title = "ホーム" ,TargetType= typeof(HomeDetail)},
                     new HomeMenuItem { Id = 1, Title = "チャット",TargetType= typeof(HomeDetail2) },
-                    new HomeMenuItem { Id = 2, Title = "ヘルプ/連絡" ,TargetType= typeof(Help)},
+                    new HomeMenuItem { Id = 2, Title = "ヘルプ/連絡" ,TargetType= typeof(Forum)},
                     new HomeMenuItem { Id = 3, Title = "アバウト" ,TargetType= typeof(HomeDetail)},
                 });
             }
