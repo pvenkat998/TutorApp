@@ -16,7 +16,11 @@ namespace TutorApp2.Views
 	{
 		public NewPost ()
 		{
-			InitializeComponent ();
+            App.cur_user.email = "ADMIN";
+            App.cur_user.surname = "aa";
+            App.cur_user.grade = "chuu";
+
+            InitializeComponent ();
 		}
         void Back(object sender,EventArgs e)
         {
@@ -25,6 +29,8 @@ namespace TutorApp2.Views
         async void NewPost1(object sender,EventArgs e)
         {
             Guid x= Guid.NewGuid();
+            var com = new List<List<string>>();
+            com.Add(new List<string> { });
             Post NP = new Post()
             {
                 UID = x.ToString(),
@@ -34,12 +40,13 @@ namespace TutorApp2.Views
                 Grade=App.cur_user.grade,
                 Content=PostCont.Text,
                 Likes="0",
-                Comments = {},
+                Comments = null,
                 PostTime=DateTime.Now
             };
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
             await context.SaveAsync(NP);
+            await Navigation.PushModalAsync(new Forum());
 
         }
 

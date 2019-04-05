@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TutorApp2.Views.ShowPost">
+    <ContentPage.Content>
+
+        <Grid Grid.Column="0" BackgroundColor="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer  CommandParameter="{Binding UID}"/>
+            </Grid.GestureRecognizers>
+            <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                                <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
+                                            </StackLayout>-->
+            <StackLayout Grid.Row="0" Orientation="Horizontal"  >
+                <Label Text="{Binding Title}" 
+                                                            HorizontalOptions="EndAndExpand"
+                                                    TextColor="#f35e20" />
+            </StackLayout>
+            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
+                <Label Text="{Binding PosterName}" 
+                                                            HorizontalOptions="EndAndExpand"
+                                                    TextColor="#f35e20" />
+            </StackLayout>
+            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                <Label Text="{Binding Content}"
+                                                            HorizontalOptions="Start"
+                                                        TextColor="#503026" />
+            </StackLayout>
+            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
+                <Label Text="{Binding Likes}"
+                                                        TextColor="#f35e20" />
+            </StackLayout>
+            <Grid Grid.Row="4"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="comment" Grid.Column="0"
+                                                        HorizontalOptions="Start"
+                                                            TextColor="#503026" />
+                <Button x:Name="commentsend" Grid.Column="1" Clicked="Updatecomments"
+                                                        HorizontalOptions="EndAndExpand" Text="SEND"
+                                                            TextColor="#503026" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

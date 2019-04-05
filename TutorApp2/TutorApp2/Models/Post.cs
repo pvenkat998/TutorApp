@@ -6,7 +6,7 @@ using System.Text;
 namespace TutorApp2.Models
 {
     [DynamoDBTable("forum_posts")]
-    class Post
+    public class Post
     {
         [DynamoDBHashKey]
         public string UID { get; set; }
@@ -17,7 +17,7 @@ namespace TutorApp2.Models
         public string PosterName { get; set; }
         public string Content { get; set; }
         public string Likes { get; set; }
-        public List<string> Comments { get; set; }
+        public List<List<string>> Comments { get; set; }
         public DateTime PostTime { get; set; }
     }
 }

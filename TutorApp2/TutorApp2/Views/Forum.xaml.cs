@@ -18,18 +18,17 @@ namespace TutorApp2.Views
 	public partial class Forum : ContentPage
 	{
 		public Forum ()
-		{
-			InitializeComponent ();
-        }
-        public async Task QueryAsync(AWSCredentials credentials, RegionEndpoint region)
         {
-            var client = new AmazonDynamoDBClient(credentials, region);
-            DynamoDBContext context = new DynamoDBContext(client);
-
-            var search = context.FromQueryAsync<Post>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            App.cur_user.surname = "ore";
+            InitializeComponent ();
+            QueryAsync();
+        }
+        public async Task QueryAsync()
+        {
+            var search = App.context.FromQueryAsync<Post>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "Grade-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Grade", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "中")
+                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Grade", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "chuu")
 
             });
 
@@ -40,6 +39,8 @@ namespace TutorApp2.Views
             {
                 Console.WriteLine(s.PosterEmail.ToString());
             }
+            App.QueriedPosts = searchResponse; 
+            BindingContext = searchResponse;
             // searchResponse.ForEach((s) = > {
             // Console.WriteLine(s.ToString());});
 
@@ -53,26 +54,11 @@ namespace TutorApp2.Views
             TappedEventArgs eventargs = e as TappedEventArgs;
 
             string te = eventargs.Parameter.ToString();
-            var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
-            if (action == "プロフィールをみる")
-            {
-                App.tarprof = App.searchResponse.Single(r => r.email == te);
-                App.Target_Prof.Email = te;
-                await Navigation.PushModalAsync(new ProfilePage());
-            }
-            if (action == "メッセージする")
-            {
-                App.User_Recepient.Email = te;
-                App.User_Recepient.Username = "vv";
-
-                await Navigation.PushModalAsync(new MessagePageSimple());
-            }
-            if (action == "通報する")
-            {
-                await DisplayAlert("通報できた", "通報できた", te);//do my sql updarte db
-
-            }
-            Debug.WriteLine("Action: " + action);
+            var k = App.QueriedPosts.Distinct().Where(x=>x.UID==te).ToList();
+            var nextpage = new ShowPost();
+            App.CurrentPost = k[0];
+            nextpage.BindingContext = k[0];
+            await Navigation.PushModalAsync(nextpage);
         }
     }
 }

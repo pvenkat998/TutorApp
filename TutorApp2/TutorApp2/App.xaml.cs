@@ -41,6 +41,9 @@ namespace TutorApp2
             public string hitokoto { get; set; }
             public string station { get; set; }
         }
+        public static DynamoDBContext context = new DynamoDBContext(new AmazonDynamoDBClient(credentials, region));
+        public static List<Post> QueriedPosts;
+        public static Post CurrentPost;
         public static Image dp_img;
         public static string dp_img_path;
         public static List<MessageDynamo> messearchResponse;
@@ -72,6 +75,7 @@ namespace TutorApp2
             public static string Shidoukeiken { get; set; }
             public static string Station { get; set; }
         }
+
         public App()
         {
             InitializeComponent();

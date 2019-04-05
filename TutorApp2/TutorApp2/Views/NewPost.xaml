@@ -27,11 +27,11 @@
                                                     TextColor="#f35e20" />
             </Grid>
             <StackLayout Grid.Row="1" Orientation="Horizontal"  >
-                <Entry x:Name="PostTitle"
+                <Entry x:Name="PostTitle" HorizontalOptions="StartAndExpand"
                                                     TextColor="#f35e20" />
             </StackLayout>
             <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                <Entry x:Name="PostCont"
+                <Entry x:Name="PostCont" HorizontalOptions="StartAndExpand"
                                                         TextColor="#503026" />
             </StackLayout>
         </Grid>
