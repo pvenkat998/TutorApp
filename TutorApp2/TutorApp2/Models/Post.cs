@@ -22,6 +22,7 @@ namespace TutorApp2.Models
         public string PosterName { get; set; }
         public string Content { get; set; }
         public string Likes { get; set; }
+        public string PostType { get; set; }
         public List<Comm> Comments { get; set; }
         public DateTime PostTime { get; set; }
     }

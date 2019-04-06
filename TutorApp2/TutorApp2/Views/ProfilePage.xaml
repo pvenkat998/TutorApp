@@ -5,7 +5,12 @@
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="TutorApp2.Views.ProfilePage">
     <ContentPage.Content>
-        <Grid x:Name="w">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid x:Name="w" Grid.Row="0">
             <skia:SKCanvasView x:Name="canvasView"
                            VerticalOptions="FillAndExpand"
                            PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>
@@ -72,6 +77,20 @@
                 </StackLayout>
             </Frame>
             </StackLayout>
+        </Grid>
+
+            <Grid Grid.Row="1" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ImageButton Aspect="AspectFit" BackgroundColor="Transparent" x:Name="b1" Grid.Column="0" Clicked="b1c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b2" Grid.Column="1" Clicked="b2c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b3" Grid.Column="2" Clicked="b3c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b4" Grid.Column="3" Clicked="b4c"></ImageButton>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

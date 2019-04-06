@@ -80,7 +80,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new Forum();
+            MainPage = new HomeDetail();
         }
 
         protected override void OnStart()

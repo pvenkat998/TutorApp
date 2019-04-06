@@ -39,6 +39,26 @@ namespace TutorApp2.Views
             image2.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
 
             // left top   right down padding 
+            b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
+            b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
+            b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
+            b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
+        }
+        void b1c(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new HomeDetail());
+        }
+        void b2c(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new HomeDetail2());
+        }
+        void b3c(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Forum());
+        }
+        void b4c(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new ProfilePage());
         }
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs arg)
         {

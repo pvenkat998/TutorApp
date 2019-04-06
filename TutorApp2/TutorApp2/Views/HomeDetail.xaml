@@ -6,11 +6,12 @@
              x:Class="TutorApp2.Views.HomeDetail"
              Title="ホーム">
     <ContentPage.Content>
-    <Grid x:Name="MasterLayout">
+        <Grid x:Name="MasterLayout">
             <Grid.RowDefinitions>
-                <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="60*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <skia:SKCanvasView x:Name="box1"
                            VerticalOptions="FillAndExpand"
@@ -42,8 +43,10 @@
                 <Label Grid.Column="9" HorizontalOptions="CenterAndExpand">文</Label>
             </Grid>
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
-            
-            <StackLayout Padding="30">
+
+                <StackLayout Padding="30">
+                    <ActivityIndicator Color="Red" IsRunning="true" />
+
                     <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="220" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -138,6 +141,18 @@
                 </ListView>
             </StackLayout>
         </ScrollView>
+            <Grid Grid.Row="3" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ImageButton Aspect="AspectFit" BackgroundColor="Transparent" x:Name="b1" Grid.Column="0" Clicked="b1c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b2" Grid.Column="1" Clicked="b2c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b3" Grid.Column="2" Clicked="b3c"></ImageButton>
+                <ImageButton BackgroundColor="Transparent" x:Name="b4" Grid.Column="3" Clicked="b4c"></ImageButton>
+            </Grid>
 
         </Grid>
     </ContentPage.Content>

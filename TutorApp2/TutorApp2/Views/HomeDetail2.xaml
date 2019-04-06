@@ -4,38 +4,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TutorApp2.Views.HomeDetail2"
              Title="Detail">
-    <StackLayout Padding="10">
-        <Label Text="aa i rule bitch This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
-        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackLayout Padding="10" Grid.Row="0">
+            <Label Text="This is the message page"/>
+            <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-            <StackLayout Padding="30">
-                <ListView ItemsSource="{Binding .}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout BackgroundColor="#eee"
-                        Orientation="Vertical" x:Name="{Binding Reciever}">
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <StackLayout Orientation="Horizontal"  >
-                                        <Image Source="{Binding image}" />
-                                        <Label Text="{Binding Text}"
-                                TextColor="#f35e20" />
-                                        <Label Text="{Binding Timestamp}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
+                <StackLayout Padding="30">
+                    <ListView ItemsSource="{Binding .}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout BackgroundColor="#eee"
+                            Orientation="Vertical" x:Name="{Binding Reciever}">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
+                                        </StackLayout.GestureRecognizers>
+                                        <StackLayout Orientation="Horizontal"  >
+                                            <Image Source="{Binding image}" />
+                                            <Label Text="{Binding Text}"
+                                    TextColor="#f35e20" />
+                                            <Label Text="{Binding Timestamp}"
+                                    HorizontalOptions="EndAndExpand"
+                                    TextColor="#503026" />
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
+                                </ViewCell>
+                            </DataTemplate>
 
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <Grid Grid.Row="1" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ImageButton Aspect="AspectFit" BackgroundColor="Transparent" x:Name="b1" Grid.Column="0" Clicked="b1c"></ImageButton>
+            <ImageButton BackgroundColor="Transparent" x:Name="b2" Grid.Column="1" Clicked="b2c"></ImageButton>
+            <ImageButton BackgroundColor="Transparent" x:Name="b3" Grid.Column="2" Clicked="b3c"></ImageButton>
+            <ImageButton BackgroundColor="Transparent" x:Name="b4" Grid.Column="3" Clicked="b4c"></ImageButton>
+        </Grid>
+    </Grid>
 
-
-    </StackLayout>
-    
 </ContentPage>

@@ -41,7 +41,8 @@ namespace TutorApp2.Views
                 Content=PostCont.Text,
                 Likes="0",
                 Comments = null,
-                PostTime=DateTime.Now
+                PostTime=DateTime.Now,
+                PostType="Post"
             };
             var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(dbclient);
