@@ -45,7 +45,6 @@
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
                 <StackLayout Padding="30">
-                    <ActivityIndicator Color="Red" IsRunning="true" />
 
                     <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="220" >
                     <ListView.ItemTemplate>
