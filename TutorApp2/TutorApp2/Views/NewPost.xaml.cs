@@ -29,8 +29,8 @@ namespace TutorApp2.Views
         async void NewPost1(object sender,EventArgs e)
         {
             Guid x= Guid.NewGuid();
-            var com = new List<List<string>>();
-            com.Add(new List<string> { });
+            //var com = new List<List<string>>();
+            //com.Add(new List<string> { });
             Post NP = new Post()
             {
                 UID = x.ToString(),

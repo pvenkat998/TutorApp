@@ -6,7 +6,8 @@
 
         <Grid Grid.Column="0" BackgroundColor="LightGray">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
@@ -20,12 +21,12 @@
                                             </StackLayout>-->
             <StackLayout Grid.Row="0" Orientation="Horizontal"  >
                 <Label Text="{Binding Title}" 
-                                                            HorizontalOptions="EndAndExpand"
+                                                            HorizontalOptions="Center"
                                                     TextColor="#f35e20" />
             </StackLayout>
             <StackLayout Grid.Row="1" Orientation="Horizontal"  >
                 <Label Text="{Binding PosterName}" 
-                                                            HorizontalOptions="EndAndExpand"
+                                                            HorizontalOptions="StartAndExpand"
                                                     TextColor="#f35e20" />
             </StackLayout>
             <StackLayout Grid.Row="2" Orientation="Horizontal"  >
@@ -37,7 +38,34 @@
                 <Label Text="{Binding Likes}"
                                                         TextColor="#f35e20" />
             </StackLayout>
-            <Grid Grid.Row="4"  >
+            <ListView x:Name="Comment" Grid.Row="4">
+
+                <ListView.ItemTemplate>
+                        <DataTemplate>
+                          <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <ScrollView>
+                                        <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50*"></RowDefinition>
+                                            <RowDefinition Height="50*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding Commentor}"></Label>
+                                        <Label Grid.Row="1" Text="{Binding Comment}"></Label>
+                                        </Grid>
+                                    </ScrollView>
+                                </StackLayout>
+                            </ViewCell.View>
+                          </ViewCell>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--<StackLayout x:Name="Comment" Grid.Row="4" Orientation="Horizontal"  >
+                <Label Text="{Binding Comments}"
+                                                        TextColor="#f35e20" />
+            </StackLayout>-->
+            <Grid Grid.Row="5"  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"></ColumnDefinition>
                     <ColumnDefinition Width="30*"></ColumnDefinition>

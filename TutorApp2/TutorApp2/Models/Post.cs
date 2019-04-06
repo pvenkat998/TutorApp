@@ -5,6 +5,11 @@ using System.Text;
 
 namespace TutorApp2.Models
 {
+    public class Comm
+    {
+        public string Commentor { get; set; }
+        public string Comment { get; set; }
+    }
     [DynamoDBTable("forum_posts")]
     public class Post
     {
@@ -17,7 +22,7 @@ namespace TutorApp2.Models
         public string PosterName { get; set; }
         public string Content { get; set; }
         public string Likes { get; set; }
-        public List<List<string>> Comments { get; set; }
+        public List<Comm> Comments { get; set; }
         public DateTime PostTime { get; set; }
     }
 }

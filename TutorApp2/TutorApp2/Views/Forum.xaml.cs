@@ -55,10 +55,8 @@ namespace TutorApp2.Views
 
             string te = eventargs.Parameter.ToString();
             var k = App.QueriedPosts.Distinct().Where(x=>x.UID==te).ToList();
-            var nextpage = new ShowPost();
             App.CurrentPost = k[0];
-            nextpage.BindingContext = k[0];
-            await Navigation.PushModalAsync(nextpage);
+            await Navigation.PushModalAsync(new ShowPost());
         }
     }
 }

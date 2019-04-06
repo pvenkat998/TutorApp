@@ -14,21 +14,30 @@ namespace TutorApp2.Views
 	{
 		public ShowPost ()
 		{
+            BindingContext = App.CurrentPost;
 			InitializeComponent ();
-		}
+            Console.WriteLine(":===");
+            Console.WriteLine("==1=");
+            if (App.CurrentPost.Comments == null)
+            {
+            }
+            else
+            {
+                Comment.ItemsSource = App.CurrentPost.Comments;
+            }
+        }
         async void Updatecomments(object sender, EventArgs e)
         {
             if (App.CurrentPost.Comments == null)
             {
-                var com = new List<List<string>>();
-                com.Add(new List<string> { App.cur_user.surname, comment.Text });
+                var com = new List<Comm>();
+                com.Add(new Comm { Commentor = App.cur_user.surname, Comment = comment.Text });
                 App.CurrentPost.Comments = com;
             }
             else
             {
-                App.CurrentPost.Comments.Add(new List<string> { App.cur_user.surname, comment.Text });
+                App.CurrentPost.Comments.Add(new Comm{ Commentor=App.cur_user.surname, Comment=comment.Text });
             }
-            Console.WriteLine(App.CurrentPost.Comments.ToString());
             await App.context.SaveAsync(App.CurrentPost);
         }
 	}
