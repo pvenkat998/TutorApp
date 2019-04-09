@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Contracts;
+using Rg.Plugins.Popup.Pages;
 
 namespace TutorApp2.Views
 {
@@ -171,9 +174,12 @@ namespace TutorApp2.Views
         {
             Navigation.PushModalAsync(new HomeDetail());
         }
+
         void b2c(object sender, EventArgs e)
         {
+            //Navigation.PushPopupAsync(new LoadingPage());
             Navigation.PushModalAsync(new HomeDetail2());
+            //Navigation.PopAllPopupAsync();
         }
         void b3c(object sender, EventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="TutorApp2.Views.Forum">
     <ContentPage.Content>
         <Grid>
@@ -16,14 +17,15 @@
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
                 <StackLayout Padding="30">
-                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="60" >
+                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="200" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
 
                                         <Grid Grid.Column="0" BackgroundColor="LightGray">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="60*"></RowDefinition>
+                                                <RowDefinition Height="50*"></RowDefinition>
+                                                <RowDefinition Height="10*"></RowDefinition>
                                                 <RowDefinition Height="10*"></RowDefinition>
                                                 <RowDefinition Height="10*"></RowDefinition>
                                                 <RowDefinition Height="10*"></RowDefinition>
@@ -57,7 +59,14 @@
                                             <StackLayout Grid.Row="4" Orientation="Horizontal"  >
                                             <Label Text="{Binding Likes}"
                                                         HorizontalOptions="Start"
+                                                            TextColor="#503026" />                                            
+                                            </StackLayout>
+                                            
+                                            <StackLayout Grid.Row="5" Orientation="Horizontal"  >
+                                            <input:CheckBox Type="Star" x:Name="likebutton"
+                                                        HorizontalOptions="Start"
                                                             TextColor="#503026" />
+                                            
                                             </StackLayout>
                                         </Grid>
                                 </ViewCell>
