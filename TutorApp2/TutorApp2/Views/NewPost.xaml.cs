@@ -1,7 +1,13 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.S3.Transfer;
+using Plugin.Media;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +19,9 @@ namespace TutorApp2.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewPost : ContentPage
-	{
-		public NewPost ()
+    {
+        string uppath = "";
+        public NewPost ()
 		{
             App.cur_user.email = "ADMIN";
             App.cur_user.surname = "aa";
@@ -31,6 +38,16 @@ namespace TutorApp2.Views
             Guid x= Guid.NewGuid();
             //var com = new List<List<string>>();
             //com.Add(new List<string> { });
+            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
+
+            // subdirectory and bucket name
+            uprequest.BucketName = "tutorapp" + @"/" + "postpics";
+            uprequest.Key = x + "_" + "1.jpg"; //file name up in S3
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg"); //local file name
+            if (uppath != "")
+            {
+                uprequest.FilePath = uppath;
+            }
             Post NP = new Post()
             {
                 UID = x.ToString(),
@@ -50,6 +67,87 @@ namespace TutorApp2.Views
             await Navigation.PushModalAsync(new Forum());
 
         }
+        private async void Imageselect(object sender, EventArgs e)
+        {   //gallery call
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    CompressionQuality = 92
+                });
+
+                if (file == null)
+                    return;
+
+                uppath = file.Path;
+                //imgPicked.Source = ImageSource.FromStream(() =>
+                //{
+                //    var stream = file.GetStream();
+                //    file.Dispose();
+                //    return stream;
+                //});
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+
+        }
+        private async void Takephoto(object sender, EventArgs e)
+        {   //camera call
+            await CrossMedia.Current.Initialize();
+
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+                {
+                    AllowCropping = true,
+                    CompressionQuality = 92,
+                    Directory = "Sample",
+                    Name = "test.jpg"
+                });
+
+                if (file == null)
+                    return;
+
+                uppath = file.Path;
+
+                //imgPicked.Source = ImageSource.FromStream(() =>
+                //{
+                //    var stream = file.GetStream();
+                //    file.Dispose();
+                //    return stream;
+                //});
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+        }
     }
 }

@@ -13,7 +13,8 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="70*"></ColumnDefinition>
+                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
                     <ColumnDefinition Width="10*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0" Clicked="Back"
@@ -26,12 +27,17 @@
                                                             HorizontalOptions="Center"
                                                     TextColor="#f35e20" />
             </Grid>
-            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
-                <Entry x:Name="PostTitle" HorizontalOptions="StartAndExpand"
-                                                    TextColor="#f35e20" />
+            <StackLayout Grid.Row="1">
+                <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
+                <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
+
             </StackLayout>
             <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                <Entry x:Name="PostCont" HorizontalOptions="StartAndExpand"
+                <Entry x:Name="PostTitle"  HorizontalOptions="FillAndExpand"
+                                                    TextColor="#f35e20" />
+            </StackLayout>
+            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
+                <Entry x:Name="PostCont" HorizontalOptions="FillAndExpand"
                                                         TextColor="#503026" />
             </StackLayout>
         </Grid>

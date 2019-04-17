@@ -9,6 +9,8 @@ using TutorApp2.Models;
 using System.Collections.Generic;
 using Amazon.DynamoDBv2;
 using System.Diagnostics;
+using Amazon.S3.Transfer;
+using Amazon.S3;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -42,6 +44,7 @@ namespace TutorApp2
             public string station { get; set; }
         }
         public static DynamoDBContext context = new DynamoDBContext(new AmazonDynamoDBClient(credentials, region));
+        public static TransferUtility s3utility = new TransferUtility(new AmazonS3Client(credentials, region));
         public static List<Post> QueriedPosts;
         public static Post CurrentPost;
         public static Image dp_img;
@@ -80,7 +83,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new HomeDetail();
+            MainPage = new Signup();
         }
 
         protected override void OnStart()

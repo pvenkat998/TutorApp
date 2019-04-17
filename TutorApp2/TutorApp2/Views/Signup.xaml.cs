@@ -137,15 +137,7 @@ namespace TutorApp2.Views
             string textbox = "登録完了";
             string button = "はい！";
 
-            //cred region
-            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-             "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
-                RegionEndpoint.APNortheast1 // Region
-            );
-            AWSConfigs.AWSRegion = "APNortheast1";
-            RegionEndpoint region = RegionEndpoint.APNortheast1;
-            var s3Client = new AmazonS3Client(credentials, region);
-            var transferUtility = new TransferUtility(s3Client);
+            
 
 
             // picture download success
@@ -157,11 +149,10 @@ namespace TutorApp2.Views
                 request.Key = "default.jpg";
                 request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg");
                 textbox = request.FilePath;
-                TransferUtility tu = new TransferUtility(s3Client);
                 request.WriteObjectProgressEvent += WriteFileProgress;
 
                 System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
-                tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+                App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
                 imgPicked.Source= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg");
             }
             catch (Exception ex)
@@ -169,7 +160,6 @@ namespace TutorApp2.Views
                 textbox = " u bik";
                 System.Diagnostics.Debug.WriteLine("=====ERROR ========");
             }
-            TransferUtility utility = new TransferUtility(s3Client);
             // making a TransferUtilityUploadRequest instance
             TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
 
@@ -185,10 +175,8 @@ namespace TutorApp2.Views
             System.Diagnostics.Debug.WriteLine(uprequest.FilePath);
             System.Diagnostics.Debug.WriteLine("=====IOS1 error========");
             System.Diagnostics.Debug.WriteLine("=====IOS3 error========");
-            utility.UploadAsync(uprequest);
+            App.s3utility.UploadAsync(uprequest);
             //commensing the transfer
-            var dbclient = new AmazonDynamoDBClient(credentials, region);
-            DynamoDBContext context = new DynamoDBContext(dbclient);
 
             DateTime now = DateTime.Now.ToLocalTime();
             string text = now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
@@ -219,7 +207,7 @@ namespace TutorApp2.Views
 
 
             };
-            context.SaveAsync(tosave_info);
+            App.context.SaveAsync(tosave_info);
 
             var dir =new LoginPage();
             Navigation.PushModalAsync(dir);
