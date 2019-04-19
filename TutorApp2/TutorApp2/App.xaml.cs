@@ -83,7 +83,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new Signup();
+            MainPage = new NewPost();
         }
 
         protected override void OnStart()

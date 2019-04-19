@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using MySql.Data.MySqlClient;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2;
 using Amazon.CognitoIdentity;

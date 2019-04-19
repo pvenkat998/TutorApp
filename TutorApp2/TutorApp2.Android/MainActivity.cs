@@ -21,18 +21,14 @@ namespace TutorApp2.Droid
     [Activity(Label = "TutorApp2", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
-        {
-            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
@@ -47,6 +43,10 @@ namespace TutorApp2.Droid
             Resolver.SetResolver(container.GetResolver());
             #endregion
             LoadApplication(new App());
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         public override void OnBackPressed()
         {

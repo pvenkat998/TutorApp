@@ -7,8 +7,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TutorApp2.Models;
 using System.Data;
-using MySql.Data.MySqlClient;
-using Npgsql;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;

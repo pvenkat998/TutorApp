@@ -33,6 +33,7 @@
 
             </StackLayout>
             <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                <Image x:Name="image"></Image>
                 <Entry x:Name="PostTitle"  HorizontalOptions="FillAndExpand"
                                                     TextColor="#f35e20" />
             </StackLayout>

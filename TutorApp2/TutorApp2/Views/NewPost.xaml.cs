@@ -28,7 +28,7 @@ namespace TutorApp2.Views
             App.cur_user.grade = "chuu";
 
             InitializeComponent ();
-		}
+        }
         void Back(object sender,EventArgs e)
         {
             Navigation.PopModalAsync();
@@ -106,12 +106,18 @@ namespace TutorApp2.Views
             }
 
         }
-        private async void Takephoto(object sender, EventArgs e)
-        {   //camera call
+
+        public async void Takephoto(object sender, EventArgs e)
+        {   //camera call screen.
+            CrossPermissions.Current.OpenAppSettings();
+            System.Diagnostics.Debug.WriteLine("=======0=======");
             await CrossMedia.Current.Initialize();
 
+            System.Diagnostics.Debug.WriteLine("=======1=======");
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            System.Diagnostics.Debug.WriteLine("=======2=======");
 
             if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
             {
@@ -120,7 +126,7 @@ namespace TutorApp2.Views
                 storageStatus = results[Permission.Storage];
             }
 
-            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            else if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
             {
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
