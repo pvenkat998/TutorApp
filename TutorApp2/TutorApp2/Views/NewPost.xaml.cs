@@ -91,12 +91,12 @@ namespace TutorApp2.Views
                     return;
 
                 uppath = file.Path;
-                //imgPicked.Source = ImageSource.FromStream(() =>
-                //{
-                //    var stream = file.GetStream();
-                //    file.Dispose();
-                //    return stream;
-                //});
+                image.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
             }
             else
             {
@@ -141,12 +141,12 @@ namespace TutorApp2.Views
 
                 uppath = file.Path;
 
-                //imgPicked.Source = ImageSource.FromStream(() =>
-                //{
-                //    var stream = file.GetStream();
-                //    file.Dispose();
-                //    return stream;
-                //});
+                image.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
             }
             else
             {

@@ -14,7 +14,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
                     <ColumnDefinition Width="10*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0" Clicked="Back"
@@ -33,13 +34,15 @@
 
             </StackLayout>
             <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                <Image x:Name="image"></Image>
                 <Entry x:Name="PostTitle"  HorizontalOptions="FillAndExpand"
                                                     TextColor="#f35e20" />
             </StackLayout>
             <StackLayout Grid.Row="3" Orientation="Horizontal"  >
                 <Entry x:Name="PostCont" HorizontalOptions="FillAndExpand"
                                                         TextColor="#503026" />
+            </StackLayout>
+            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
+                <Image x:Name="image" HeightRequest="200" Aspect="AspectFit" ></Image>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
