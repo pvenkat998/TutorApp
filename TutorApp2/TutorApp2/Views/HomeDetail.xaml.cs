@@ -74,8 +74,6 @@ namespace TutorApp2.Views
             {
                 Console.WriteLine(s.email.ToString());
                 //pic
-                var s3Client = new AmazonS3Client(App.credentials, App.region);
-                var transferUtility = new TransferUtility(s3Client);
                 try
                 {
 
@@ -83,9 +81,9 @@ namespace TutorApp2.Views
                     request.BucketName = "tutorapp" + @"/" + "profilepic";
                     request.Key = s.email.ToString() + "_dp.jpg";
                     request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.email.ToString() + "_dp.jpg");
-                    TransferUtility tu = new TransferUtility(s3Client);
+           
                     System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
-                    tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+                    App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
                 }
                 catch (Exception ex)
                 {
@@ -150,7 +148,7 @@ namespace TutorApp2.Views
             //-----------------------------------FRONTEND-----------------------
             i1.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
             i2.Source = ImageSource.FromResource("TutorApp2.Images.downloadw.png");
-            if (bun.IsChecked==false)
+            if (bun.IsChecked==true)
             {
                 test.Text = "test success";
                 listteachlist.Add(new ListOfTeachers

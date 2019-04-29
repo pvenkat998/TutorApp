@@ -24,7 +24,9 @@
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
                                         </StackLayout.GestureRecognizers>
                                         <StackLayout Orientation="Horizontal"  >
-                                            <Image Source="{Binding image}" />
+                                            <Image Source="{Binding Rec_ImageSrc}" />
+                                            <Label Text="{Binding Reciever_Surname}"
+                                    TextColor="#f35e20" />
                                             <Label Text="{Binding Text}"
                                     TextColor="#f35e20" />
                                             <Label Text="{Binding Timestamp}"

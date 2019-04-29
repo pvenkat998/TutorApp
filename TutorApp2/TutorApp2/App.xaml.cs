@@ -64,6 +64,7 @@ namespace TutorApp2
         {
             public static string Email { get; set; }
             public static string Username { get; set; }
+            public static string PicSrc { get; set; }
         }
         public static class Target_Prof
         {
@@ -83,7 +84,7 @@ namespace TutorApp2
         {
             InitializeComponent();
 
-            MainPage = new NewPost();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

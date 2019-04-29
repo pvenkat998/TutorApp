@@ -48,6 +48,7 @@ namespace TutorApp2.Views
             {
                 uprequest.FilePath = uppath;
             }
+            App.s3utility.UploadAsync(uprequest);
             Post NP = new Post()
             {
                 UID = x.ToString(),

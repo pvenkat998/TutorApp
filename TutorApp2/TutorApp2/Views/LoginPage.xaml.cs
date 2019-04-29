@@ -200,13 +200,9 @@ namespace TutorApp2.Views
             //MA - -------------  solve ma?----------------------
             //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
             //s credentials,
-            // RegionEndpoint.APNortheast1, // Region
-            //       APP_ID // app id
-            var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
-            DynamoDBContext context = new DynamoDBContext(dbclient);
             App.userdata_v1 retrievedBook;
      //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-            retrievedBook = context.LoadAsync<App.userdata_v1>("admin", "admin").Result;
+            retrievedBook = App.context.LoadAsync<App.userdata_v1>("admin", "admin").Result;
      //       ---------------------------DANGER========================
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;

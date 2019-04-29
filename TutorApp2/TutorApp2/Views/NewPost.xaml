@@ -6,17 +6,17 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
                 <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="60*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"   >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="40*"></ColumnDefinition>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0" Clicked="Back"
                                                             HorizontalOptions="Center"
