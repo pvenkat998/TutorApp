@@ -135,14 +135,15 @@ namespace TutorApp2.Views
             {
                 try
                 {
-                    App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
-                    recievers[i].Reciever_Surname = k.surname;
+                    App.userdata_v1 retrievedBook;
+                    retrievedBook = App.context.LoadAsync<App.userdata_v1>(recievers[i].Reciever).Result;
+
+                    //App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
+                    recievers[i].Reciever_Surname = retrievedBook.surname;
                     Console.WriteLine("db exists");
                 }
                 catch
                 {
-                    App.userdata_v1 retrievedBook;
-                    retrievedBook = App.context.LoadAsync<App.userdata_v1>(recievers[i].Reciever).Result;
                     recievers[i].Reciever_Surname = "ERROR_fix in HomeDetail2";
                 }
                 Console.WriteLine(recievers[i].Reciever);
