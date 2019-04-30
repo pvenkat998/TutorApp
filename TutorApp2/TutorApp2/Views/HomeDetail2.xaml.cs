@@ -51,7 +51,7 @@ namespace TutorApp2.Views
             public DateTime Timestamp { get; set; }
             public string Rec_ImageSrc { get; set; }
         }
-        public List<Recievers> RecieverDB()
+        public List<Message> RecieverDB()
         {
             QueryFilter filter = new QueryFilter();
             filter.AddCondition("Sender", QueryOperator.Equal, App.cur_user.email);
@@ -77,26 +77,26 @@ namespace TutorApp2.Views
             //messearchResponse2 sender is diff
             //messearchResponse  reciever is diff
             //List<Message> messagelist = new List<Message>();
-            List<Recievers> recievers = new List<Recievers>();
+            List<Message> recievers = new List<Message>();
             Console.WriteLine("im here");
             try
             {
                 foreach (var s in App.messearchResponse2)
                 {
-                    if (recievers.Any(x => x.Reciever == s.Sender && x.Timestamp>s.TimeStamp))
+                    if (recievers.Any(x => x.Reciever == s.Sender && x.TimeStamp>s.TimeStamp))
                     {
                         
                     }
-                    if (recievers.Any(x => x.Reciever == s.Sender && x.Timestamp <= s.TimeStamp))
+                    if (recievers.Any(x => x.Reciever == s.Sender && x.TimeStamp <= s.TimeStamp))
                     {
                         var itemToRemove = recievers.Single(r => r.Reciever == s.Sender);
                         recievers.Remove(itemToRemove);
-                        recievers.Add(new Recievers() {Reciever=s.Sender, Text=s.Message,Timestamp=s.TimeStamp });
+                        recievers.Add(new Message() {Reciever=s.Sender, Text=s.Message,TimeStamp=s.TimeStamp });
 
                     }
                     else
                     {
-                        recievers.Add(new Recievers() { Reciever = s.Sender, Text = s.Message, Timestamp = s.TimeStamp});
+                        recievers.Add(new Message() { Reciever = s.Sender, Text = s.Message, TimeStamp = s.TimeStamp});
 
                     }
                 }
@@ -109,20 +109,20 @@ namespace TutorApp2.Views
             {
                 foreach (var s in App.messearchResponse)
                 {
-                    if (recievers.Any(x => x.Reciever == s.Reciever && x.Timestamp > s.TimeStamp))
+                    if (recievers.Any(x => x.Reciever == s.Reciever && x.TimeStamp > s.TimeStamp))
                     {
 
                     }
-                    else if (recievers.Any(x => x.Reciever == s.Reciever && x.Timestamp <= s.TimeStamp))
+                    else if (recievers.Any(x => x.Reciever == s.Reciever && x.TimeStamp <= s.TimeStamp))
                     {
                         var itemToRemove = recievers.Single(r => r.Reciever == s.Reciever);
                         recievers.Remove(itemToRemove);
-                        recievers.Add(new Recievers() { Reciever = s.Reciever, Text = s.Message, Timestamp = s.TimeStamp});
+                        recievers.Add(new Message() { Reciever = s.Reciever, Text = s.Message, TimeStamp = s.TimeStamp});
 
                     }
                     else
                     {
-                        recievers.Add(new Recievers() { Reciever = s.Reciever, Text = s.Message, Timestamp = s.TimeStamp});
+                        recievers.Add(new Message() { Reciever = s.Reciever, Text = s.Message, TimeStamp = s.TimeStamp});
 
                     }
                 }
@@ -135,16 +135,19 @@ namespace TutorApp2.Views
             {
                 try
                 {
+
+                    App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
+                    recievers[i].Reciever_Surname = k.surname;
+                    Console.WriteLine("db exists");
+                }
+                catch
+                {
                     App.userdata_v1 retrievedBook;
                     retrievedBook = App.context.LoadAsync<App.userdata_v1>(recievers[i].Reciever).Result;
 
                     //App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
                     recievers[i].Reciever_Surname = retrievedBook.surname;
-                    Console.WriteLine("db exists");
-                }
-                catch
-                {
-                    recievers[i].Reciever_Surname = "ERROR_fix in HomeDetail2";
+                   // recievers[i].Reciever_Surname = "ERROR_fix in HomeDetail2";
                 }
                 Console.WriteLine(recievers[i].Reciever);
                 string imgpath=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), recievers[i].Reciever + "_dp.jpg");
@@ -175,7 +178,7 @@ namespace TutorApp2.Views
                     }
                 }
             }
-            List<Recievers> SortedList = recievers.OrderByDescending(o => o.Timestamp).ToList();
+            List<Message> SortedList = recievers.OrderByDescending(o => o.TimeStamp).ToList();
             return SortedList;
         }
         private async void OnTapped2(object sender, EventArgs e)

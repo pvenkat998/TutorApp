@@ -78,7 +78,7 @@ namespace TutorApp2
             public static string Shidoukeiken { get; set; }
             public static string Station { get; set; }
         }
-
+        public List<Message> MessageList;
         public App()
         {
             InitializeComponent();

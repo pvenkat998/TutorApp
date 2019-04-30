@@ -23,8 +23,8 @@ email.Text =App.User_Recepient.Email ;
 */
         public MessagePage()
         {
-            messagelist[0] = new Message { Sender = "s", Reciever = "r", text = "mes",TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true };
-            messagelist[1] = new Message { Sender = "s", Reciever = "r", text = "mes", TimeStamp = DateTime.Now, IsIncoming = false };
+            messagelist[0] = new Message { Sender = "s", Reciever = "r", Text = "mes",TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true };
+            messagelist[1] = new Message { Sender = "s", Reciever = "r", Text = "mes", TimeStamp = DateTime.Now, IsIncoming = false };
             InitializeComponent();
             BindingContext = messagelist;
             Title = "#general";
