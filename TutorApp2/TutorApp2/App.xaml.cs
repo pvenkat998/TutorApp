@@ -50,6 +50,7 @@ namespace TutorApp2
         public static string dp_img_path;
         public static List<MessageDynamo> messearchResponse;
         public static List<MessageDynamo> messearchResponse2;
+        public static List<Message> AllMessageList;
         public static List<userdata_v1> searchResponse;
         public static userdata_v1 tarprof;
         public static class cur_user
@@ -78,7 +79,6 @@ namespace TutorApp2
             public static string Shidoukeiken { get; set; }
             public static string Station { get; set; }
         }
-        public List<Message> MessageList;
         public App()
         {
             InitializeComponent();

@@ -135,7 +135,6 @@ namespace TutorApp2.Views
             {
                 try
                 {
-
                     App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
                     recievers[i].Reciever_Surname = k.surname;
                     Console.WriteLine("db exists");
@@ -147,7 +146,6 @@ namespace TutorApp2.Views
 
                     //App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
                     recievers[i].Reciever_Surname = retrievedBook.surname;
-                   // recievers[i].Reciever_Surname = "ERROR_fix in HomeDetail2";
                 }
                 Console.WriteLine(recievers[i].Reciever);
                 string imgpath=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), recievers[i].Reciever + "_dp.jpg");
