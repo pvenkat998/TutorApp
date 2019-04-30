@@ -27,7 +27,6 @@ namespace TutorApp2
         {
             [DynamoDBHashKey]    // Hash key.
             public string email { get; set; }
-            [DynamoDBRangeKey]
             public string password { get; set; }
             public string stud_teach { get; set; }
             public string surname { get; set; }

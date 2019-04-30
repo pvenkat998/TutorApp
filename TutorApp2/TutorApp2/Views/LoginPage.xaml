@@ -27,7 +27,6 @@
                 <Button x:Name="Btn_Redirsignup" Text="Sign up" Clicked="Redirsignup"/>
                 <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
                 <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
-                <Button x:Name="Btn_Messageredir" Text="msg" Clicked="Messageredir"/>
                 <Button x:Name="Btn_profileedir" Text="prof" Clicked="Profileredir"/>
                 <Label x:Name="path" Text="pathb4" />
                 <Image x:Name="imgPicked"/>

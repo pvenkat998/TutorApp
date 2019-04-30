@@ -52,8 +52,10 @@ namespace TutorApp2.Models
         public List<Message> MessageDB()
         {
             QueryFilter filter = new QueryFilter();
-            filter.AddCondition("Sender", QueryOperator.Equal, "admin");
-            filter.AddCondition("Reciever", QueryOperator.Equal, "dummy1");
+            // message partner is App.User_Recepient.Email
+            // cur user in from App.cur_user.email
+            filter.AddCondition("Sender", QueryOperator.Equal, App.cur_user.email);
+            filter.AddCondition("Reciever", QueryOperator.Equal, App.User_Recepient.Email);
 
             CognitoAWSCredentials credentials = new CognitoAWSCredentials(
     "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
@@ -85,8 +87,8 @@ namespace TutorApp2.Models
             App.messearchResponse2 = searchm2.GetRemainingAsync().Result;
             //working with list
             List<Message> messagelist = new List<Message>();
-            messagelist.Add(new Message { Sender = "s", Reciever = "r", text = "mes", TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true, IsOutgoing = false });
-            messagelist.Add(new Message { Sender = "s", Reciever = "r", text = "mes", TimeStamp = DateTime.Now, IsIncoming = false, IsOutgoing = true });
+            messagelist.Add(new Message { Sender = "s", Reciever = "r", Text = "mes", TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true, IsOutgoing = false });
+            messagelist.Add(new Message { Sender = "s", Reciever = "r", Text = "mes", TimeStamp = DateTime.Now, IsIncoming = false, IsOutgoing = true });
 
             Console.WriteLine("im here");
             try
@@ -97,7 +99,7 @@ namespace TutorApp2.Models
                     {
                         Sender = s.Sender,
                         Reciever = s.Reciever,
-                        text = s.Message,
+                        Text = s.Message,
                         TimeStamp = s.TimeStamp,
                         IsIncoming = true,
                         IsOutgoing = false
@@ -117,7 +119,7 @@ namespace TutorApp2.Models
                         {
                             Sender = s.Sender,
                             Reciever = s.Reciever,
-                            text = s.Message,
+                            Text = s.Message,
                             TimeStamp = s.TimeStamp,
                             IsIncoming = false,
                             IsOutgoing = true
@@ -134,14 +136,8 @@ namespace TutorApp2.Models
         }
         async Task SaveAsync(MessageDynamo mes)
         {
-            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-       "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
-          RegionEndpoint.APNortheast1 // Region
-      );
-            RegionEndpoint region = RegionEndpoint.APNortheast1;
-            var dbclient = new AmazonDynamoDBClient(credentials, region);
-            DynamoDBContext context = new DynamoDBContext(dbclient);
-            await context.SaveAsync(mes);
+            
+            await App.context.SaveAsync(mes);
         }
     }
 }

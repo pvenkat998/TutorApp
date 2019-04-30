@@ -23,9 +23,9 @@ namespace TutorApp2.Views
         string uppath = "";
         public NewPost ()
 		{
-            App.cur_user.email = "ADMIN";
-            App.cur_user.surname = "aa";
-            App.cur_user.grade = "chuu";
+            //App.cur_user.email = "ADMIN";
+            //App.cur_user.surname = "aa";
+            //App.cur_user.grade = "chuu";
 
             InitializeComponent ();
         }

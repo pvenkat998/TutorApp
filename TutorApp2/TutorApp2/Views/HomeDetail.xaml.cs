@@ -27,8 +27,6 @@ namespace TutorApp2.Views
     {
         public HomeDetail()
         {
-            App.cur_user.email = "admin";
-
             InitializeComponent();
             //-----------------------BACKEND--------------------------      
             var client = new AmazonDynamoDBClient(App.credentials, App.region);

@@ -202,7 +202,7 @@ namespace TutorApp2.Views
             //s credentials,
             App.userdata_v1 retrievedBook;
      //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-            retrievedBook = App.context.LoadAsync<App.userdata_v1>("admin", "admin").Result;
+            retrievedBook = App.context.LoadAsync<App.userdata_v1>("admin@example.com").Result;
      //       ---------------------------DANGER========================
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
@@ -254,13 +254,6 @@ namespace TutorApp2.Views
         {
             // await QueryAsync(App.credentials, App.region);
             Navigation.PushModalAsync(new Signup());
-        }
-        void Messageredir(object sender, EventArgs e)
-        {
-            // await QueryAsync(App.credentials, App.region);
-            App.cur_user.email = "admin";
-            App.User_Recepient.Email = "dummy1";
-            Navigation.PushModalAsync(new MessagePageSimple());
         }
         void Profileredir(object sender, EventArgs e)
         {
