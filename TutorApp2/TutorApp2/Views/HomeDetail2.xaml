@@ -13,33 +13,42 @@
             <Label Text="This is the message page"/>
             <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                <StackLayout Padding="30">
                     <ListView ItemsSource="{Binding .}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout BackgroundColor="#eee"
-                            Orientation="Vertical" x:Name="{Binding Reciever}">
-                                        <StackLayout.GestureRecognizers>
+                                    <Grid BackgroundColor="#eee" x:Name="{Binding Reciever}">
+                                        <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
-                                        </StackLayout.GestureRecognizers>
-                                        <StackLayout Orientation="Horizontal"  >
-                                            <Image Source="{Binding Rec_ImageSrc}" />
-                                            <Label Text="{Binding Reciever_Surname}"
-                                    TextColor="#f35e20" />
-                                            <Label Text="{Binding Text}"
-                                    TextColor="#f35e20" />
-                                            <Label Text="{Binding Timestamp}"
-                                    HorizontalOptions="EndAndExpand"
-                                    TextColor="#503026" />
-                                        </StackLayout>
-                                    </StackLayout>
+                                        </Grid.GestureRecognizers>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="15*"></ColumnDefinition>
+                                                <ColumnDefinition Width="85*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                                <Image Source="{Binding Rec_ImageSrc}" Grid.Column="0"/>
+                                                <Grid Grid.Column="1">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="AUTO"></RowDefinition>
+                                                        <RowDefinition Height="AUTO"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Text="{Binding Reciever_Surname}" Grid.Column="0"  TextColor="#f35e20"  />
+                                                        <Label Text="{Binding TimeStamp}" HorizontalTextAlignment="End" Grid.Column="1" TextColor="Red" />
+                                                    </Grid>
+                                                    <Label Text="{Binding Text}" HorizontalOptions="Start"
+                                                        TextColor="#f35e20" Grid.Row="1" />
+                                                </Grid>
+                                    </Grid>
                                 </ViewCell>
                             </DataTemplate>
 
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackLayout>
             </ScrollView>
         </StackLayout>
         <Grid Grid.Row="1" ColumnSpacing="0">

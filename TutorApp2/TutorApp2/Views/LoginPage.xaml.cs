@@ -237,7 +237,8 @@ namespace TutorApp2.Views
                 }
                 //
                 App.cur_user.email = retrievedBook.email;
-                DisplayAlert("yay", textbox, check);//do my sql updarte db
+                App.cur_user.surname = retrievedBook.surname;
+                App.cur_user.grade = retrievedBook.edu_tier;
                 Navigation.PushModalAsync(new Home());
                 Console.WriteLine("True!");
             }

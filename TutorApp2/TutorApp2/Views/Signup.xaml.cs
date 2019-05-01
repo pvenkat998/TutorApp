@@ -191,6 +191,7 @@ namespace TutorApp2.Views
             //    bach_or_mast = Entry_bach_or_mast.SelectedItem.ToString() ?? "1",
              //   gakunen = Entry_gakunen.SelectedItem.ToString() ?? "1",
                 karui_major = Entry_karui_major.Text,
+                edu_tier=Entry_cur_edu_tier.Text,
                 high_school = Entry_high_school.Text,
                 chuugaku_juken = Entry_chuugaku_juken.Text,
                 shidoukanou = Entry_shidoukanou.Text,

@@ -72,6 +72,9 @@
                     <Label x:Name="Lbl_karui_major" Text="karui_major" />
                     <Entry x:Name="Entry_karui_major" Placeholder="karui_major"/>
 
+                    <Label x:Name="Lbl_cur_edu_tier" Text="cur_edu_tier-mid-high-clg" />
+                    <Entry x:Name="Entry_cur_edu_tier" Placeholder="mid-high-clg"/>
+                    
                     <Label x:Name="Lbl_high_school" Text="high_school" />
                     <Entry x:Name="Entry_high_school" Placeholder="high_school"/>
 

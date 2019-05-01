@@ -1,6 +1,8 @@
 ﻿using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
+using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
 using System;
 using System.Collections.Generic;
@@ -46,16 +48,40 @@ namespace TutorApp2.Views
         }
         public async Task QueryAsync()
         {
-            var search = App.context.FromQueryAsync<Post>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
+            QueryFilter filter = new QueryFilter();
+            if (App.cur_user.grade == "大")
+            {
+                filter.AddCondition("Grade", QueryOperator.Equal, "小");
+                filter.AddCondition("Grade",QueryOperator.Equal, "中");
+                filter.AddCondition("Grade",QueryOperator.Equal, "高");
+                filter.AddCondition("Grade",QueryOperator.Equal, "大");
+            }
+            else
+            {
+                List<string> fl = new List<string>();
+                fl.Add("大");
+                fl.Add(App.cur_user.grade);
+                filter.AddCondition("Grade",QueryOperator.Equal,  fl);
+
+            }
+            var search = App.context.FromQueryAsync<Post>(new QueryOperationConfig()
             {
                 IndexName = "Grade-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Grade", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, "chuu")
+                Filter = filter
 
             });
-
+            var request = new QueryRequest
+            {
+                TableName = "forum_posts",
+                KeyConditionExpression = "Grade = :v_Id",
+                ExpressionAttributeValues = new Dictionary<string, AttributeValue> {
+            {":v_Id", new AttributeValue { S =  "中" }}
+        },
+            };
             Console.WriteLine("items retrieved");
 
-            var searchResponse = await search.GetRemainingAsync();
+            var search2 = App.context.QueryAsync<Post>(request);
+            var searchResponse = await search2.GetRemainingAsync();
             foreach (var s in searchResponse)
             {
                 Console.WriteLine(s.PosterEmail.ToString());

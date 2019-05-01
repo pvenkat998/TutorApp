@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TutorApp2.Models;
+using TutorApp2.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,9 +26,10 @@ namespace TutorApp2.Models
         public MessagePageSimple ()
         {
             List<Message> messagelist =  MessageDB();
-
             BindingContext = messagelist;
-            InitializeComponent ();
+            Debug.WriteLine("=====GGWP ======== ");
+            InitializeComponent();
+            Surname.Text = App.User_Recepient.Username;
 		}
         private async void SendMessage(object sender, EventArgs e)
         {
@@ -56,28 +58,17 @@ namespace TutorApp2.Models
             // cur user in from App.cur_user.email
             filter.AddCondition("Sender", QueryOperator.Equal, App.cur_user.email);
             filter.AddCondition("Reciever", QueryOperator.Equal, App.User_Recepient.Email);
-
-            CognitoAWSCredentials credentials = new CognitoAWSCredentials(
-    "ap-northeast-1:65003829-3bb8-4228-a97c-559a1b370746", // Identity pool ID
-       RegionEndpoint.APNortheast1 // Region
-   );
-         RegionEndpoint region = RegionEndpoint.APNortheast1;
-        var client = new AmazonDynamoDBClient(credentials, region);
-
-            Debug.WriteLine("=====GGWP ======== ");
-            DynamoDBContext context = new DynamoDBContext(client);
-            var searchm = context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
+            var searchm = App.context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
             {
                 IndexName = "Sender-Reciever-index",
                 Filter=filter
             });
-            Debug.WriteLine("=====GGWP ======== ");
             Console.WriteLine("bb items retrieved");
             App.messearchResponse = searchm.GetRemainingAsync().Result;
             QueryFilter filter2 = new QueryFilter();
             filter2.AddCondition("Reciever", QueryOperator.Equal, App.cur_user.email);
             filter2.AddCondition("Sender", QueryOperator.Equal, App.User_Recepient.Email);
-            var searchm2 = context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
+            var searchm2 = App.context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
             {
                 IndexName = "Reciever-Sender-index",
                 Filter = filter2
@@ -87,7 +78,7 @@ namespace TutorApp2.Models
             App.messearchResponse2 = searchm2.GetRemainingAsync().Result;
             //working with list
             List<Message> messagelist = new List<Message>();
-            messagelist.Add(new Message { Sender = "s", Reciever = "r", Text = "mes", TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true, IsOutgoing = false });
+            messagelist.Add(new Message { Sender = "s", Reciever = "r", Text = "msdadss", TimeStamp = new DateTime(2008, 5, 1, 8, 30, 52), IsIncoming = true, IsOutgoing = false, Rec_ImageSrc = App.User_Recepient.PicSrc });
             messagelist.Add(new Message { Sender = "s", Reciever = "r", Text = "mes", TimeStamp = DateTime.Now, IsIncoming = false, IsOutgoing = true });
 
             Console.WriteLine("im here");
@@ -102,7 +93,8 @@ namespace TutorApp2.Models
                         Text = s.Message,
                         TimeStamp = s.TimeStamp,
                         IsIncoming = true,
-                        IsOutgoing = false
+                        IsOutgoing = false,
+                        Rec_ImageSrc = App.User_Recepient.PicSrc
                     });
                 }
             }
@@ -122,7 +114,8 @@ namespace TutorApp2.Models
                             Text = s.Message,
                             TimeStamp = s.TimeStamp,
                             IsIncoming = false,
-                            IsOutgoing = true
+                            IsOutgoing = true,
+                            Rec_ImageSrc = App.User_Recepient.PicSrc
                         });
                     }
                 }
@@ -131,6 +124,7 @@ namespace TutorApp2.Models
             {
 
             }
+
             List<Message> SortedList = messagelist.OrderBy(o => o.TimeStamp).ToList();
             return SortedList;
         }
@@ -138,6 +132,12 @@ namespace TutorApp2.Models
         {
             
             await App.context.SaveAsync(mes);
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            Navigation.PushModalAsync(new HomeDetail2());
+            return true;
         }
     }
 }

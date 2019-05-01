@@ -186,7 +186,20 @@ namespace TutorApp2.Views
             string te = eventargs.Parameter.ToString();
            
             App.User_Recepient.Email = te;
-            App.User_Recepient.Username = "sender";
+            try
+            {
+                App.userdata_v1 k = (App.searchResponse.Single(x => x.email == te));
+                App.User_Recepient.Username = k.surname;
+                Console.WriteLine("db exists");
+            }
+            catch
+            {
+                App.userdata_v1 retrievedBook;
+                retrievedBook = App.context.LoadAsync<App.userdata_v1>(te).Result;
+
+                //App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
+                App.User_Recepient.Username = retrievedBook.surname;
+            }
             App.User_Recepient.PicSrc= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), te + "_dp.jpg");
             await Navigation.PushModalAsync(new MessagePageSimple());
             

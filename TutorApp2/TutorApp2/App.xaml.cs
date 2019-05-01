@@ -35,6 +35,7 @@ namespace TutorApp2
             public string bach_or_mast { get; set; }
             public string gakunen { get; set; }
             public string karui_major { get; set; }
+            public string edu_tier { get; set; }
             public string high_school { get; set; }
             public string chuugaku_juken { get; set; }
             public string shidoukanou { get; set; }
@@ -42,6 +43,7 @@ namespace TutorApp2
             public string hitokoto { get; set; }
             public string station { get; set; }
         }
+        public static AmazonDynamoDBClient client = new AmazonDynamoDBClient(credentials, region);
         public static DynamoDBContext context = new DynamoDBContext(new AmazonDynamoDBClient(credentials, region));
         public static TransferUtility s3utility = new TransferUtility(new AmazonS3Client(credentials, region));
         public static List<Post> QueriedPosts;
@@ -84,6 +86,12 @@ namespace TutorApp2
             InitializeComponent();
 
             MainPage = new LoginPage();
+            //App.cur_user.email = "admin@example.com";
+            //App.User_Recepient.Email = "dummy2@example.com";
+            //App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
+            //App.User_Recepient.Username = "Nub";
+            //MainPage = new MessagePageSimple();
+
         }
 
         protected override void OnStart()
