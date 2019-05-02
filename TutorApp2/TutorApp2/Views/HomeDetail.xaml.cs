@@ -231,7 +231,9 @@ namespace TutorApp2.Views
             if (action == "メッセージする")
             {
                 App.User_Recepient.Email = te;
-                App.User_Recepient.Username = "vv";
+
+                App.userdata_v1 k = (App.searchResponse.Single(x => x.email == te));
+                App.User_Recepient.Username = k.surname;
 
                 await Navigation.PushModalAsync(new MessagePageSimple());
             }

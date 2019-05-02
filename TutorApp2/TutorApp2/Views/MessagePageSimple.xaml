@@ -20,7 +20,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0"></Button>
                 <Label x:Name="Surname" Grid.Column="1" Text=""></Label>
-                <Button x:Name="b2" Text="dropdown or prof" Grid.Column="2"></Button>
+                <Button x:Name="b2" Clicked="Button2"  Text="dropdown or prof" Grid.Column="2"></Button>
             </Grid>
             <ScrollView Grid.Row="1">
                 <ListView x:Name="msg" ItemsSource="{Binding .}">
