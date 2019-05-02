@@ -183,6 +183,7 @@ namespace TutorApp2.Views
         }
         void b4c(object sender, EventArgs e)
         {
+            App.tarprof.email = App.cur_user.email;
             Navigation.PushModalAsync(new ProfilePage());
         }
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs arg)
@@ -225,7 +226,6 @@ namespace TutorApp2.Views
             if (action== "プロフィールをみる")
             {
                 App.tarprof = App.searchResponse.Single(r => r.email == te);
-                App.Target_Prof.Email = te;
                 await Navigation.PushModalAsync(new ProfilePage());
             }
             if (action == "メッセージする")

@@ -83,7 +83,7 @@ namespace TutorApp2.Views
             catch (Exception ex)
             {
             }
-             double miles = Xamarin.Essentials.Location.CalculateDistance(userlocation, tarlocation, DistanceUnits.Kilometers);
+            double miles = Xamarin.Essentials.Location.CalculateDistance(userlocation, tarlocation, DistanceUnits.Kilometers);
             dist.Text = miles.ToString();
         }
         void Init()
@@ -191,7 +191,7 @@ namespace TutorApp2.Views
 
         private void SignIn(object sender, EventArgs e)
         {
-            
+
 
             // Initialize
 
@@ -201,9 +201,17 @@ namespace TutorApp2.Views
             //    analyticsManager = MobileAnalyticsManager.GetOrCreateInstance(
             //s credentials,
             App.userdata_v1 retrievedBook;
-     //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-            retrievedBook = App.context.LoadAsync<App.userdata_v1>("admin@example.com").Result;
-     //       ---------------------------DANGER========================
+            //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
+            if (Entry_Username.Text ==  null)
+            {
+                Entry_Username.Text = "admin@example.com";
+            }
+            else
+            {
+
+            }
+            retrievedBook = App.context.LoadAsync<App.userdata_v1>(Entry_Username.Text).Result;
+            //       ---------------------------DANGER========================
             //Enter S3
             AWSConfigsS3.UseSignatureVersion4 = true;
             var s3Client = new AmazonS3Client(App.credentials, App.region);
@@ -236,6 +244,7 @@ namespace TutorApp2.Views
                     System.Diagnostics.Debug.WriteLine("=====ERROR ========");
                 }
                 //
+                App.cur_user_book = retrievedBook;
                 App.cur_user.email = retrievedBook.email;
                 App.cur_user.surname = retrievedBook.surname;
                 App.cur_user.grade = retrievedBook.edu_tier;

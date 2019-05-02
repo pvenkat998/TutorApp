@@ -54,7 +54,8 @@ namespace TutorApp2
         public static List<MessageDynamo> messearchResponse2;
         public static List<Message> AllMessageList;
         public static List<userdata_v1> searchResponse;
-        public static userdata_v1 tarprof;
+        public static userdata_v1 tarprof = new App.userdata_v1 {email="" };
+        public static userdata_v1 cur_user_book;
         public static class cur_user
         {
             public static string email { get; set; }
@@ -67,19 +68,6 @@ namespace TutorApp2
             public static string Email { get; set; }
             public static string Username { get; set; }
             public static string PicSrc { get; set; }
-        }
-        public static class Target_Prof
-        {
-            public static string Email { get; set; }
-            public static string Surname { get; set; }
-            public static string Gender { get; set; }
-            public static string Hitokoto { get; set; }
-            public static string Karui_major { get; set; }
-            public static string High_school { get; set; }
-            public static string Chuugaku_juken { get; set; }
-            public static string Shidoukanou { get; set; }
-            public static string Shidoukeiken { get; set; }
-            public static string Station { get; set; }
         }
         public App()
         {

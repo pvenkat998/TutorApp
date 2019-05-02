@@ -41,6 +41,7 @@ namespace TutorApp2.Views
         }
         void b4c(object sender, EventArgs e)
         {
+            App.tarprof.email = App.cur_user.email;
             Navigation.PushModalAsync(new ProfilePage());
         }
         public class Recievers

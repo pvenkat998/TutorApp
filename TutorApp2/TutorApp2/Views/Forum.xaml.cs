@@ -44,50 +44,59 @@ namespace TutorApp2.Views
         }
         void b4c(object sender, EventArgs e)
         {
+            App.tarprof.email = App.cur_user.email;
             Navigation.PushModalAsync(new ProfilePage());
         }
         public async Task QueryAsync()
         {
             QueryFilter filter = new QueryFilter();
+            QueryFilter filter2 = new QueryFilter();
+            QueryFilter filter3 = new QueryFilter();
+            QueryFilter filter4 = new QueryFilter();
             if (App.cur_user.grade == "大")
             {
-                filter.AddCondition("Grade", QueryOperator.Equal, "小");
-                filter.AddCondition("Grade",QueryOperator.Equal, "中");
-                filter.AddCondition("Grade",QueryOperator.Equal, "高");
-                filter.AddCondition("Grade",QueryOperator.Equal, "大");
+                Console.WriteLine("daaaaaaaaaaaaaaaai");
+                filter.AddCondition("Grade", QueryOperator.Equal, "大");
+                filter2.AddCondition("Grade", QueryOperator.Equal, "中");
+                filter3.AddCondition("Grade", QueryOperator.Equal, "小");
+                filter4.AddCondition("Grade", QueryOperator.Equal, "高");
             }
             else
             {
-                List<string> fl = new List<string>();
-                fl.Add("大");
-                fl.Add(App.cur_user.grade);
-                filter.AddCondition("Grade",QueryOperator.Equal,  fl);
+                filter.AddCondition("Grade",QueryOperator.Equal, "大");
+                filter2.AddCondition("Grade", QueryOperator.Equal,App.cur_user.grade);
+                filter3.AddCondition("Grade", QueryOperator.Equal, "小aweaw");
+                filter4.AddCondition("Grade", QueryOperator.Equal, "qweqe高");
 
             }
             var search = App.context.FromQueryAsync<Post>(new QueryOperationConfig()
             {
                 IndexName = "Grade-index",
                 Filter = filter
-
             });
-            var request = new QueryRequest
+            var search2 = App.context.FromQueryAsync<Post>(new QueryOperationConfig()
             {
-                TableName = "forum_posts",
-                KeyConditionExpression = "Grade = :v_Id",
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue> {
-            {":v_Id", new AttributeValue { S =  "中" }}
-        },
-            };
+                IndexName = "Grade-index",
+                Filter = filter2
+            });
+            var search3 = App.context.FromQueryAsync<Post>(new QueryOperationConfig()
+            {
+                IndexName = "Grade-index",
+                Filter = filter3
+            });
+            var search4 = App.context.FromQueryAsync<Post>(new QueryOperationConfig()
+            {
+                IndexName = "Grade-index",
+                Filter = filter4
+            });
             Console.WriteLine("items retrieved");
-
-            var search2 = App.context.QueryAsync<Post>(request);
-            var searchResponse = await search2.GetRemainingAsync();
-            foreach (var s in searchResponse)
-            {
-                Console.WriteLine(s.PosterEmail.ToString());
-            }
-            App.QueriedPosts = searchResponse; 
-            BindingContext = searchResponse;
+            List<Post> searchResponse = await search.GetRemainingAsync();
+            List<Post> searchResponse2 = await search2.GetRemainingAsync();
+            List<Post> searchResponse3 = await search3.GetRemainingAsync();
+            List<Post> searchResponse4 = await search4.GetRemainingAsync();
+            List<Post> searchResponseres = searchResponse.Union(searchResponse2).Union(searchResponse3).Union(searchResponse4).ToList();
+            App.QueriedPosts = searchResponseres; 
+            BindingContext = App.QueriedPosts;
             // searchResponse.ForEach((s) = > {
             // Console.WriteLine(s.ToString());});
 
