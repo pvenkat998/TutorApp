@@ -136,7 +136,6 @@ namespace TutorApp2.Models
         async void Button2(object sender, EventArgs e)
         {
             try { 
-            App.searchResponse.Remove(App.searchResponse.Single(r => r.email == App.User_Recepient.Email));
             App.tarprof = App.searchResponse.Single(r => r.email == App.User_Recepient.Email);
             }
             catch

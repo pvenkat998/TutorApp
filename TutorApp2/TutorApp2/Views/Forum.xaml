@@ -41,6 +41,7 @@
                                             <Label Text="{Binding Title}" 
                                                             HorizontalOptions="EndAndExpand"
                                                     TextColor="#f35e20" />
+                                                <Image Source="{Binding PosterPicPath}"></Image>
                                         </StackLayout>
                                         <StackLayout Grid.Row="1" Orientation="Horizontal"  >
                                             <Label Text="{Binding PosterName}" 
@@ -53,8 +54,7 @@
                                                         TextColor="#503026" />
                                             </StackLayout>
                                             <StackLayout Grid.Row="3" Orientation="Horizontal"  >
-                                            <Label Text="{Binding Likes}"
-                                                        TextColor="#f35e20" />
+                                                <Image Source="{Binding PostPicPath}"></Image>
                                             </StackLayout>
                                             <StackLayout Grid.Row="4" Orientation="Horizontal"  >
                                             <Label Text="{Binding Likes}"

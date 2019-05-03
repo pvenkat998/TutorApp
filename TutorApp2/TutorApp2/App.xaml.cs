@@ -11,6 +11,7 @@ using Amazon.DynamoDBv2;
 using System.Diagnostics;
 using Amazon.S3.Transfer;
 using Amazon.S3;
+using System.IO;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -71,6 +72,12 @@ namespace TutorApp2
         }
         public App()
         {
+            System.IO.DirectoryInfo di = new DirectoryInfo((Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
             InitializeComponent();
 
             MainPage = new LoginPage();

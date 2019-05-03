@@ -23,10 +23,6 @@ namespace TutorApp2.Views
         string uppath = "";
         public NewPost ()
 		{
-            //App.cur_user.email = "ADMIN";
-            //App.cur_user.surname = "aa";
-            //App.cur_user.grade = "chuu";
-
             InitializeComponent ();
         }
         void Back(object sender,EventArgs e)
@@ -36,8 +32,6 @@ namespace TutorApp2.Views
         async void NewPost1(object sender,EventArgs e)
         {
             Guid x= Guid.NewGuid();
-            //var com = new List<List<string>>();
-            //com.Add(new List<string> { });
             TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
 
             // subdirectory and bucket name
@@ -47,8 +41,8 @@ namespace TutorApp2.Views
             if (uppath != "")
             {
                 uprequest.FilePath = uppath;
+                App.s3utility.UploadAsync(uprequest);
             }
-            App.s3utility.UploadAsync(uprequest);
             Post NP = new Post()
             {
                 UID = x.ToString(),

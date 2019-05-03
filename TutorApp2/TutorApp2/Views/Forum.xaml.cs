@@ -4,9 +4,11 @@ using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
+using Amazon.S3.Transfer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,6 @@ namespace TutorApp2.Views
 	{
 		public Forum ()
         {
-            App.cur_user.surname = "ore";
             InitializeComponent ();
             QueryAsync();
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
@@ -95,6 +96,48 @@ namespace TutorApp2.Views
             List<Post> searchResponse3 = await search3.GetRemainingAsync();
             List<Post> searchResponse4 = await search4.GetRemainingAsync();
             List<Post> searchResponseres = searchResponse.Union(searchResponse2).Union(searchResponse3).Union(searchResponse4).ToList();
+            int count = 0;
+            foreach (var s in searchResponseres)
+            {
+                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                request.BucketName = "tutorapp" + @"/" + "postpics";
+                request.Key = s.UID.ToString() + "_1.jpg";
+                request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.UID.ToString() + "_1.jpg");
+                System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
+                try
+                {
+                    await App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+                    searchResponseres[count].PostPicPath = request.FilePath;
+                }
+                catch { }
+                string imgpath= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),searchResponseres[count].PosterEmail+"_dp.jpg");
+                if (File.Exists(imgpath))
+                {
+                    Console.WriteLine("file exists");
+                    searchResponseres[count].PosterPicPath = imgpath;
+                }
+                else
+                {
+                    Console.WriteLine("file downloading");
+                    try
+                    {
+
+                        TransferUtilityDownloadRequest requestdp = new TransferUtilityDownloadRequest();
+                        requestdp.BucketName = "tutorapp" + @"/" + "profilepic";
+                        requestdp.Key = searchResponseres[count].PosterEmail + "_dp.jpg";
+                        requestdp.FilePath = imgpath;
+
+                        App.s3utility.DownloadAsync(requestdp).ConfigureAwait(true);
+                        searchResponseres[count].PosterPicPath = imgpath;
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("=====ERROR ========");
+                    }
+                }
+
+                count++;
+            }
             App.QueriedPosts = searchResponseres; 
             BindingContext = App.QueriedPosts;
             // searchResponse.ForEach((s) = > {
