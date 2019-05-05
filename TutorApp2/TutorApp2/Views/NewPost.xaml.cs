@@ -104,7 +104,6 @@ namespace TutorApp2.Views
 
         public async void Takephoto(object sender, EventArgs e)
         {   //camera call screen.
-            CrossPermissions.Current.OpenAppSettings();
             System.Diagnostics.Debug.WriteLine("=======0=======");
             await CrossMedia.Current.Initialize();
 

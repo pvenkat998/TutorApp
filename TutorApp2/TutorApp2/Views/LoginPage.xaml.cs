@@ -146,6 +146,7 @@ namespace TutorApp2.Views
         }
         private async void Takephoto(object sender, EventArgs e)
         {   //camera call
+
             await CrossMedia.Current.Initialize();
 
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
@@ -162,6 +163,7 @@ namespace TutorApp2.Views
             {
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
+                    OverlayViewProvider = func,
                     AllowCropping = true,
                     CompressionQuality = 92,
                     Directory = "Sample",

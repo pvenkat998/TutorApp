@@ -136,6 +136,9 @@
     <None Update="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\Forum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\Help.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
@@ -151,13 +154,25 @@
     <None Update="Views\HomeMaster.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\LoadingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\MessagePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\MessagePageSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\NewPost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\ProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ShowPost.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Signup.xaml">
