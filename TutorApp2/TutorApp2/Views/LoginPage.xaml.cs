@@ -158,24 +158,26 @@ namespace TutorApp2.Views
                 cameraStatus = results[Permission.Camera];
                 storageStatus = results[Permission.Storage];
             }
+            System.Diagnostics.Debug.WriteLine("=======2=======");
 
             if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
             {
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
-                    OverlayViewProvider = func,
                     AllowCropping = true,
                     CompressionQuality = 92,
                     Directory = "Sample",
                     Name = "test.jpg"
                 });
 
+                System.Diagnostics.Debug.WriteLine("=======1=======");
                 if (file == null)
                     return;
 
                 path.Text = file.Path;
                 uppath = file.Path;
 
+                System.Diagnostics.Debug.WriteLine("=======0=======");
                 imgPicked.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();

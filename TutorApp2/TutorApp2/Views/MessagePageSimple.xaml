@@ -8,8 +8,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="80*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="60*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             <!--Messages in Row 0 -->
             <Grid Grid.Row="0">
@@ -22,15 +23,16 @@
                 <Label x:Name="Surname" Grid.Column="1" Text=""></Label>
                 <Button x:Name="b2" Clicked="Button2"  Text="dropdown or prof" Grid.Column="2"></Button>
             </Grid>
-            <ScrollView Grid.Row="1">
-                <ListView x:Name="msg" ItemsSource="{Binding .}">
+            <StackLayout Grid.Row="1">
+                <ScrollView>
+                <ListView x:Name="msg" ItemsSource="{Binding .}" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
+                                <Grid>
                                     <StackLayout IsVisible="{Binding IsIncoming}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
+                                            <Grid IsVisible="{Binding IsText}">
+                                                <Grid.ColumnDefinitions WidthRequest="100"  HeightRequest="50">
                                                 <ColumnDefinition Width="50"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
@@ -44,44 +46,64 @@
                                         Aspect="AspectFill"
                                         HorizontalOptions="Start"
                                         VerticalOptions="Start" Source="{Binding Rec_ImageSrc}"/>
-                                            <Label VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
-                                            <Label FontSize="Micro" Grid.Column="2" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
+                                                <Label  VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                <Label FontSize="Micro" Grid.Column="2" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
 
-                                        </Grid>
-                                    </StackLayout>
-                                    <StackLayout IsVisible="{Binding IsOutgoing}">
-                                        <Grid
+                                            </Grid>
+                                            <Grid IsVisible="{Binding IsPic}">
+                                                <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250">
+                                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <plugin:CircleImage
+                                        Grid.Column="0"
                                         HeightRequest="100"
-                                        WidthRequest="100">
+                                        WidthRequest="100"
+                                        BorderThickness="2"
+                                        BorderColor="#03A9F4"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="Start"
+                                        VerticalOptions="Start" Source="{Binding Rec_ImageSrc}"/>
+                                                <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
+                
+                                            </Grid>
+                                        </StackLayout>  
+                                    <StackLayout IsVisible="{Binding IsOutgoing}">
+                                            <Grid IsVisible="{Binding IsText}" WidthRequest="100"  HeightRequest="50">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                                <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                                                <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Label FontSize="Micro" Grid.Column="1" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
-
-                                            <Label VerticalOptions="Center" Grid.Column="2" TextColor="Blue" Text="{Binding Text}"  ></Label>
-
-                                        </Grid>
-                                    </StackLayout>
+                                                <Label  FontSize="Micro" Grid.Column="1" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
+                                                <Label   HorizontalOptions="End" VerticalOptions="Center" Grid.Column="2" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                            </Grid>
+                                            <Image HeightRequest="250" WidthRequest="250" IsVisible="{Binding IsPic}" HorizontalOptions="End" Source="{Binding MsgPicSrc}"></Image>
+                                        </StackLayout>
                                     
-                                </StackLayout>
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
 
                     </ListView.ItemTemplate>
-                </ListView>
-            </ScrollView>
+                    </ListView>
+                </ScrollView>
+            </StackLayout>
             <StackLayout Grid.Row="2">
                 <Grid ColumnSpacing="2" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80*"></ColumnDefinition>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                        <ColumnDefinition Width="75*"></ColumnDefinition>
                         <ColumnDefinition Width="20*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Entry  Grid.Column="0" x:Name="Messagetosend" ></Entry>
-                    <Button Grid.Column="1"  x:Name="Btn_SendMessage" Text="Send" Clicked="SendMessage" VerticalOptions="End" HorizontalOptions="End"/>
+                    <Button  Grid.Column="0" x:Name="Btn_imageselect" Text="Photo" Clicked="Imageselect"/>
+                    <Entry  Grid.Column="1" x:Name="Messagetosend" ></Entry>
+                    <Button Grid.Column="2"  x:Name="Btn_SendMessage" Text="Send" Clicked="SendMessage" VerticalOptions="End" HorizontalOptions="End"/>
                 </Grid>
             </StackLayout>
+            <Image x:Name="ChosenImg" Grid.Row="3">
+                
+            </Image>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

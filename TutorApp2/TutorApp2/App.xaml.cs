@@ -76,16 +76,16 @@ namespace TutorApp2
 
             foreach (FileInfo file in di.GetFiles())
             {
-                file.Delete();
+               // file.Delete();
             }
             InitializeComponent();
 
-            MainPage = new LoginPage();
-            //App.cur_user.email = "admin@example.com";
-            //App.User_Recepient.Email = "dummy2@example.com";
-            //App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
-            //App.User_Recepient.Username = "Nub";
-            //MainPage = new MessagePageSimple();
+           // MainPage = new LoginPage();
+            App.cur_user.email = "admin@example.com";
+            App.User_Recepient.Email = "dummy3@example.com";
+            App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
+            App.User_Recepient.Username = "Nub";
+            MainPage = new MessagePageSimple();
 
         }
 

@@ -5,11 +5,17 @@ using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
+using Amazon.S3.Transfer;
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,27 +29,39 @@ namespace TutorApp2.Models
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MessagePageSimple : ContentPage
     {
+        string uppath = "";
         public MessagePageSimple ()
         {
+            InitializeComponent();
             List<Message> messagelist =  MessageDB();
             BindingContext = messagelist;
             Debug.WriteLine("=====GGWP ======== ");
-            InitializeComponent();
             Surname.Text = App.User_Recepient.Username;
-		}
+            ChosenImg.SizeChanged += (sender, e) => {
+                if (ChosenImg.Height > 50)
+                    ChosenImg.HeightRequest = 50;
+            };
+        }
         private async void SendMessage(object sender, EventArgs e)
         {
-
+            Guid x = Guid.NewGuid();
             MessageDynamo mes = new MessageDynamo
             {
-                Messageid = Guid.NewGuid().ToString(),
+                Messageid = x.ToString(),
                 Sender = App.cur_user.email,
                 Reciever = App.User_Recepient.Email,
                 Message = Messagetosend.Text,
                 TimeStamp = DateTime.Now
             };
-
-            Console.WriteLine("aa");
+            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
+            uprequest.BucketName = "tutorapp" + @"/" + "messagepic";
+            uprequest.Key = x + "_" + "1.jpg"; //file name up in S3
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg"); //local file name
+            if (uppath != "")
+            {
+                uprequest.FilePath = uppath;
+                await App.s3utility.UploadAsync(uprequest);
+            }
             await SaveAsync(mes);
 
             msg.ItemsSource  = null;
@@ -86,6 +104,23 @@ namespace TutorApp2.Models
             {
                 foreach (var s in App.messearchResponse2)
                 {
+                    bool pic = false;
+                    bool text = true;
+                    string mps = "";
+                    TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                    request.BucketName = "tutorapp" + @"/" + "messagepic";
+                    request.Key = s.Messageid.ToString() + "_1.jpg";
+                    request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.Messageid.ToString() + "_1.jpg");
+                    try
+                    {
+                        App.s3utility.DownloadAsync(request).ConfigureAwait(true);
+                        mps = request.FilePath;
+                        if (File.Exists(mps)) { 
+                        pic = true;
+                        text = false;
+                        }
+                    }
+                    catch { }
                     messagelist.Add(new Message
                     {
                         Sender = s.Sender,
@@ -94,7 +129,10 @@ namespace TutorApp2.Models
                         TimeStamp = s.TimeStamp,
                         IsIncoming = true,
                         IsOutgoing = false,
-                        Rec_ImageSrc = App.User_Recepient.PicSrc
+                        Rec_ImageSrc = App.User_Recepient.PicSrc,
+                        MsgPicSrc = mps,
+                        IsPic = pic,
+                        IsText = text
                     });
                 }
             }
@@ -107,6 +145,22 @@ namespace TutorApp2.Models
                 foreach (var s in App.messearchResponse)
                 {
                     {
+                        bool pic = false;
+                        bool text = true;
+                        string mps = "";
+                        TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                        request.BucketName = "tutorapp" + @"/" + "messagepic";
+                        request.Key = s.Messageid.ToString() + "_1.jpg";
+                        request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.Messageid.ToString() + "_1.jpg");
+                        try
+                        {
+                            App.s3utility.DownloadAsync(request).ConfigureAwait(true);
+                            mps = request.FilePath;
+                            if (File.Exists(mps))
+                            { pic = true;
+                                text = false; }
+                        }
+                        catch { }
                         messagelist.Add(new Message
                         {
                             Sender = s.Sender,
@@ -115,7 +169,10 @@ namespace TutorApp2.Models
                             TimeStamp = s.TimeStamp,
                             IsIncoming = false,
                             IsOutgoing = true,
-                            Rec_ImageSrc = App.User_Recepient.PicSrc
+                            Rec_ImageSrc = App.User_Recepient.PicSrc,
+                            MsgPicSrc = mps,
+                            IsPic = pic,
+                            IsText = text
                         });
                     }
                 }
@@ -132,6 +189,45 @@ namespace TutorApp2.Models
         {
             
             await App.context.SaveAsync(mes);
+        }
+        private async void Imageselect(object sender, EventArgs e)
+        {   //gallery call
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    CompressionQuality = 92
+                });
+
+                if (file == null)
+                    return;
+
+                uppath = file.Path;
+                ChosenImg.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+
         }
         async void Button2(object sender, EventArgs e)
         {

@@ -13,6 +13,9 @@ namespace TutorApp2.Models
         public DateTime TimeStamp { get; set; }
         public string Reciever_Surname { get; set; }
         public string Rec_ImageSrc { get; set; }
+        public string MsgPicSrc { get; set; }
+        public bool IsText { get; set; }
+        public bool IsPic { get; set; }
         public bool IsIncoming { get; set; }
         public bool IsOutgoing { get; set; }
     }
