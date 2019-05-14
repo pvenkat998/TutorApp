@@ -29,6 +29,7 @@ namespace TutorApp2.Models
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MessagePageSimple : ContentPage
     {
+
         string uppath = "";
         public MessagePageSimple ()
         {
@@ -71,6 +72,7 @@ namespace TutorApp2.Models
         }
         public List<Message> MessageDB()
         {
+            App.MessageID.Clear();
             QueryFilter filter = new QueryFilter();
             // message partner is App.User_Recepient.Email
             // cur user in from App.cur_user.email
@@ -118,6 +120,7 @@ namespace TutorApp2.Models
                         if (File.Exists(mps)) { 
                         pic = true;
                         text = false;
+                            App.MessageID.Add(mps);
                         }
                     }
                     catch { }
@@ -144,37 +147,39 @@ namespace TutorApp2.Models
             {
                 foreach (var s in App.messearchResponse)
                 {
+                    
+                    bool pic = false;
+                    bool text = true;
+                    string mps = "";
+                    TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                    request.BucketName = "tutorapp" + @"/" + "messagepic";
+                    request.Key = s.Messageid.ToString() + "_1.jpg";
+                    request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.Messageid.ToString() + "_1.jpg");
+                    try
                     {
-                        bool pic = false;
-                        bool text = true;
-                        string mps = "";
-                        TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
-                        request.BucketName = "tutorapp" + @"/" + "messagepic";
-                        request.Key = s.Messageid.ToString() + "_1.jpg";
-                        request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.Messageid.ToString() + "_1.jpg");
-                        try
-                        {
-                            App.s3utility.DownloadAsync(request).ConfigureAwait(true);
-                            mps = request.FilePath;
-                            if (File.Exists(mps))
-                            { pic = true;
-                                text = false; }
+                        App.s3utility.DownloadAsync(request).ConfigureAwait(true);
+                        mps = request.FilePath;
+                        if (File.Exists(mps))
+                        { pic = true;
+                            text = false;
+                            App.MessageID.Add(mps);
                         }
-                        catch { }
-                        messagelist.Add(new Message
-                        {
-                            Sender = s.Sender,
-                            Reciever = s.Reciever,
-                            Text = s.Message,
-                            TimeStamp = s.TimeStamp,
-                            IsIncoming = false,
-                            IsOutgoing = true,
-                            Rec_ImageSrc = App.User_Recepient.PicSrc,
-                            MsgPicSrc = mps,
-                            IsPic = pic,
-                            IsText = text
-                        });
                     }
+                    catch { }
+                    messagelist.Add(new Message
+                    {
+                        Sender = s.Sender,
+                        Reciever = s.Reciever,
+                        Text = s.Message,
+                        TimeStamp = s.TimeStamp,
+                        IsIncoming = false,
+                        IsOutgoing = true,
+                        Rec_ImageSrc = App.User_Recepient.PicSrc,
+                        MsgPicSrc = mps,
+                        IsPic = pic,
+                        IsText = text
+                    });
+                    
                 }
             }
             catch
@@ -229,7 +234,19 @@ namespace TutorApp2.Models
             }
 
         }
-        async void Button2(object sender, EventArgs e)
+        async void Button2(object sender,EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ChatImages());
+        }
+        async void Button4(object sender, EventArgs e)
+        {
+
+        }
+        async void Button3(object sender, EventArgs e)
+        {
+
+        }
+        async void Profrdr(object sender, EventArgs e)
         {
             try { 
             App.tarprof = App.searchResponse.Single(r => r.email == App.User_Recepient.Email);

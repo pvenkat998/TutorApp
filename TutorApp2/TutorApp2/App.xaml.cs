@@ -44,6 +44,7 @@ namespace TutorApp2
             public string hitokoto { get; set; }
             public string station { get; set; }
         }
+        public static List<string> MessageID = new List<string>();
         public static AmazonDynamoDBClient client = new AmazonDynamoDBClient(credentials, region);
         public static DynamoDBContext context = new DynamoDBContext(new AmazonDynamoDBClient(credentials, region));
         public static TransferUtility s3utility = new TransferUtility(new AmazonS3Client(credentials, region));

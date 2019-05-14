@@ -16,12 +16,16 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"></ColumnDefinition>
-                    <ColumnDefinition Width="70*"></ColumnDefinition>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="60*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0"></Button>
                 <Label x:Name="Surname" Grid.Column="1" Text=""></Label>
-                <Button x:Name="b2" Clicked="Button2"  Text="dropdown or prof" Grid.Column="2"></Button>
+                <Button x:Name="b2" Clicked="Button2"  Text="shashin" Grid.Column="2"></Button>
+                <Button x:Name="b3" Clicked="Button3"  Text="yotei" Grid.Column="3"></Button>
+                <Button x:Name="b4" Clicked="Button4"  Text="report" Grid.Column="4"></Button>
             </Grid>
             <StackLayout Grid.Row="1">
                 <ScrollView>
