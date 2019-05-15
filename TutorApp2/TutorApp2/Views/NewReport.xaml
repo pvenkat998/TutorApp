@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TutorApp2.Views.NewReport">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="80*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Text="Send report" Clicked="newrep" Grid.Row="0"></Button>
+            <Entry x:Name="Title" Grid.Row="1" Placeholder="Enter title"></Entry>
+            <Entry x:Name="Contents" Grid.Row="2" Placeholder="Enter report contents"></Entry>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

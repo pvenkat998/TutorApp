@@ -234,6 +234,7 @@ namespace TutorApp2.Views
 
                 App.userdata_v1 k = (App.searchResponse.Single(x => x.email == te));
                 App.User_Recepient.Username = k.surname;
+                App.User_Recepient.Grade = k.edu_tier;
 
                 await Navigation.PushModalAsync(new MessagePageSimple());
             }

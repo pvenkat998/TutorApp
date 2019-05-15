@@ -41,7 +41,7 @@
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <plugin:CircleImage
+                                                <plugin:CircleImage
                                         Grid.Column="0"
                                         HeightRequest="100"
                                         WidthRequest="100"
@@ -49,7 +49,13 @@
                                         BorderColor="#03A9F4"
                                         Aspect="AspectFill"
                                         HorizontalOptions="Start"
-                                        VerticalOptions="Start" Source="{Binding Rec_ImageSrc}"/>
+                                        VerticalOptions="Start" 
+                                                Source="{Binding Rec_ImageSrc}">
+
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="Profrdr" />
+                                                    </Image.GestureRecognizers>
+                                                </plugin:CircleImage>
                                                 <Label  VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
                                                 <Label FontSize="Micro" Grid.Column="2" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
 
@@ -67,8 +73,13 @@
                                         BorderColor="#03A9F4"
                                         Aspect="AspectFill"
                                         HorizontalOptions="Start"
-                                        VerticalOptions="Start" Source="{Binding Rec_ImageSrc}"/>
-                                                <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
+
+                                                Source="{Binding Rec_ImageSrc}">
+
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="Profrdr" />
+                                                    </Image.GestureRecognizers>
+                                                </plugin:CircleImage>                                                <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
                 
                                             </Grid>
                                         </StackLayout>  

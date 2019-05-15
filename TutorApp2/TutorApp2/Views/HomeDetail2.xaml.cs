@@ -191,6 +191,7 @@ namespace TutorApp2.Views
             {
                 App.userdata_v1 k = (App.searchResponse.Single(x => x.email == te));
                 App.User_Recepient.Username = k.surname;
+                App.User_Recepient.Grade = k.edu_tier;
                 Console.WriteLine("db exists");
             }
             catch
@@ -200,35 +201,11 @@ namespace TutorApp2.Views
 
                 //App.userdata_v1 k = (App.searchResponse.Single(x => x.email == recievers[i].Reciever));
                 App.User_Recepient.Username = retrievedBook.surname;
+                App.User_Recepient.Grade = retrievedBook.edu_tier;
             }
             App.User_Recepient.PicSrc= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), te + "_dp.jpg");
             await Navigation.PushModalAsync(new MessagePageSimple());
             
-        }
-        private async void onhold(object sender, EventArgs e)
-        {
-            TappedEventArgs eventargs = e as TappedEventArgs;
-
-            string te = eventargs.Parameter.ToString();
-            var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
-            if (action == "プロフィールをみる")
-            {
-                App.User_Recepient.Email = te;
-                await Navigation.PushModalAsync(new ProfilePage());
-            }
-            if (action == "メッセージする")
-            {
-                App.User_Recepient.Email = te;
-                App.User_Recepient.Username = "vv";
-
-                await Navigation.PushModalAsync(new MessagePageSimple());
-            }
-            if (action == "通報する")
-            {
-                await DisplayAlert("通報できた", "通報できた", te);//do my sql updarte db
-
-            }
-            Debug.WriteLine("Action: " + action);
         }
     }
 }

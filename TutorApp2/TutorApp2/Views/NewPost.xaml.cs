@@ -51,14 +51,11 @@ namespace TutorApp2.Views
                 PosterName=App.cur_user.surname,
                 Grade=App.cur_user.grade,
                 Content=PostCont.Text,
-                Likes="0",
                 Comments = null,
                 PostTime=DateTime.Now,
                 PostType="Post"
             };
-            var dbclient = new AmazonDynamoDBClient(App.credentials, App.region);
-            DynamoDBContext context = new DynamoDBContext(dbclient);
-            await context.SaveAsync(NP);
+            await App.context.SaveAsync(NP);
             await Navigation.PushModalAsync(new Forum());
 
         }

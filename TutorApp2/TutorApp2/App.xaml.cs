@@ -57,7 +57,7 @@ namespace TutorApp2
         public static List<Message> AllMessageList;
         public static List<userdata_v1> searchResponse;
         public static userdata_v1 tarprof = new App.userdata_v1 {email="" };
-        public static userdata_v1 cur_user_book;
+        public static userdata_v1 cur_user_book=new userdata_v1();
         public static class cur_user
         {
             public static string email { get; set; }
@@ -69,6 +69,7 @@ namespace TutorApp2
         {
             public static string Email { get; set; }
             public static string Username { get; set; }
+            public static string Grade { get; set; }
             public static string PicSrc { get; set; }
         }
         public App()
@@ -77,15 +78,19 @@ namespace TutorApp2
 
             foreach (FileInfo file in di.GetFiles())
             {
-               // file.Delete();
+                // file.Delete();
             }
             InitializeComponent();
 
-           // MainPage = new LoginPage();
+            // MainPage = new LoginPage();
             App.cur_user.email = "admin@example.com";
+            App.cur_user.surname = "kint";
+            App.cur_user.grade = "ug 1";
             App.User_Recepient.Email = "dummy3@example.com";
             App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
             App.User_Recepient.Username = "Nub";
+            App.User_Recepient.Grade = "chuu";
+            App.cur_user_book.stud_teach = "学生";
             MainPage = new MessagePageSimple();
 
         }
