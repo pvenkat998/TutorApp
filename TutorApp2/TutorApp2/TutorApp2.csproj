@@ -119,6 +119,9 @@
     <EmbeddedResource Update="Views\ReportList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReportOne.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ShowPost.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -143,6 +146,9 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ChatImages.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\Forum.xaml">
@@ -178,7 +184,13 @@
     <None Update="Views\NewPost.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\NewReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\ProfilePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\ReportList.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\ShowPost.xaml">

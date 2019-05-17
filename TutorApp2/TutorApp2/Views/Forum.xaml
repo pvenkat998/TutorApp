@@ -17,57 +17,27 @@
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
                 <StackLayout Padding="30">
-                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="200" >
+                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="100" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
 
                                         <Grid Grid.Column="0" BackgroundColor="LightGray">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="50*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnTapped3" CommandParameter="{Binding UID}"/>
-                                            </Grid.GestureRecognizers>
-                                            <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
-                                                <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
-                                            </StackLayout>-->
-                                        <StackLayout Grid.Row="0" Orientation="Horizontal"  >
-                                            <Label Text="{Binding Title}" 
-                                                            HorizontalOptions="EndAndExpand"
-                                                    TextColor="#f35e20" />
-                                                <Image Source="{Binding PosterPicPath}"></Image>
-                                        </StackLayout>
-                                        <StackLayout Grid.Row="1" Orientation="Horizontal"  >
-                                            <Label Text="{Binding PosterName}" 
-                                                            HorizontalOptions="EndAndExpand"
-                                                    TextColor="#f35e20" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                                            <Label Text="{Binding Content}"
-                                                            HorizontalOptions="Start"
-                                                        TextColor="#503026" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
-                                                <Image Source="{Binding PostPicPath}"></Image>
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
-                                            <Label Text="{Binding Likes}"
-                                                        HorizontalOptions="Start"
-                                                            TextColor="#503026" />                                            
-                                            </StackLayout>
-                                            
-                                            <StackLayout Grid.Row="5" Orientation="Horizontal"  >
-                                            <input:CheckBox Type="Star" x:Name="likebutton"
-                                                        HorizontalOptions="Start"
-                                                            TextColor="#503026" />
-                                            
-                                            </StackLayout>
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="20*"></ColumnDefinition>
+                                                <ColumnDefinition Width="80*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Aspect="Fill" Source="{Binding PosterPicPath}"></Image>
+                                            <Grid Grid.Column="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50*"></RowDefinition>
+                                                    <RowDefinition Height="30*"></RowDefinition>
+                                                    <RowDefinition Height="20*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Label Font="20,Bold" TextColor="Black" Grid.Row="0" Text="{Binding Title}"></Label>
+                                                <Label Grid.Row="1" Text="{Binding PosterName}"></Label>
+                                                <Label Grid.Row="2" Text="{Binding PostTime}"></Label>
+                                            </Grid>
                                         </Grid>
                                 </ViewCell>
                             </DataTemplate>

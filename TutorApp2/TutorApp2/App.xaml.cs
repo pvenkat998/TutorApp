@@ -82,16 +82,16 @@ namespace TutorApp2
             }
             InitializeComponent();
 
-            // MainPage = new LoginPage();
-            App.cur_user.email = "admin@example.com";
-            App.cur_user.surname = "kint";
-            App.cur_user.grade = "ug 1";
-            App.User_Recepient.Email = "dummy3@example.com";
-            App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
-            App.User_Recepient.Username = "Nub";
-            App.User_Recepient.Grade = "chuu";
-            App.cur_user_book.stud_teach = "学生";
-            MainPage = new MessagePageSimple();
+            MainPage = new LoginPage();
+            //App.cur_user.email = "admin@example.com";
+            //App.cur_user.surname = "kint";
+            //App.cur_user.grade = "ug 1";
+            //App.User_Recepient.Email = "dummy3@example.com";
+            //App.User_Recepient.PicSrc = "TutorApp2/Images/kuma.jpg";
+            //App.User_Recepient.Username = "Nub";
+            //App.User_Recepient.Grade = "chuu";
+            //App.cur_user_book.stud_teach = "学生";
+            //MainPage = new Forum();
 
         }
 

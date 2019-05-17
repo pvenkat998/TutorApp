@@ -19,6 +19,7 @@ namespace TutorApp2.Models
         public string PostType { get; set; }
         public DateTime PostTime { get; set; }
         public string PosterPicPath { get; set; }
+        public string StudentEmail { get; set; }
     }
     public class Comm
     {

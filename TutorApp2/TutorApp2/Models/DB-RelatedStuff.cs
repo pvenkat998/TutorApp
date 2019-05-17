@@ -1,6 +1,7 @@
 ﻿using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
@@ -18,6 +19,21 @@ namespace TutorApp2.Models
     {
         //QUERY THE QB USING INDEX IN THIS CASE PASSWORD-INDEX
  //---------------------------searchResponse is the list of all things queried ,,,, s is each result s == Book class call stuff with s.email
+       //AND FILTER
+ public async Task QueryAAsync(AWSCredentials credentials, RegionEndpoint region)
+        {                   QueryFilter filter = new QueryFilter();
+            // message partner is App.User_Recepient.Email
+            // cur user in from App.cur_user.email
+            filter.AddCondition("Sender", QueryOperator.Equal, App.cur_user.email);
+            filter.AddCondition("Reciever", QueryOperator.Equal, App.User_Recepient.Email);
+            var searchm = App.context.FromQueryAsync<MessageDynamo>(new QueryOperationConfig()
+            {
+                IndexName = "Sender-Reciever-index",
+                Filter=filter
+            });
+            Console.WriteLine("bb items retrieved");
+            App.messearchResponse = searchm.GetRemainingAsync().Result;
+        }
         public async Task QueryAsync(AWSCredentials credentials, RegionEndpoint region)
         {
             var client = new AmazonDynamoDBClient(credentials, region);

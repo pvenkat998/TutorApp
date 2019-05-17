@@ -29,9 +29,10 @@ namespace TutorApp2.Views
                 PostType = "Report",
                 PosterEmail = App.cur_user.email,
                 PosterName = App.cur_user.surname,
-                Grade = App.cur_user.grade
+                Grade = App.cur_user.grade,
+                StudentEmail = App.User_Recepient.Email
             };
             await App.context.SaveAsync(rep);
         }
-	}
+    }
 }

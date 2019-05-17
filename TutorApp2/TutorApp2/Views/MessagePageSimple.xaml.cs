@@ -244,7 +244,7 @@ namespace TutorApp2.Models
         }
         async void Button3(object sender, EventArgs e)
         {
-            if (App.cur_user_book.stud_teach == "先生")
+            if (App.cur_user_book.stud_teach == "学生")
             {
                 await Navigation.PushModalAsync(new ReportList());
 
