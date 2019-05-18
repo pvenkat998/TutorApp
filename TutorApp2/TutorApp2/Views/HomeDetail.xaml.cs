@@ -32,42 +32,61 @@ namespace TutorApp2.Views
         void FilterOnClick(object sender, EventArgs e)
         {
             FilterListTeach.Clear();
+            int count = 0;
             if (man.IsChecked == true)
             {
-
+                count++;
                 FilterListTeach.AddRange(searchResponse.Where(x => x.gender == "男").ToList());
-            }
-            else
-            {
             }
             if (woman.IsChecked == true)
             {
+                count++;
                 FilterListTeach.AddRange(searchResponse.Where(x => x.gender == "女").ToList());
-            }
-            else
-            {
             }
             if (chu.IsChecked == true)
             {
+                count++;
                 FilterListTeach.AddRange(searchResponse.Where(x => x.chuugaku_juken == "あり").ToList());
-            }
-            else
-            {
             }
             if (ri.IsChecked == true)
             {
+                count++;
                 FilterListTeach.AddRange(searchResponse.Where(x => x.karui_major == "理").ToList());
-            }
-            else
-            {
             }
             if (bun.IsChecked == true)
             {
+                count++;
                 FilterListTeach.AddRange(searchResponse.Where(x => x.karui_major == "文").ToList());
             }
-            else
+            if (count > 1)
             {
+                FilterListTeach = FilterListTeach.GroupBy(x => x)
+                 .Where(g => g.Count() > 1)
+                 .Select(y => y.Key)
+                 .ToList();
+                //A intersection B or A inter B inter C 
             }
+            //if (man.IsChecked == false)
+            //{
+
+            //    FilterListTeach.RemoveAll((x => x.gender == "男"));
+            //}
+            //if (woman.IsChecked == false)
+            //{
+            //    FilterListTeach.RemoveAll((x => x.gender == "女"));
+            //}
+            //if (chu.IsChecked == false)
+            //{
+            //    FilterListTeach.RemoveAll((x => x.chuugaku_juken == "あり"));
+            //}
+            //if (ri.IsChecked == false)
+            //{
+            //    FilterListTeach.RemoveAll((x => x.karui_major == "理"));
+            //}
+            //if (bun.IsChecked == false)
+            //{
+            //    FilterListTeach.RemoveAll((x => x.karui_major == "文"));
+            //}
             //init list of ListOfTeachers
             List<ListOfTeachers> listteachlistsub = new List<ListOfTeachers>();
 
@@ -224,7 +243,7 @@ namespace TutorApp2.Views
         void Logout(object sender, EventArgs e)
         {
             var properties = Application.Current.Properties;
-            properties["password"] = "";
+            properties["password"] = ""; Application.Current.SavePropertiesAsync();
             Navigation.PushModalAsync(new LoginPage());
         }
         void b1c(object sender, EventArgs e)

@@ -229,7 +229,6 @@ namespace TutorApp2.Views
             if (Entry_Username.Text == null)
             {
                 Entry_Username.Text = "admin@example.com";
-                Entry_Password.Text = "admin";
             }
             else
             {
@@ -277,8 +276,8 @@ namespace TutorApp2.Views
                 if (Entry_Password.Text == App.cur_user_book.password)
                 {
                     var prop= Application.Current.Properties;
-                    prop["username"] = Entry_Username.Text;
-                    prop["password"] = Entry_Password.Text;
+                    prop["username"] = Entry_Username.Text.ToString();
+                    prop["password"] = Entry_Password.Text.ToString(); Application.Current.SavePropertiesAsync();
                     System.Diagnostics.Debug.WriteLine("=====HEY========");
                     Navigation.PushModalAsync(new HomeDetail());
                 }
