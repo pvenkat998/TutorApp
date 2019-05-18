@@ -31,11 +31,11 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <input:CheckBox Type="Check" x:Name="man" Grid.Column="0"></input:CheckBox>
-                <input:CheckBox Type="Check" x:Name="woman" Grid.Column="2"></input:CheckBox>
-                <input:CheckBox Type="Check" x:Name="chu" Grid.Column="4"></input:CheckBox>
-                <input:CheckBox Type="Check" x:Name="ri" Grid.Column="6"></input:CheckBox>
-                <input:CheckBox Type="Check" x:Name="bun" Grid.Column="8"></input:CheckBox>
+                <input:CheckBox CheckChanged="FilterOnClick"  Type="Check" x:Name="man" Grid.Column="0"></input:CheckBox>
+                <input:CheckBox CheckChanged="FilterOnClick" Type="Check" x:Name="woman" Grid.Column="2"></input:CheckBox>
+                <input:CheckBox CheckChanged="FilterOnClick" Type="Check" x:Name="chu" Grid.Column="4"></input:CheckBox>
+                <input:CheckBox CheckChanged="FilterOnClick" Type="Check" x:Name="ri" Grid.Column="6"></input:CheckBox>
+                <input:CheckBox CheckChanged="FilterOnClick"  Type="Check" x:Name="bun" Grid.Column="8"></input:CheckBox>
                 <Image Grid.Column="1" x:Name="i1"></Image>
                 <Image Grid.Column="3" x:Name="i2"></Image>
                 <Label Grid.Column="5" x:Name="test">Test</Label>

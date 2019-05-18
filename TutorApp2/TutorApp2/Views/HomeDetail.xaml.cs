@@ -19,12 +19,109 @@ using Xamarin.Forms.Xaml;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Pages;
+using static TutorApp2.App;
 
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomeDetail : ContentPage
     {
+        List<userdata_v1> FilterListTeach = new List<userdata_v1>();
+        List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
+
+        void FilterOnClick(object sender, EventArgs e)
+        {
+            FilterListTeach.Clear();
+            if (man.IsChecked == true)
+            {
+
+                FilterListTeach.AddRange(searchResponse.Where(x => x.gender == "男").ToList());
+            }
+            else
+            {
+            }
+            if (woman.IsChecked == true)
+            {
+                FilterListTeach.AddRange(searchResponse.Where(x => x.gender == "女").ToList());
+            }
+            else
+            {
+            }
+            if (chu.IsChecked == true)
+            {
+                FilterListTeach.AddRange(searchResponse.Where(x => x.chuugaku_juken == "あり").ToList());
+            }
+            else
+            {
+            }
+            if (ri.IsChecked == true)
+            {
+                FilterListTeach.AddRange(searchResponse.Where(x => x.karui_major == "理").ToList());
+            }
+            else
+            {
+            }
+            if (bun.IsChecked == true)
+            {
+                FilterListTeach.AddRange(searchResponse.Where(x => x.karui_major == "文").ToList());
+            }
+            else
+            {
+            }
+            //init list of ListOfTeachers
+            List<ListOfTeachers> listteachlistsub = new List<ListOfTeachers>();
+
+            int size = FilterListTeach.Count;
+            System.Diagnostics.Debug.WriteLine("=====GGWP ======== " + FilterListTeach.Count());
+            string imgsrc, imgsrc2;
+            for (int i = 0; i < 10 && i < size; i = i + 2)
+            {
+                imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), FilterListTeach[i].email.ToString() + "_dp.jpg");
+
+                {
+
+                    if (size - i != 1)
+                    {
+                        imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), FilterListTeach[i + 1].email.ToString() + "_dp.jpg");
+                        listteachlistsub.Add(new ListOfTeachers
+                        {
+                            email =FilterListTeach[i].email.ToString(),
+                            name = FilterListTeach[i].surname.ToString(),
+                            karui_major = FilterListTeach[i].gakunen.ToString(),
+                            chuugaku_juken = FilterListTeach[i].gender.ToString(),
+                            gakunen = FilterListTeach[i].station.ToString(),
+                            image = imgsrc,
+                            gender ="un",
+                            email2 = FilterListTeach[i + 1].email.ToString(),
+                            name2 = FilterListTeach[i + 1].surname.ToString(),
+                            karui_major2 = FilterListTeach[i + 1].gakunen.ToString(),
+                            chuugaku_juken2 = FilterListTeach[i + 1].gender.ToString(),
+                            gakunen2 = FilterListTeach[i + 1].station.ToString(),
+                            image2 = imgsrc2,
+                            gender2 = FilterListTeach[i + 1].gender.ToString(),
+                        }
+                );
+                    }
+                    else
+                    {
+                        listteachlistsub.Add(new ListOfTeachers
+                        {
+                            email = FilterListTeach[i].email.ToString(),
+                            name = FilterListTeach[i].surname.ToString(),
+                            karui_major = FilterListTeach[i].gakunen.ToString(),
+                            chuugaku_juken = FilterListTeach[i].gender.ToString(),
+                            gakunen = FilterListTeach[i].station.ToString(),
+                            image = imgsrc,
+                            gender = FilterListTeach[i].gender.ToString(),
+                        }
+                    );
+
+                    }
+                }
+            }
+            listteachlistsub=listteachlistsub.Distinct().ToList();
+            listview.ItemsSource = listteachlistsub;
+        }
         public HomeDetail()
         {
             InitializeComponent();
@@ -32,32 +129,6 @@ namespace TutorApp2.Views
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);
 
-            //download data from query DB
-            //DOWNLOAD MESSAGES DATA
-            /*
-            var searchm = context.FromQueryAsync<MessageDynamo>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
-            {
-                IndexName = "Sender-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Sender", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, App.cur_user.email)
-
-            });
-            Console.WriteLine("items retrieved");
-            
-            App.messearchResponse = searchm.GetRemainingAsync().Result;
-            var searchm2 = context.FromQueryAsync<MessageDynamo>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
-            {
-                IndexName = "Reciever-index",
-                Filter = new Amazon.DynamoDBv2.DocumentModel.QueryFilter("Reciever", Amazon.DynamoDBv2.DocumentModel.QueryOperator.Equal, App.cur_user.email)
-
-            });
-            Console.WriteLine("items retrieved");
-        
-            //download images
-            App.messearchResponse2 = searchm2.GetRemainingAsync().Result;
-            // QueryAsync1(App.credentials, App.region).ConfigureAwait(true);
-            //  var client = new AmazonDynamoDBClient(App.credentials, App.region);
-            //   DynamoDBContext context = new DynamoDBContext(client);
-                */
             var search = context.FromQueryAsync<App.userdata_v1>(new Amazon.DynamoDBv2.DocumentModel.QueryOperationConfig()
             {
                 IndexName = "stud_teach-index",
@@ -79,7 +150,7 @@ namespace TutorApp2.Views
                     request.BucketName = "tutorapp" + @"/" + "profilepic";
                     request.Key = s.email.ToString() + "_dp.jpg";
                     request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), s.email.ToString() + "_dp.jpg");
-           
+
                     System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
                     App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
                 }
@@ -88,41 +159,37 @@ namespace TutorApp2.Views
                     System.Diagnostics.Debug.WriteLine("=====ERROR ========");
                 }
             }
-            /*    ListOfTeachers listteach =();
-               // listteach.image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "1.jpg");
-                listteach.name = searchResponse[0].surname.ToString();
-                listteach.gakunen = searchResponse[0].gakunen.ToString();
-                listteach.kamoku = searchResponse[0].strong_subject.ToString();
-                listteach.moyori = searchResponse[0].station.ToString(); 
-                */
+
             int size = App.searchResponse.Count;
-            List<ListOfTeachers> listteachlist = new List<ListOfTeachers>();
-            System.Diagnostics.Debug.WriteLine("=====GGWP ======== "+size);
+            System.Diagnostics.Debug.WriteLine("=====GGWP ======== " + size);
             string imgsrc, imgsrc2;
             //ASSIGNING CELLS
-            for (int i = 0; i < 10&&i<size; i=i+2)
+            for (int i = 0; i < 10 && i < size; i = i + 2)
             {
                 imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg");
-           
-                {
-                    if (size - i != 1) {
-                        imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i + 1].email.ToString() + "_dp.jpg");
 
+                {                        
+
+                    if (size - i != 1)
+                    {
+                        imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i + 1].email.ToString() + "_dp.jpg");
                         listteachlist.Add(new ListOfTeachers
-                {
-                    email=App.searchResponse[i].email.ToString(),
-                    name = App.searchResponse[i].surname.ToString(),
-                    karui_major = App.searchResponse[i].gakunen.ToString(),
-                    chuugaku_juken = App.searchResponse[i].gender.ToString(),
-                    gakunen = App.searchResponse[i].station.ToString(),
-                    image = imgsrc,
-                    email2 = App.searchResponse[i+1].email.ToString(),
-                    name2 = App.searchResponse[i+1].surname.ToString(),
-                    karui_major2 = App.searchResponse[i+1].gakunen.ToString(),
-                    chuugaku_juken2 = App.searchResponse[i+1].gender.ToString(),
-                    gakunen2 = App.searchResponse[i+1].station.ToString(),
-                    image2 = imgsrc2,
-                    }
+                        {
+                            email = App.searchResponse[i].email.ToString(),
+                            name = App.searchResponse[i].surname.ToString(),
+                            karui_major = App.searchResponse[i].gakunen.ToString(),
+                            chuugaku_juken = App.searchResponse[i].gender.ToString(),
+                            gakunen = App.searchResponse[i].station.ToString(),
+                            image = imgsrc,
+                            gender = App.searchResponse[i].gender.ToString(),
+                            email2 = App.searchResponse[i + 1].email.ToString(),
+                            name2 = App.searchResponse[i + 1].surname.ToString(),
+                            karui_major2 = App.searchResponse[i + 1].gakunen.ToString(),
+                            chuugaku_juken2 = App.searchResponse[i + 1].gender.ToString(),
+                            gakunen2 = App.searchResponse[i + 1].station.ToString(),
+                            image2 = imgsrc2,
+                            gender2 = App.searchResponse[i + 1].gender.ToString(),
+                        }
                 );
                     }
                     else
@@ -134,7 +201,8 @@ namespace TutorApp2.Views
                             karui_major = App.searchResponse[i].gakunen.ToString(),
                             chuugaku_juken = App.searchResponse[i].gender.ToString(),
                             gakunen = App.searchResponse[i].station.ToString(),
-                            image = imgsrc
+                            image = imgsrc,
+                            gender = App.searchResponse[i].gender.ToString(),
                         }
                     );
 
@@ -146,33 +214,20 @@ namespace TutorApp2.Views
             //-----------------------------------FRONTEND-----------------------
             i1.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
             i2.Source = ImageSource.FromResource("TutorApp2.Images.downloadw.png");
-            if (bun.IsChecked==true)
-            {
-                test.Text = "test success";
-                listteachlist.Add(new ListOfTeachers
-                {
-                    email = App.searchResponse[0].email.ToString(),
-                    name = App.searchResponse[0].surname.ToString(),
-                    karui_major = App.searchResponse[0].gakunen.ToString(),
-                    chuugaku_juken = App.searchResponse[0].gender.ToString(),
-                    gakunen = App.searchResponse[0].station.ToString()
-                });
-                BindingContext = listteachlist;
-            }
 
-            b1.Source= ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
+            b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
             b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
 
         }
-        void Logout(object sender,EventArgs e)
+        void Logout(object sender, EventArgs e)
         {
-            var properties = App.Current.Properties;
+            var properties = Application.Current.Properties;
             properties["password"] = "";
             Navigation.PushModalAsync(new LoginPage());
         }
-        void b1c (object sender,EventArgs e)
+        void b1c(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new HomeDetail());
         }
@@ -222,14 +277,14 @@ namespace TutorApp2.Views
                 // Draw the gradient on the rectangle
             }
         }
-  
-    private async void OnTapped2(object sender, EventArgs e)
+
+        private async void OnTapped2(object sender, EventArgs e)
         {
             TappedEventArgs eventargs = e as TappedEventArgs;
 
             string te = eventargs.Parameter.ToString();
             var action = await DisplayActionSheet("アクション", "戻る", null, "プロフィールをみる", "メッセージする", "通報する");
-            if (action== "プロフィールをみる")
+            if (action == "プロフィールをみる")
             {
                 App.tarprof = App.searchResponse.Single(r => r.email == te);
                 await Navigation.PushModalAsync(new ProfilePage());

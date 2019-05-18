@@ -49,9 +49,10 @@ namespace TutorApp2.Views
         }
         void AutoLogin()
         {
-            var properties = App.Current.Properties;
+            var properties = Application.Current.Properties;
             if (!properties.ContainsKey("username") && !properties.ContainsKey("password"))
             {
+                Console.WriteLine("==aa==");
                 properties.Add("username", "");
                 properties.Add("password", "");
 
@@ -65,9 +66,8 @@ namespace TutorApp2.Views
                 }
                 else
                 {
-
                 Entry_Password.Text = (string)properties["password"];
-                LOGIN();
+                    LOGIN();
                 }
             }
         }
@@ -229,6 +229,7 @@ namespace TutorApp2.Views
             if (Entry_Username.Text == null)
             {
                 Entry_Username.Text = "admin@example.com";
+                Entry_Password.Text = "admin";
             }
             else
             {
@@ -275,9 +276,10 @@ namespace TutorApp2.Views
                 App.cur_user.grade = retrievedBook.edu_tier;
                 if (Entry_Password.Text == App.cur_user_book.password)
                 {
-                    var prop= App.Current.Properties;
+                    var prop= Application.Current.Properties;
                     prop["username"] = Entry_Username.Text;
                     prop["password"] = Entry_Password.Text;
+                    System.Diagnostics.Debug.WriteLine("=====HEY========");
                     Navigation.PushModalAsync(new HomeDetail());
                 }
                 else
