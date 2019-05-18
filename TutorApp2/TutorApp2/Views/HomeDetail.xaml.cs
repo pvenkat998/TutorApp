@@ -166,6 +166,12 @@ namespace TutorApp2.Views
             b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
 
         }
+        void Logout(object sender,EventArgs e)
+        {
+            var properties = App.Current.Properties;
+            properties["password"] = "";
+            Navigation.PushModalAsync(new LoginPage());
+        }
         void b1c (object sender,EventArgs e)
         {
             Navigation.PushModalAsync(new HomeDetail());

@@ -41,7 +41,7 @@ namespace TutorApp2.Views
             if (uppath != "")
             {
                 uprequest.FilePath = uppath;
-                App.s3utility.UploadAsync(uprequest);
+                await App.s3utility.UploadAsync(uprequest);
             }
             Post NP = new Post()
             {

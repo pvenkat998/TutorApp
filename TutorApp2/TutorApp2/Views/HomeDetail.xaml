@@ -17,7 +17,7 @@
             <skia:SKCanvasView x:Name="box1"
                            VerticalOptions="FillAndExpand"
                            PaintSurface="OnCanvasViewPaintSurface" Grid.Row="0"></skia:SKCanvasView>
-            <Label Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center">PAHON</Label>
+            <Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>
             <Grid Grid.Row="1" Padding="10,0,10,0" ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>

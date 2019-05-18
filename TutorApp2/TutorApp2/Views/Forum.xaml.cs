@@ -24,7 +24,7 @@ namespace TutorApp2.Views
 		public Forum ()
         {
             InitializeComponent ();
-            QueryAsync();
+            QueryAsync().Wait();
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
@@ -127,7 +127,7 @@ namespace TutorApp2.Views
                         requestdp.Key = searchResponseres[count].PosterEmail + "_dp.jpg";
                         requestdp.FilePath = imgpath;
 
-                        App.s3utility.DownloadAsync(requestdp).ConfigureAwait(true);
+                        await App.s3utility.DownloadAsync(requestdp).ConfigureAwait(true);
                         searchResponseres[count].PosterPicPath = imgpath;
                     }
                     catch (Exception ex)

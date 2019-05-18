@@ -44,7 +44,32 @@ namespace TutorApp2.Views
         {
             InitializeComponent();
             Init();
-            test();
+            AutoLogin();
+            //test();
+        }
+        void AutoLogin()
+        {
+            var properties = App.Current.Properties;
+            if (!properties.ContainsKey("username") && !properties.ContainsKey("password"))
+            {
+                properties.Add("username", "");
+                properties.Add("password", "");
+
+            }
+            else
+            {
+                Entry_Username.Text = (string)properties["username"];
+                if ((string)properties["password"] == "")
+                {
+                    Entry_Username.Text = (string)properties["username"];
+                }
+                else
+                {
+
+                Entry_Password.Text = (string)properties["password"];
+                LOGIN();
+                }
+            }
         }
         async void test()
         {
@@ -192,13 +217,8 @@ namespace TutorApp2.Views
                 CrossPermissions.Current.OpenAppSettings();
             }
         }
-
-        private void SignIn(object sender, EventArgs e)
+        void LOGIN()
         {
-
-
-            // Initialize
-
             AWSConfigs.AWSRegion = "APNortheast1";
 
             //MA - -------------  solve ma?----------------------
@@ -206,7 +226,7 @@ namespace TutorApp2.Views
             //s credentials,
             App.userdata_v1 retrievedBook;
             //changeeeeee retrievedBook = context.LoadAsync<App.userdata_v1>(Entry_Username.Text,Entry_Password.Text).Result;
-            if (Entry_Username.Text ==  null)
+            if (Entry_Username.Text == null)
             {
                 Entry_Username.Text = "admin@example.com";
             }
@@ -221,8 +241,9 @@ namespace TutorApp2.Views
             var s3Client = new AmazonS3Client(App.credentials, App.region);
             var transferUtility = new TransferUtility(s3Client);
 
-          //  string button = retrievedBook.id.ToString();
-            if (retrievedBook!= null) {
+            //  string button = retrievedBook.id.ToString();
+            if (retrievedBook != null)
+            {
                 // picture download success
                 string textbox = "w";
                 string check = "1";
@@ -230,8 +251,8 @@ namespace TutorApp2.Views
                 {
 
                     TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
-                    request.BucketName = "tutorapp" + @"/" + "profilepic"; 
-                    request.Key = Entry_Username.Text + "_dp.jpg"; 
+                    request.BucketName = "tutorapp" + @"/" + "profilepic";
+                    request.Key = Entry_Username.Text + "_dp.jpg";
                     request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "dpuser.jpg");
                     textbox = request.FilePath;
                     TransferUtility tu = new TransferUtility(s3Client);
@@ -252,8 +273,18 @@ namespace TutorApp2.Views
                 App.cur_user.email = retrievedBook.email;
                 App.cur_user.surname = retrievedBook.surname;
                 App.cur_user.grade = retrievedBook.edu_tier;
-                Navigation.PushModalAsync(new Home());
-                Console.WriteLine("True!");
+                if (Entry_Password.Text == App.cur_user_book.password)
+                {
+                    var prop= App.Current.Properties;
+                    prop["username"] = Entry_Username.Text;
+                    prop["password"] = Entry_Password.Text;
+                    Navigation.PushModalAsync(new HomeDetail());
+                }
+                else
+                {
+                    
+                    path.Text = "wrong password";
+                }
             }
             else
             {
@@ -261,6 +292,14 @@ namespace TutorApp2.Views
                 DisplayAlert(Entry_Username.Text, Entry_Password.Text, "ww");//do my sql updarte db
                 Console.WriteLine("False!");
             }
+        }
+        private void SignIn(object sender, EventArgs e)
+        {
+
+
+            // Initialize
+            LOGIN();
+            
 
         }
         

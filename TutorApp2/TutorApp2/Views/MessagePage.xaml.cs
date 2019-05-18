@@ -12,7 +12,7 @@ namespace TutorApp2.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MessagePage : ContentPage
     {
-        private List<Message> messagelist;
+        private List<Message> messagelist= new List<Message>();
 
         /*
 public MessagePage ()

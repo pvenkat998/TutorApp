@@ -123,7 +123,7 @@ namespace TutorApp2.Models
                 request.WriteObjectProgressEvent += WriteFileProgress;
 
                 System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
-                tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
+                await tu.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
             }
 
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace TutorApp2.Models
             uprequest.Key = "test"+ "_" + "workz.jpg"; //file name up in S3
             uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Capture.PNG"); //local file name
             uprequest.FilePath = uppath;
-            utility.UploadAsync(uprequest); //commensing the transfer
+            await utility.UploadAsync(uprequest); //commensing the transfer
 
         }
         private void WriteFileProgress(object sender, WriteObjectProgressArgs args)
