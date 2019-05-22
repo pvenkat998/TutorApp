@@ -72,6 +72,26 @@ namespace TutorApp2.Models
         }
         public List<Message> MessageDB()
         {
+            App.User_Recepient.PicSrc= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.User_Recepient.Email+"_dp.jpg"); //local file name
+            if (File.Exists(App.User_Recepient.PicSrc))
+            {
+            }
+            else
+            {
+                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                request.BucketName = "tutorapp" + @"/" + "profilepic";
+                request.Key = App.User_Recepient.Email+"_dp.jpg";
+                request.FilePath = App.User_Recepient.PicSrc;
+                try
+                {
+                    App.s3utility.DownloadAsync(request).ConfigureAwait(true);
+
+                }
+                catch
+                {
+                    Console.WriteLine("===navprof==");
+                }
+            }
             App.MessageID.Clear();
             QueryFilter filter = new QueryFilter();
             // message partner is App.User_Recepient.Email

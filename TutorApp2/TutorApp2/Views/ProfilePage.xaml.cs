@@ -2,10 +2,11 @@
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TutorApp2.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,7 +30,8 @@ namespace TutorApp2.Views
 
             InitializeComponent();
             w.LowerChild(canvasView);
-            image.Source = ImageSource.FromResource("TutorApp2.Images.kuma.jpg");
+            image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg");
+
             image2.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
 
             // left top   right down padding 
@@ -38,6 +40,14 @@ namespace TutorApp2.Views
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
             b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
         }
+        void MsgRdr(object sender, EventArgs e)
+        {
+            App.User_Recepient.Email = App.tarprof.email;
+            App.User_Recepient.Username = App.tarprof.surname;
+            App.User_Recepient.Grade = App.tarprof.edu_tier;
+            Navigation.PushModalAsync(new MessagePageSimple());
+        }
+
         void b1c(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new HomeDetail());
