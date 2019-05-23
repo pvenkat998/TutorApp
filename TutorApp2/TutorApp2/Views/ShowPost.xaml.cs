@@ -44,8 +44,10 @@ namespace TutorApp2.Views
         }
         async void Updatesubcomments(object sender, EventArgs e)
         {
-            TappedEventArgs eventargs = e as TappedEventArgs;
-            string te = eventargs.Parameter.ToString();
+            var button = sender as Button;
+            var te = button.BindingContext as string;
+            //TappedEventArgs eventargs = e as TappedEventArgs;
+            //string te = eventargs.Parameter.ToString();
             var buttonClickHandler = (Button)sender;
             // access Parent Layout for Button  
             Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;

@@ -46,7 +46,7 @@
                                             <RowDefinition ></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
-                                        <Label Grid.Row="1" Text="{Binding Comment}"></Label>
+                                        <Label Grid.Row="1" Text="{Binding CID}"></Label>
                                         <Button Grid.Row="2" Text="see replies" Clicked="ShowReplies"></Button>
                                         <Grid Grid.Row="3" IsVisible="True" x:Name="hid" BindingContext="{Binding CID}">
                                             <Grid.RowDefinitions>
@@ -54,10 +54,7 @@
                                                 <RowDefinition Height="Auto"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <Entry  Grid.Row="0"  Text="{Binding .}"></Entry>
-                                            <Button Grid.Row="1" Text="投稿する" >
-                                                <Button.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="Updatesubcomments" CommandParameter="{Binding .}"/>
-                                                </Button.GestureRecognizers></Button>
+                                            <Button Grid.Row="2" Text="投稿する" Clicked="Updatesubcomments" BindingContext="{Binding .}"></Button>
                                         </Grid>
                                         </Grid>
                                         
