@@ -96,9 +96,9 @@ namespace TutorApp2.Views
             List<Post> searchResponse2 = await search2.GetRemainingAsync();
             List<Post> searchResponse3 = await search3.GetRemainingAsync();
             List<Post> searchResponse4 = await search4.GetRemainingAsync();
-            List<Post> searchResponseres = searchResponse.Union(searchResponse2).Union(searchResponse3).Union(searchResponse4).ToList();
+            App.QueriedPosts = searchResponse.Union(searchResponse2).Union(searchResponse3).Union(searchResponse4).ToList();
             int count = 0;
-            foreach (var s in searchResponseres)
+            foreach (var s in App.QueriedPosts)
             {
                 TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
                 request.BucketName = "tutorapp" + @"/" + "postpics";
@@ -108,14 +108,14 @@ namespace TutorApp2.Views
                 try
                 {
                     await App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
-                    searchResponseres[count].PostPicPath = request.FilePath;
+                    App.QueriedPosts[count].PostPicPath = request.FilePath;
                 }
                 catch { }
-                string imgpath= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),searchResponseres[count].PosterEmail+"_dp.jpg");
+                string imgpath= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.QueriedPosts[count].PosterEmail+"_dp.jpg");
                 if (File.Exists(imgpath))
                 {
                     Console.WriteLine("file exists");
-                    searchResponseres[count].PosterPicPath = imgpath;
+                    App.QueriedPosts[count].PosterPicPath = imgpath;
                 }
                 else
                 {
@@ -125,11 +125,11 @@ namespace TutorApp2.Views
 
                         TransferUtilityDownloadRequest requestdp = new TransferUtilityDownloadRequest();
                         requestdp.BucketName = "tutorapp" + @"/" + "profilepic";
-                        requestdp.Key = searchResponseres[count].PosterEmail + "_dp.jpg";
+                        requestdp.Key = App.QueriedPosts[count].PosterEmail + "_dp.jpg";
                         requestdp.FilePath = imgpath;
 
                         await App.s3utility.DownloadAsync(requestdp).ConfigureAwait(true);
-                        searchResponseres[count].PosterPicPath = imgpath;
+                        App.QueriedPosts[count].PosterPicPath = imgpath;
                     }
                     catch (Exception ex)
                     {
@@ -139,7 +139,6 @@ namespace TutorApp2.Views
 
                 count++;
             }
-            App.QueriedPosts = searchResponseres; 
             BindingContext = App.QueriedPosts;
             // searchResponse.ForEach((s) = > {
             // Console.WriteLine(s.ToString());});

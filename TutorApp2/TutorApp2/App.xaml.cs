@@ -82,7 +82,11 @@ namespace TutorApp2
             }
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            //MainPage = new LoginPage();
+
+            App.cur_user.grade ="大";
+            MainPage = new Forum();
+
             //App.cur_user.email = "admin@example.com";
             //App.cur_user.surname = "kint";
             //App.cur_user.grade = "ug 1";

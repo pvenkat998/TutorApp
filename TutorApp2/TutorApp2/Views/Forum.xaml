@@ -23,6 +23,9 @@
                                 <ViewCell>
 
                                         <Grid Grid.Column="0" BackgroundColor="LightGray">
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTapped3" CommandParameter="{Binding UID}"/>
+                                            </Grid.GestureRecognizers>
                                             <Grid.ColumnDefinitions >
                                                 <ColumnDefinition Width="20*"></ColumnDefinition>
                                                 <ColumnDefinition Width="80*"></ColumnDefinition>

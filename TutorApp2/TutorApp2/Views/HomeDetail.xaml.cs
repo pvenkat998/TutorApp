@@ -231,8 +231,8 @@ namespace TutorApp2.Views
             BindingContext = listteachlist;
 
             //-----------------------------------FRONTEND-----------------------
-            i1.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
-            i2.Source = ImageSource.FromResource("TutorApp2.Images.downloadw.png");
+            i1.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
+            i2.Source = ImageSource.FromResource("TutorApp2.Images.female.png");
 
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");

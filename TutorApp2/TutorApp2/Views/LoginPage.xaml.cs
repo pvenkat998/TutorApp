@@ -114,7 +114,6 @@ namespace TutorApp2.Views
         void Init()
         {
             LoginIcon.Source = ImageSource.FromResource("LoginIcon.jpg");
-            boy.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
             BackgroundColor = Constants.BackgroundColor;
             Lbl_Username.TextColor = Constants.MainTextColor;
             Lbl_Password.TextColor = Constants.MainTextColor;
