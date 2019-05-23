@@ -46,8 +46,8 @@ namespace TutorApp2.Views
         {
             var button = sender as Button;
             var te = button.BindingContext as string;
-            //TappedEventArgs eventargs = e as TappedEventArgs;
-            //string te = eventargs.Parameter.ToString();
+
+
             var buttonClickHandler = (Button)sender;
             // access Parent Layout for Button  
             Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
@@ -55,16 +55,18 @@ namespace TutorApp2.Views
             Entry Subcommentlabel = (Entry)ParentStackLayout.Children[0];
             string subcomment = Subcommentlabel.Text;
             Console.WriteLine(subcomment);
-            Guid x = Guid.NewGuid();
+            string x = Guid.NewGuid().ToString();
+            Console.WriteLine("==1==");
+            Console.WriteLine(App.cur_user.email);
             if (App.CurrentPost.Comments == null)
             {
                 var com = new List<Comm>();
-                com.Add(new Comm { CID = x.ToString(), ParentCID = te, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = subcomment });
+                com.Add(new Comm { CID = x, ParentCID = te, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = subcomment });
                 App.CurrentPost.Comments = com;
             }
             else
             {
-                App.CurrentPost.Comments.Add(new Comm { CID = x.ToString(), ParentCID=te, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = subcomment });
+                App.CurrentPost.Comments.Add(new Comm { CID = x, ParentCID=te, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = subcomment });
 
             }
             Console.WriteLine("==5==");
