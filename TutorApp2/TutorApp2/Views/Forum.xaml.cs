@@ -24,7 +24,8 @@ namespace TutorApp2.Views
 		public Forum ()
         {
             InitializeComponent ();
-            QueryAsync().Wait();
+            Console.WriteLine("wttt");
+            QueryAsync();
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
