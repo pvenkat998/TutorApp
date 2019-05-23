@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using Amazon.S3.Transfer;
+using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,34 @@ namespace TutorApp2.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProfilePage : ContentPage
 	{
-		public ProfilePage ()
+        public ProfilePage()
         {
             if (App.tarprof.email == App.cur_user.email)
             {
                 App.tarprof = App.cur_user_book;
             }
-            else 
+            else
             {
 
+            }
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg")))
+            {
+            }
+            else
+            {
+                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
+                request.BucketName = "tutorapp" + @"/" + "profilepic";
+                request.Key = App.tarprof.email + "_dp.jpg";
+                request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg");
+                try
+                {
+                    App.s3utility.DownloadAsync(request).ConfigureAwait(true);
+
+                }
+                catch
+                {
+                    Console.WriteLine("===navprof==");
+                }
             }
 
             BindingContext = App.tarprof;
@@ -31,9 +51,13 @@ namespace TutorApp2.Views
             InitializeComponent();
             w.LowerChild(canvasView);
             image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg");
-
-            image2.Source = ImageSource.FromResource("TutorApp2.Images.download.png");
-
+            if (App.tarprof.gender == "男") { 
+            image2.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
+            }
+            else if(App.tarprof.gender=="女")
+            {
+                image2.Source=ImageSource.FromResource("TutorApp2.Images.female.png")''
+            }
             // left top   right down padding 
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
