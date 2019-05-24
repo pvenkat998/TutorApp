@@ -74,8 +74,15 @@ namespace TutorApp2.Views
             comment.Text = "";
             Commentstatus.Text = "";
         }
-        async void ShowReplies(object sender, EventArgs e)
+        void ShowReplies(object sender, EventArgs e)
         {
+
+            var buttonClickHandler = (Button)sender;
+            // access Parent Layout for Button  
+            Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
+            // access first Label "name"  
+            Grid InvisGrid = (Grid)ParentStackLayout.Children[3];
+            InvisGrid.IsVisible = true;
         }
     }
 }

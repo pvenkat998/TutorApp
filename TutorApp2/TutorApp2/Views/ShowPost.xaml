@@ -24,7 +24,7 @@
             <Label Grid.Row="3" Font="20,Bold" Text="Comments"></Label>
             <Grid Grid.Row="4" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition> 
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -47,14 +47,14 @@
                                         </Grid.RowDefinitions>
                                         <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
                                         <Label Grid.Row="1" Text="{Binding CID}"></Label>
-                                        <Button Grid.Row="2" Text="see replies" Clicked="ShowReplies"></Button>
-                                        <Grid Grid.Row="3" IsVisible="True" x:Name="hid" BindingContext="{Binding CID}">
+                                        <Button Grid.Row="2" Font="10" Text="see replies" Clicked="ShowReplies"></Button>
+                                        <Grid Grid.Row="3" IsVisible="False" BindingContext="{Binding CID}">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"></RowDefinition>
                                                 <RowDefinition Height="Auto"></RowDefinition>
                                             </Grid.RowDefinitions>
-                                            <Entry  Grid.Row="0"  Text="{Binding .}"></Entry>
-                                            <Button Grid.Row="2" Text="投稿する" Clicked="Updatesubcomments" BindingContext="{Binding .}"></Button>
+                                            <Entry  Grid.Row="0"  ></Entry>
+                                            <Button Grid.Row="1" Text="投稿する" Clicked="Updatesubcomments" BindingContext="{Binding .}"></Button>
                                         </Grid>
                                         </Grid>
                                         
