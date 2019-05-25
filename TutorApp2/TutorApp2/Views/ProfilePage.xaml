@@ -3,26 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             x:Class="TutorApp2.Views.ProfilePage">
+             x:Class="TutorApp2.Views.ProfilePage" BackgroundImage="images.jpg">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="93*"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid x:Name="w" Grid.Row="0">
             <skia:SKCanvasView x:Name="canvasView"
                            VerticalOptions="FillAndExpand"
                            PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>
-            <StackLayout Padding="40,0,40,0" x:Name="we">
-            <Label Text="プロフィール"
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Padding="40,75,40,20" x:Name="we">
 
                     <plugin:CircleImage
                                         x:Name="image"
-                                        HeightRequest="150"
-                                        WidthRequest="150"
+                                        HeightRequest="170"
+                                        WidthRequest="170"
                                         BorderThickness="0"
                                         BorderColor="#03A9F4"
                                         Aspect="AspectFill"
@@ -34,60 +31,69 @@
                         </Image.GestureRecognizers>
                     </plugin:CircleImage>
                         <StackLayout  HorizontalOptions="Center" Orientation="Horizontal"  HeightRequest="30">
-            <Label Text="{Binding surname}"
-                                TextColor="#f35e20" 
+            <Label Text="熊澤克也" FontSize="19"
+                                TextColor="DarkBlue" 
                                          />
-                        <plugin:CircleImage
+                        <!--<plugin:CircleImage
                                         x:Name="image2"
                                         BorderThickness="0"
                                         BorderColor="#03A9F4"
                                         Aspect="AspectFill"
                                         >
 
-                        </plugin:CircleImage>
+                        </plugin:CircleImage>-->
                     </StackLayout>
-            <Label FontSize="18" Text="{Binding hitokoto}" 
+            <Label FontSize="19" Text="{Binding hitokoto}" 
                                 TextColor="#503026" MaxLines="5"/>
-            <Frame BackgroundColor="Gray" CornerRadius="10"  >
-                <StackLayout>                                                                                                                                                                                                                                                                                                               
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontSize="Large" Text="現在："
-                                    TextColor="#f35e20" />
-                        <Label FontSize="Large" Text="{Binding bach_or_mast}"
-                                    TextColor="#f35e20" />
-                        <Label FontSize="Large" Text="{Binding gakunen}"
-                                    TextColor="#503026" />
-                        <Label FontSize="Large" Text="年"
-                                    TextColor="#f35e20" />
-                        <Label FontSize="Large" Text="{Binding karui_major}"
-                                    TextColor="#503026" />
+            <Frame VerticalOptions="EndAndExpand" BackgroundColor="White" CornerRadius="10"  >
+                        <StackLayout VerticalOptions="EndAndExpand">                                                                                                                                                                                                                                                                                                               
+                    <StackLayout Orientation="Horizontal" Spacing="-6">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="現在："
+                                    />
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding bach_or_mast}"
+                                    />
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding gakunen}"
+                                    />
+                                <Label FontSize="19" Text="年" FontFamily="Yu Gothic"
+                                    />
+                                <Label FontSize="19" Text="{Binding karui_major}" FontFamily="Yu Gothic"
+                                     />
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal">
-                        <Label FontSize="Large" Text="出身高校："></Label>
-                            <Label FontSize="Large" Text="{Binding high_school}"></Label>
+                            <StackLayout  Orientation="Horizontal" Spacing="-6">
+                        <!--<Label FontSize="19" Text="出身高校：">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="Lobster-Regular" />
+                                        <On Platform="Android" Value="MEIRYO.TTC#MEIRYO" />
+                                        <On Platform="UWP" Value="Assets/Fonts/Lobster-Regular.ttf#Lobster" />
+                                    </OnPlatform>
+                                    </Label.FontFamily>
+                                </Label>-->
+                                <Label FontSize="19" Text="出身高校"></Label>
+                                <Label FontSize="19" Text="{Binding high_school}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal">
-                        <Label FontSize="Large" Text="中学受験経験："></Label>
-                            <Label FontSize="Large" Text="{Binding chuugaku_juken}"></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="-6">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="中学受験経験："></Label>
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
                         </StackLayout>
-                    <StackLayout  Orientation="Horizontal">
-                        <Label FontSize="Large" Text="指導可能期間："></Label>
-                        <Label FontSize="Large" Text="{Binding chuugaku_juken}"></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="-6">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="指導可能期間："></Label>
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal">
-                        <Label FontSize="Large" Text="指導経験："></Label>
-                        <Label FontSize="Large" Text="{Binding shidoukeiken}"></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="-6">
+                        <Label FontSize="19" Text="指導経験："></Label>
+                        <Label FontSize="19" Text="{Binding shidoukeiken}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal">
-                        <Label FontSize="Large" Text="最寄り駅："></Label>
-                        <Label FontSize="Large" Text="{Binding station}"></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="-6">
+                        <Label FontSize="19" Text="最寄り駅："></Label>
+                        <Label FontSize="19" Text="{Binding station}"></Label>
                     </StackLayout>
                 </StackLayout>
             </Frame>
             </StackLayout>
         </Grid>
 
-            <Grid Grid.Row="1" ColumnSpacing="0">
+            <Grid Grid.Row="1" ColumnSpacing="-6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"></ColumnDefinition>
                     <ColumnDefinition Width="25*"></ColumnDefinition>

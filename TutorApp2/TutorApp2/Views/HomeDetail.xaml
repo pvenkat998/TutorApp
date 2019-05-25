@@ -3,33 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-                          xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="TutorApp2.Views.HomeDetail"
              Title="ホーム">
     <ContentPage.Content>
-        <Grid x:Name="MasterLayout">
+          <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="60*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+              <RowDefinition Height="93*"></RowDefinition>
+              <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
-            <skia:SKCanvasView x:Name="box1"
-                           VerticalOptions="FillAndExpand"
-                           PaintSurface="OnCanvasViewPaintSurface" Grid.Row="0"></skia:SKCanvasView>
-            <Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>
-            <Grid Grid.Row="1" Padding="10,0,10,0" ColumnSpacing="10">
+
+            <Grid Grid.Row="0" x:Name="w" >
+
+              <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="90*"></RowDefinition>
+              </Grid.RowDefinitions>
+              <Label Grid.Row="0" Text="Pahon"></Label>
+              <!--<Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
+              <Grid Grid.Row="2" Padding="10,0,10,0" ColumnSpacing="10"> 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
+                  <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <input:CheckBox CheckChanged="FilterOnClick"  Type="Check" x:Name="man" Grid.Column="0"></input:CheckBox>
                 <input:CheckBox CheckChanged="FilterOnClick" Type="Check" x:Name="woman" Grid.Column="2"></input:CheckBox>
@@ -39,133 +42,121 @@
                 <Image Grid.Column="1" x:Name="i1"></Image>
                 <Image Grid.Column="3" x:Name="i2"></Image>
                 <Label Grid.Column="5" x:Name="test">Test</Label>
-                <!--<Label Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Fill">中学受験あり</Label>-->
+                <Label Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Fill">中学受験あり</Label>
                 <Label Grid.Column="7" HorizontalOptions="CenterAndExpand">理</Label>
                 <Label Grid.Column="9" HorizontalOptions="CenterAndExpand">文</Label>
-            </Grid>
-            <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
+              </Grid>
+              <ScrollView Grid.Row="1" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
                 <StackLayout Padding="30">
 
-                    <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="220" >
+                  <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="170" >
                     <ListView.ItemTemplate>
-                        <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
+                      <DataTemplate>
+                        <ViewCell>
+                          <Grid BackgroundColor="LightGray">
 
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="95*" />
-                                            <RowDefinition Height="5*" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50*" />
-                                            <ColumnDefinition Width="50*" />
-                                        </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="95*" />
+                              <RowDefinition Height="5*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="50*" />
+                              <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
 
-                                        <!-- Left column - BindingContext set to ModelPair.Item1  -->
+                            <!-- Left column - BindingContext set to ModelPair.Item1  -->
 
-                                        <Grid Grid.Column="0" BackgroundColor="LightGray">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="60*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
-                                            </Grid.GestureRecognizers>
-                                            <StackLayout Grid.Row="0">
+                            <Grid Grid.Column="0" >
+                              <Grid.RowDefinitions>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                              </Grid.RowDefinitions>
+                              <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
+                              </Grid.GestureRecognizers>
+                              <StackLayout Grid.Row="0" >
 
-                                                <plugin:CircleImage
-                                        HeightRequest="150"
-                                        WidthRequest="150"
-                                        BorderThickness="0"
-                                        BorderColor="#03A9F4"
-                                        Aspect="AspectFill"
-                                                    Source="{Binding image}"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"/>
-                                            </StackLayout>
-                                            <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                <plugin:CircleImage
+                        HeightRequest="150"
+                        WidthRequest="150"
+                        BorderThickness="0"
+                        BorderColor="#03A9F4"
+                        Aspect="AspectFill"
+                                    Source="{Binding image}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                              </StackLayout>
+                              <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
                                                 <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
                                             </StackLayout>-->
-                                            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
-                                                    <Label Text="{Binding name}" 
-                                                            HorizontalOptions="EndAndExpand"
-                                                    TextColor="#f35e20" />
-                                                </StackLayout>
-                                            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                                                    <Label Text="{Binding karui_major}"
-                                                            HorizontalOptions="Start"
-                                                        TextColor="#503026" />
-                                                </StackLayout>
-                                            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
-                                                    <Label Text="{Binding chuugaku_juken}"
-                                                        TextColor="#f35e20" />
-                                                </StackLayout>
-                                            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
-                                                    <Label Text="{Binding gakunen}"
-                                                        HorizontalOptions="Start"
-                                                            TextColor="#503026" />
-                                                </StackLayout>
-                                        </Grid>
-                                        <Grid Grid.Column="1" BackgroundColor="LightGray">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="60*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                                <RowDefinition Height="10*"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email2}"/>
-                                            </Grid.GestureRecognizers>
-                                            <StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
-                                                <Image Source="{Binding image2}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="1" Orientation="Horizontal"  >
-                                                <Label Text="{Binding name2}" 
-                                                            HorizontalOptions="EndAndExpand"
-                                                    TextColor="#f35e20" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
-                                                <Label Text="{Binding karui_major2}"
-                                                            HorizontalOptions="Start"
-                                                        TextColor="#503026" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
-                                                <Label Text="{Binding chuugaku_juken2}"
-                                                        TextColor="#f35e20" />
-                                            </StackLayout>
-                                            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
-                                                <Label Text="{Binding gakunen2}"
-                                                        HorizontalOptions="Start"
-                                                            TextColor="#503026" />
-                                            </StackLayout>
-                                        </Grid>
+                            
+                         
+                            </Grid>
+                            <Grid Grid.Column="1">
+                              <Grid.RowDefinitions>
+                                <RowDefinition Height="60*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                                <RowDefinition Height="10*"></RowDefinition>
+                              </Grid.RowDefinitions>
+                              <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email2}"/>
+                              </Grid.GestureRecognizers>
+                              <StackLayout  Grid.Row="0">
+                                <plugin:CircleImage
+                                                        HeightRequest="150"
+                                                        WidthRequest="150"
+                                                        BorderThickness="0"
+                                                        BorderColor="#03A9F4"
+                                                        Aspect="AspectFill"
+                                                                    Source="{Binding image2}"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"/>                              </StackLayout>
+                            
+                              <!--<StackLayout Grid.Row="2" Orientation="Horizontal"  >
+                                <Label Text="{Binding karui_major2}"
+                                            HorizontalOptions="Start"
+                                        TextColor="#503026" />
+                              </StackLayout>
+                              <StackLayout Grid.Row="3" Orientation="Horizontal"  >
+                                <Label Text="{Binding chuugaku_juken2}"
+                                        TextColor="#f35e20" />
+                              </StackLayout>
+                              <StackLayout Grid.Row="4" Orientation="Horizontal"  >
+                                <Label Text="{Binding gakunen2}"
+                                        HorizontalOptions="Start"
+                                            TextColor="#503026" />
+                              </StackLayout>-->
+                            </Grid>
 
-                                    </Grid>
-                                </ViewCell> 
-                        </DataTemplate>
+                          </Grid>
+                        </ViewCell>
+                      </DataTemplate>
 
                     </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
-            <Grid Grid.Row="3" ColumnSpacing="0">
+                  </ListView>
+                </StackLayout>
+              </ScrollView>
+            </Grid>
+            
+              <Grid Grid.Row="1" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                  <ColumnDefinition Width="25*"></ColumnDefinition>
+                  <ColumnDefinition Width="25*"></ColumnDefinition>
+                  <ColumnDefinition Width="25*"></ColumnDefinition>
+                  <ColumnDefinition Width="25*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ImageButton Aspect="AspectFit" BackgroundColor="Transparent" x:Name="b1" Grid.Column="0" Clicked="b1c"></ImageButton>
                 <ImageButton BackgroundColor="Transparent" x:Name="b2" Grid.Column="1" Clicked="b2c"></ImageButton>
                 <ImageButton BackgroundColor="Transparent" x:Name="b3" Grid.Column="2" Clicked="b3c"></ImageButton>
                 <ImageButton BackgroundColor="Transparent" x:Name="b4" Grid.Column="3" Clicked="b4c"></ImageButton>
-            </Grid>
+              </Grid>
 
-        </Grid>
+            </Grid>
     </ContentPage.Content>
 </ContentPage>

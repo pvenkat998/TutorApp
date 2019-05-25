@@ -52,11 +52,11 @@ namespace TutorApp2.Views
             w.LowerChild(canvasView);
             image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg");
             if (App.tarprof.gender == "男") { 
-            image2.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
+            //image2.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
             }
             else if(App.tarprof.gender=="女")
             {
-                image2.Source = ImageSource.FromResource("TutorApp2.Images.female.png");
+               // image2.Source = ImageSource.FromResource("TutorApp2.Images.female.png");
             }
             // left top   right down padding 
             b1.Source = ImageSource.FromResource("TutorApp2.Images.Searchicon.png");

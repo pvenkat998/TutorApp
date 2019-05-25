@@ -18,10 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\MEIRYO.TTC" />
     <None Remove="Images\download.png" />
     <None Remove="Images\downloadw.png" />
     <None Remove="Images\female.png" />
     <None Remove="Images\Forumicon.png" />
+    <None Remove="Images\images.jpg" />
     <None Remove="Images\kuma.jpg" />
     <None Remove="Images\LoginIcon.jpg" />
     <None Remove="Images\Mailicon.png" />
@@ -31,9 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ApplicationDefinition Include="Assets\MEIRYO.TTC" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Images\downloadw.png" />
     <EmbeddedResource Include="Images\female.png" />
     <EmbeddedResource Include="Images\Forumicon.png" />
+    <EmbeddedResource Include="Images\images.jpg" />
     <EmbeddedResource Include="Images\kuma.jpg" />
     <EmbeddedResource Include="Images\LoginIcon.jpg" />
     <EmbeddedResource Include="Images\Mailicon.png" />

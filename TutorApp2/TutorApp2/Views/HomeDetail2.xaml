@@ -9,15 +9,15 @@
             <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout Padding="10" Grid.Row="0">
+        <StackLayout Padding="10" Grid.Row="0" BackgroundColor="LightBlue">
             <Label Text="This is the message page"/>
             <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                    <ListView ItemsSource="{Binding .}">
+                <ListView ItemsSource="{Binding .}" RowHeight="50">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid BackgroundColor="#eee" x:Name="{Binding Reciever}">
+                                    <Grid BackgroundColor="White" x:Name="{Binding Reciever}">
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
                                         </Grid.GestureRecognizers>
@@ -37,7 +37,7 @@
                                                             <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
-                                                        <Label Text="{Binding Reciever_Surname}" Grid.Column="0"  TextColor="#f35e20"  />
+                                                        <Label Text="{Binding Reciever_Surname}" Font="Bold"  Grid.Column="0"  TextColor="#f35e20"  />
                                                         <Label Text="{Binding TimeStamp}" HorizontalTextAlignment="End" Grid.Column="1" TextColor="Red" />
                                                     </Grid>
                                                     <Label Text="{Binding Text}" HorizontalOptions="Start"
