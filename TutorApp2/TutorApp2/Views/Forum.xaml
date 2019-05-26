@@ -23,15 +23,19 @@
                                 <ViewCell>
 
                                         <Grid Grid.Column="0" BackgroundColor="LightGray">
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer Tapped="OnTapped3" CommandParameter="{Binding UID}"/>
-                                            </Grid.GestureRecognizers>
                                             <Grid.ColumnDefinitions >
                                                 <ColumnDefinition Width="20*"></ColumnDefinition>
                                                 <ColumnDefinition Width="80*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Aspect="Fill" Source="{Binding PosterPicPath}"></Image>
+                                            <Image Grid.Column="0" Aspect="Fill" Source="{Binding PosterPicPath}">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnTappedProf" CommandParameter="{Binding PosterEmail}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
                                             <Grid Grid.Column="1">
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnTapped3" CommandParameter="{Binding UID}"/>
+                                                </Grid.GestureRecognizers>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="50*"></RowDefinition>
                                                     <RowDefinition Height="30*"></RowDefinition>

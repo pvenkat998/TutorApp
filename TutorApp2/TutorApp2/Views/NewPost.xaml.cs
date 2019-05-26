@@ -37,11 +37,15 @@ namespace TutorApp2.Views
             // subdirectory and bucket name
             uprequest.BucketName = "tutorapp" + @"/" + "postpics";
             uprequest.Key = x + "_" + "1.jpg"; //file name up in S3
-            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg"); //local file name
-            if (uppath != "")
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), x + "_" + "1.jpg"); //local file name
+            try
             {
                 uprequest.FilePath = uppath;
                 await App.s3utility.UploadAsync(uprequest);
+            }
+            catch
+            {
+                Console.WriteLine(x + "no pic");
             }
             Post NP = new Post()
             {

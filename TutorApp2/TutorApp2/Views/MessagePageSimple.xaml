@@ -16,16 +16,15 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"></ColumnDefinition>
-                    <ColumnDefinition Width="60*"></ColumnDefinition>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Back" Grid.Column="0"></Button>
                 <Label x:Name="Surname" Grid.Column="1" Text=""></Label>
                 <Button x:Name="b2" Clicked="Button2"  Text="shashin" Grid.Column="2"></Button>
-                <Button x:Name="b3" Clicked="Button3"  Text="yotei" Grid.Column="3"></Button>
-                <Button x:Name="b4" Clicked="Button4"  Text="report" Grid.Column="4"></Button>
+                <Button x:Name="b3" Clicked="Buttonse"  Text="report(sensei persp)" Grid.Column="3"></Button>
+                <Button x:Name="b4" Clicked="Buttonst"  Text="report(stud persp)" Grid.Column="4"></Button>
             </Grid>
             <StackLayout Grid.Row="1">
                 <ScrollView>
@@ -104,18 +103,16 @@
                     </ListView>
                 </ScrollView>
             </StackLayout>
-            <StackLayout Grid.Row="2">
-                <Grid ColumnSpacing="2" >
+                <Grid ColumnSpacing="2" Grid.Row="2">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"></ColumnDefinition>
-                        <ColumnDefinition Width="75*"></ColumnDefinition>
-                        <ColumnDefinition Width="20*"></ColumnDefinition>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="270"></ColumnDefinition>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button  Grid.Column="0" x:Name="Btn_imageselect" Text="Photo" Clicked="Imageselect"/>
-                    <Entry  Grid.Column="1" x:Name="Messagetosend" ></Entry>
-                    <Button Grid.Column="2"  x:Name="Btn_SendMessage" Text="Send" Clicked="SendMessage" VerticalOptions="End" HorizontalOptions="End"/>
+                    <Editor Grid.Column="1" AutoSize="TextChanges"   x:Name="Messagetosend" MaxLength="300"></Editor>
+                <Button Grid.Column="2"  x:Name="Btn_SendMessage" Text="Send" Clicked="SendMessage" VerticalOptions="End" HorizontalOptions="End"/>
                 </Grid>
-            </StackLayout>
             <Image x:Name="ChosenImg" Grid.Row="3">
                 
             </Image>

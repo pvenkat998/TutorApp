@@ -245,7 +245,6 @@ namespace TutorApp2.Views
             {
                 // picture download success
                 string textbox = "w";
-                string check = "1";
                 try
                 {
 

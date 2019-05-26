@@ -5,22 +5,30 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="TutorApp2.Views.HomeDetail"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              Title="ホーム">
     <ContentPage.Content>
-          <Grid>
-            <Grid.RowDefinitions>
+        <Grid>
+            <Grid>
+                <ff:CachedImage x:Name="Gif" Source="resource://TutorApp2.Images.awa2.gif" Aspect="AspectFill" />
+
+                <Grid.RowDefinitions>
               <RowDefinition Height="93*"></RowDefinition>
               <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" x:Name="w" >
 
-              <Grid.RowDefinitions>
+
+                <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="90*"></RowDefinition>
               </Grid.RowDefinitions>
-              <Label Grid.Row="0" Text="Pahon"></Label>
-              <!--<Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
+                <Label Grid.Row="0" Text="Pahon"></Label>
+
+                <!--<Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
               <Grid Grid.Row="2" Padding="10,0,10,0" ColumnSpacing="10"> 
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*"></ColumnDefinition>
@@ -158,5 +166,7 @@
               </Grid>
 
             </Grid>
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Amazon.S3.Transfer;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,23 @@ namespace TutorApp2.Views
     {
         public ShowPost()
         {
+            App.CurrentPost.PostPicPath = "";
+            TransferUtilityDownloadRequest dlreq = new TransferUtilityDownloadRequest();
+
+            // subdirectory and bucket name
+            dlreq.BucketName = "tutorapp" + @"/" + "postpics";
+            dlreq.Key = App.CurrentPost.UID + "_" + "1.jpg"; //file name up in S3
+            dlreq.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.CurrentPost.UID + "_" + "1.jpg"); //local file name
+            try
+            {
+                App.s3utility.DownloadAsync(dlreq).ConfigureAwait(true);
+                App.CurrentPost.PostPicPath = dlreq.FilePath;
+            }
+            catch
+            {
+                App.CurrentPost.PostPicPath = "";
+
+            }
             BindingContext = App.CurrentPost;
             InitializeComponent();
             if (App.CurrentPost.Comments == null)
@@ -21,7 +40,7 @@ namespace TutorApp2.Views
             }
             else
             {
-                Comment.ItemsSource = App.CurrentPost.Comments;
+                Comment.ItemsSource = App.CurrentPost.Comments.Where(x => x.ParentCID == null || x.ParentCID=="" ).ToList();
             }
         }
         async void Updatecomments(object sender, EventArgs e)
@@ -82,7 +101,28 @@ namespace TutorApp2.Views
             Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
             // access first Label "name"  
             Grid InvisGrid = (Grid)ParentStackLayout.Children[3];
-            InvisGrid.IsVisible = true;
+            ListView SubCom = (ListView)ParentStackLayout.Children[4];
+            string CID = InvisGrid.BindingContext as string;
+
+            if (InvisGrid.IsVisible) { 
+            InvisGrid.IsVisible = false;
+                SubCom.IsVisible = false;
+            }
+            else
+            {
+                List<Comm> comlist = App.CurrentPost.Comments.Where(x => x.ParentCID == CID).ToList();
+                SubCom.ItemsSource = comlist;
+                InvisGrid.IsVisible = true;
+                if (comlist.Count == 0)
+                {
+                }
+                else
+                {
+                    SubCom.IsVisible = true;
+                }
+            }
+            //below is to display comments
+
         }
     }
 }

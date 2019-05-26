@@ -47,8 +47,8 @@
                                 TextColor="#503026" MaxLines="5"/>
             <Frame VerticalOptions="EndAndExpand" BackgroundColor="White" CornerRadius="10"  >
                         <StackLayout VerticalOptions="EndAndExpand">                                                                                                                                                                                                                                                                                                               
-                    <StackLayout Orientation="Horizontal" Spacing="-6">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="現在："
+                    <StackLayout Orientation="Horizontal" Spacing="0">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="現在:"
                                     />
                                 <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding bach_or_mast}"
                                     />
@@ -59,7 +59,7 @@
                                 <Label FontSize="19" Text="{Binding karui_major}" FontFamily="Yu Gothic"
                                      />
                     </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Spacing="-6">
+                            <StackLayout  Orientation="Horizontal" Spacing="0">
                         <!--<Label FontSize="19" Text="出身高校：">
                                 <Label.FontFamily>
                                     <OnPlatform x:TypeArguments="x:String">
@@ -69,23 +69,23 @@
                                     </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>-->
-                                <Label FontSize="19" Text="出身高校"></Label>
+                                <Label FontSize="19" Text="出身高校:"></Label>
                                 <Label FontSize="19" Text="{Binding high_school}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="-6">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="中学受験経験："></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="中学受験経験:"></Label>
                                 <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
                         </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="-6">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="指導可能期間："></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
+                                <Label FontSize="19" FontFamily="Yu Gothic" Text="指導可能期間:"></Label>
                                 <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="-6">
-                        <Label FontSize="19" Text="指導経験："></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
+                        <Label FontSize="19" Text="指導経験:"></Label>
                         <Label FontSize="19" Text="{Binding shidoukeiken}"></Label>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="-6">
-                        <Label FontSize="19" Text="最寄り駅："></Label>
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
+                        <Label FontSize="19" Text="最寄り駅:"></Label>
                         <Label FontSize="19" Text="{Binding station}"></Label>
                     </StackLayout>
                 </StackLayout>

@@ -15,6 +15,7 @@ using XLabs.Ioc;
 using XLabs.Platform.Device;
 using XLabs.Platform.Services;
 using Plugin.CurrentActivity;
+using FFImageLoading.Forms.Platform;
 
 namespace TutorApp2.Droid
 {
@@ -33,7 +34,7 @@ namespace TutorApp2.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
+            CachedImageRenderer.Init(true);
             #region Resolver Init
             SimpleContainer container = new SimpleContainer();
             container.Register<IDevice>(t => AndroidDevice.CurrentDevice);

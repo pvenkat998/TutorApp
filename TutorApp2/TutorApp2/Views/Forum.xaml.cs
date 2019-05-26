@@ -157,5 +157,20 @@ namespace TutorApp2.Views
             App.CurrentPost = k[0];
             await Navigation.PushModalAsync(new ShowPost());
         }
+        private async void OnTappedProf(object sender,EventArgs e)
+        {
+            TappedEventArgs eventargs = e as TappedEventArgs;
+            string te = eventargs.Parameter.ToString();
+            var item = (App.searchResponse.Single(r => r.email == te));
+            if (item == null)
+            {
+                App.tarprof = App.context.LoadAsync<App.userdata_v1>(te).Result;
+
+            }
+            else { 
+            App.tarprof = item;
+            }
+            await Navigation.PushModalAsync(new ProfilePage());
+        }
     }
 }

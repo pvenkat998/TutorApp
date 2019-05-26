@@ -144,7 +144,6 @@ namespace TutorApp2.Views
         public HomeDetail()
         {
             InitializeComponent();
-            w.BackgroundColor = Color.LightSteelBlue;
             //-----------------------BACKEND--------------------------      
             var client = new AmazonDynamoDBClient(App.credentials, App.region);
             DynamoDBContext context = new DynamoDBContext(client);

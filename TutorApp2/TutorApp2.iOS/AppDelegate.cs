@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
 using XLabs.Ioc;
@@ -34,7 +34,7 @@ namespace TutorApp2.iOS
             container.Register<IDevice>(t => AppleDevice.CurrentDevice);
             container.Register<IDisplay>(t => t.Resolve<IDevice>().Display);
             container.Register<INetwork>(t => t.Resolve<IDevice>().Network);
-
+            CachedImageRenderer.Init();
             Resolver.SetResolver(container.GetResolver());
             #endregion
             return base.FinishedLaunching(app, options);

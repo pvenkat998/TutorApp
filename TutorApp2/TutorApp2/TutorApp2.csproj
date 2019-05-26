@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <None Remove="Assets\MEIRYO.TTC" />
+    <None Remove="Images\awa.gif" />
+    <None Remove="Images\awa2.gif" />
+    <None Remove="Images\awa3.gif" />
     <None Remove="Images\download.png" />
     <None Remove="Images\downloadw.png" />
     <None Remove="Images\female.png" />
@@ -37,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images\awa2.gif" />
+    <EmbeddedResource Include="Images\awa.gif" />
+    <EmbeddedResource Include="Images\awa3.gif" />
     <EmbeddedResource Include="Images\downloadw.png" />
     <EmbeddedResource Include="Images\female.png" />
     <EmbeddedResource Include="Images\Forumicon.png" />
@@ -80,6 +86,10 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.1.1.1-beta" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.394984-pre10" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.11" />
     <PackageReference Include="XLabs.Forms" Version="2.3.0-pre05" />
