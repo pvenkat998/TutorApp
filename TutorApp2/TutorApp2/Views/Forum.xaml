@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             x:Class="TutorApp2.Views.Forum">
+             x:Class="TutorApp2.Views.Forum"
+             BackgroundColor="White">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -13,16 +14,16 @@
             <Label Text="Welcome to the FORUM"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="Btn_addpost" Text="Add New Post" Clicked="AddPost"/>
+            <Button x:Name="Btn_addpost" Text="Add New Post" BackgroundColor="LightGreen" Clicked="AddPost"/>
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                <StackLayout Padding="30">
+                <StackLayout Padding="0">
                     <ListView x:Name="listview" ItemsSource="{Binding .}" RowHeight="100" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
 
-                                        <Grid Grid.Column="0" BackgroundColor="LightGray">
+                                        <Grid Grid.Column="0" BackgroundColor="White">
                                             <Grid.ColumnDefinitions >
                                                 <ColumnDefinition Width="20*"></ColumnDefinition>
                                                 <ColumnDefinition Width="80*"></ColumnDefinition>

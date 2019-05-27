@@ -5,7 +5,7 @@
              xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
 
     <ContentPage.Content>
-        <Grid>
+        <Grid BackgroundColor="LightGreen">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="60*"></RowDefinition>

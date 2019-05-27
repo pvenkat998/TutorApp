@@ -9,14 +9,14 @@
             <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout Padding="10" Grid.Row="0" BackgroundColor="LightBlue">
-            <Label Text="This is the message page"/>
+        <StackLayout Padding="0" Grid.Row="0" >
+            <Label Text="Talk" FontSize="Large" HorizontalOptions="Center" BackgroundColor="LightGreen"/>
             <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
-                <ListView ItemsSource="{Binding .}" RowHeight="50">
+                <ListView ItemsSource="{Binding .}"  RowHeight="50">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <ViewCell >
                                     <Grid BackgroundColor="White" x:Name="{Binding Reciever}">
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
@@ -37,8 +37,8 @@
                                                             <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
-                                                        <Label Text="{Binding Reciever_Surname}" Font="Bold"  Grid.Column="0"  TextColor="#f35e20"  />
-                                                        <Label Text="{Binding TimeStamp}" HorizontalTextAlignment="End" Grid.Column="1" TextColor="Red" />
+                                                        <Label Text="{Binding Reciever_Surname}" Font="Bold"  Grid.Column="0"  TextColor="Black"  />
+                                                        <Label Text="{Binding TimeStamp}" HorizontalTextAlignment="End" Grid.Column="1" TextColor="Black" />
                                                     </Grid>
                                                     <Label Text="{Binding Text}" HorizontalOptions="Start"
                                                         TextColor="#f35e20" Grid.Row="1" />
