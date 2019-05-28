@@ -34,11 +34,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition> 
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
                 <Entry x:Name="comment" Grid.Row="0" ></Entry>
-                <Button Grid.Row="1" Text="投稿する" Clicked="Updatecomments"></Button>
-                <Label Grid.Row="2" x:Name="Commentstatus"></Label>
+                    <Button Grid.Row="1" Text="投稿する" Clicked="Updatecomments"></Button>
+                    <Button Grid.Row="2" Text="image select"  Clicked="ImageselectCom"></Button>
+                    <Image Grid.Row="3" x:Name="image"></Image>
+                    <Label Grid.Row="4" x:Name="Commentstatus"></Label>
             </Grid>
             <ListView x:Name="Comment" Grid.Row="5"  HasUnevenRows="True" >
 
@@ -53,20 +57,27 @@
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
                                         <Label Grid.Row="1" Text="{Binding Comment}"></Label>
-                                        <Button Grid.Row="2" Font="10" Text="see replies" Clicked="ShowReplies"></Button>
-                                        <Grid RowSpacing="0" Grid.Row="3" IsVisible="False" BindingContext="{Binding CID}">
+                                        <Image Grid.Row="2" Source="{Binding CommentPicPath}"></Image>
+
+                                        <Button Grid.Row="3" Font="10" Text="see replies" Clicked="ShowReplies"></Button>
+                                        <Grid RowSpacing="0" Grid.Row="4" IsVisible="False" BindingContext="{Binding CID}">
                                             <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO"></RowDefinition>
+                                                <RowDefinition Height="AUTO"></RowDefinition>
                                                 <RowDefinition Height="AUTO"></RowDefinition>
                                                 <RowDefinition Height="AUTO"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <Entry  Grid.Row="0"  ></Entry>
                                             <Button  Grid.Row="1" Text="投稿する" Clicked="Updatesubcomments" BindingContext="{Binding .}"></Button>
+                                            <Button Grid.Row="2" Text="subcom image select"  Clicked="ImageselectSubcom"></Button>
+                                            <Image Grid.Row="3"></Image>
                                         </Grid>
                                             <!--> Above is just to write subcomment/ Below is to display subcomments<-->
-                                        <ListView  Grid.Row="4" IsVisible="False" HasUnevenRows="True" >
+                                        <ListView  Grid.Row="5" IsVisible="False" HasUnevenRows="True" >
 
                                             <ListView.ItemTemplate>
                                                 <DataTemplate>
@@ -76,9 +87,12 @@
                                                                 <Grid.RowDefinitions>
                                                                     <RowDefinition Height="Auto" ></RowDefinition>
                                                                     <RowDefinition Height="Auto"></RowDefinition>
+                                                                    <RowDefinition Height="Auto"></RowDefinition>
                                                                 </Grid.RowDefinitions>
                                                                 <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
-                                                                <Label Grid.Row="1" Text="{Binding Comment}"></Label>
+                                                                <Label Grid.Row="1" Text="{Binding Comment}"></Label>                                                                  <Label Grid.Row="1" Text="{Binding Comment}"></Label>                                                                <Label Grid.Row="1" Text="{Binding Comment}"></Label>
+                                                                <Image Grid.Row="2" Source="{Binding CommentPicPath}"></Image>
+
                                                             </Grid>
                                                         </ViewCell.View>
                                                     </ViewCell>

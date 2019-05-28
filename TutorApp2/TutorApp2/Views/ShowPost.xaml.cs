@@ -1,4 +1,8 @@
 ﻿using Amazon.S3.Transfer;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +18,9 @@ namespace TutorApp2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShowPost : ContentPage
     {
+        string uppath = "";
+        string uppathsc = "";
+
         public ShowPost()
         {
             App.CurrentPost.PostPicPath = "";
@@ -40,12 +47,30 @@ namespace TutorApp2.Views
             }
             else
             {
-                Comment.ItemsSource = App.CurrentPost.Comments.Where(x => x.ParentCID == null || x.ParentCID=="" ).ToList();
+                List<Comm> worklist = App.CurrentPost.Comments.Where(x => x.ParentCID == null || x.ParentCID == "").ToList();
+                dlreq.BucketName = "tutorapp" + @"/" + "postpics" + @"/"+"commentpics";
+                // choose to load all images or just images in comm but not subcomm 
+                int i;
+                for ( i=0;i< worklist.Count();i++){
+                    dlreq.Key = worklist[i].CID + "_" + "1.jpg"; //file name up in S3
+                    dlreq.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), worklist[i].CID + "_" + "1.jpg"); //local file name
+                    try
+                    {
+                        App.s3utility.DownloadAsync(dlreq).ConfigureAwait(true);
+                        worklist[i].CommentPicPath = dlreq.FilePath;
+                    }
+                    catch
+                    {
+                        worklist[i].CommentPicPath = "";
+
+                    }
+                }
+                Comment.ItemsSource = worklist;
             }
         }
         async void Updatecomments(object sender, EventArgs e)
         {
-            string x = Guid.NewGuid().ToString();
+            string x = Guid.NewGuid().ToString() + Guid.NewGuid().ToString();
             if (App.CurrentPost.Comments == null)
             {
                 var com = new List<Comm>();
@@ -56,6 +81,19 @@ namespace TutorApp2.Views
             {
                 App.CurrentPost.Comments.Add(new Comm { CID = x, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = comment.Text });
 
+            }
+            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
+            uprequest.BucketName = "tutorapp" + @"/" + "postpics" + @"/" + "commentpics";
+            uprequest.Key = x + "_" + "1.jpg"; //file name up in S3
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), x + "_" + "1.jpg"); //local file name
+            try
+            {
+                uprequest.FilePath = uppath;
+                await App.s3utility.UploadAsync(uprequest);
+            }
+            catch
+            {
+                Console.WriteLine(x + "no pic");
             }
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
@@ -74,7 +112,7 @@ namespace TutorApp2.Views
             Entry Subcommentlabel = (Entry)ParentStackLayout.Children[0];
             string subcomment = Subcommentlabel.Text;
             Console.WriteLine(subcomment);
-            string x = Guid.NewGuid().ToString();
+            string x = Guid.NewGuid().ToString() + Guid.NewGuid().ToString() + Guid.NewGuid().ToString();
             Console.WriteLine("==1==");
             Console.WriteLine(App.cur_user.email);
             if (App.CurrentPost.Comments == null)
@@ -88,20 +126,32 @@ namespace TutorApp2.Views
                 App.CurrentPost.Comments.Add(new Comm { CID = x, ParentCID=te, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = subcomment });
 
             }
-            Console.WriteLine("==5==");
+            TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
+            uprequest.BucketName = "tutorapp" + @"/" + "postpics" + @"/" + "subcommentpics";
+            uprequest.Key = x + "_" + "1.jpg"; //file name up in S3
+            uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), x + "_" + "1.jpg"); //local file name
+            try
+            {
+                uprequest.FilePath = uppathsc;
+                await App.s3utility.UploadAsync(uprequest);
+            }
+            catch
+            {
+                Console.WriteLine(x + "no pic");
+            }
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
             Commentstatus.Text = "";
         }
-        void ShowReplies(object sender, EventArgs e)
+        async void ShowReplies(object sender, EventArgs e)
         {
 
             var buttonClickHandler = (Button)sender;
             // access Parent Layout for Button  
             Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
             // access first Label "name"  
-            Grid InvisGrid = (Grid)ParentStackLayout.Children[3];
-            ListView SubCom = (ListView)ParentStackLayout.Children[4];
+            Grid InvisGrid = (Grid)ParentStackLayout.Children[4];
+            ListView SubCom = (ListView)ParentStackLayout.Children[5];
             string CID = InvisGrid.BindingContext as string;
 
             if (InvisGrid.IsVisible) { 
@@ -110,10 +160,29 @@ namespace TutorApp2.Views
             }
             else
             {
-                List<Comm> comlist = App.CurrentPost.Comments.Where(x => x.ParentCID == CID).ToList();
-                SubCom.ItemsSource = comlist;
+                List<Comm> worklist = App.CurrentPost.Comments.Where(x => x.ParentCID == CID).ToList();
+                TransferUtilityDownloadRequest dlreq = new TransferUtilityDownloadRequest();
+                dlreq.BucketName = "tutorapp" + @"/" + "postpics" + @"/"+"subcommentpics";
+                int i;
+                for ( i=0;i< worklist.Count();i++){
+                    File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), worklist[i].CID + "_" + "1.jpg"));
+                    dlreq.Key = worklist[i].CID + "_" + "1.jpg"; //file name up in S3
+                    dlreq.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), worklist[i].CID + "_" + "1.jpg"); //local file name
+                    try
+                    {
+                        await App.s3utility.DownloadAsync(dlreq).ConfigureAwait(true);
+                        worklist[i].CommentPicPath = dlreq.FilePath;
+                        Console.WriteLine("====picdl===");                    }
+                    catch
+                    {
+                        worklist[i].CommentPicPath = "";
+                        Console.WriteLine("====nopicdl===");
+
+                    }
+                }
+                SubCom.ItemsSource = worklist;
                 InvisGrid.IsVisible = true;
-                if (comlist.Count == 0)
+                if (worklist.Count == 0)
                 {
                 }
                 else
@@ -121,8 +190,94 @@ namespace TutorApp2.Views
                     SubCom.IsVisible = true;
                 }
             }
-            //below is to display comments
+            
 
         }
+        private async void ImageselectCom(object sender, EventArgs e)
+        {   //gallery call
+            uppath = "";
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    CompressionQuality = 92
+                });
+
+                if (file == null)
+                    return;
+
+                uppath = file.Path;
+                image.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+
+        }
+        private async void ImageselectSubcom(object sender, EventArgs e)
+        {   //gallery call
+            uppathsc = "";
+            var buttonClickHandler = (Button)sender;
+            Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
+
+            await CrossMedia.Current.Initialize();
+            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
+                cameraStatus = results[Permission.Camera];
+                storageStatus = results[Permission.Storage];
+            }
+
+            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+            {
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+                {
+                    CompressionQuality = 92
+                });
+
+                if (file == null)
+                    return;
+
+                uppathsc = file.Path;
+                Image img = (Image)ParentStackLayout.Children[3];
+                img.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
+                //On iOS you may want to send your user to the settings screen.
+                CrossPermissions.Current.OpenAppSettings();
+            }
+
+        }
+
+        //below is to display comments
     }
 }

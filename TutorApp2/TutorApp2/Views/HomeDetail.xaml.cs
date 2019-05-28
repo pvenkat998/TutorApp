@@ -238,7 +238,6 @@ namespace TutorApp2.Views
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
             b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
-
         }
         void Logout(object sender, EventArgs e)
         {
@@ -256,10 +255,12 @@ namespace TutorApp2.Views
             //Navigation.PushPopupAsync(new LoadingPage());
             Navigation.PushModalAsync(new HomeDetail2());
             //Navigation.PopAllPopupAsync();
+            Navigation.PushModalAsync(new ForumMessageTabPage());
         }
         void b3c(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Forum());
+            Navigation.PushModalAsync(new ForumMessageTabPage());
         }
         void b4c(object sender, EventArgs e)
         {

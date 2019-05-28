@@ -24,6 +24,7 @@ namespace TutorApp2.Models
     public class Comm
     {
         public string CID { get; set; }
+        public string CommentPicPath { get; set; }
         public string CommentorName { get; set; }
         public string CommentorEmail { get; set; }
         public string Comment { get; set; }
