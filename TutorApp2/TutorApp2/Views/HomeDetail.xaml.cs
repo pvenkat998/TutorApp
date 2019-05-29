@@ -20,6 +20,7 @@ using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Pages;
 using static TutorApp2.App;
+using ImageCircle.Forms.Plugin.Abstractions;
 
 namespace TutorApp2.Views
 {
@@ -238,6 +239,21 @@ namespace TutorApp2.Views
             b2.Source = ImageSource.FromResource("TutorApp2.Images.Mailicon.png");
             b3.Source = ImageSource.FromResource("TutorApp2.Images.Forumicon.png");
             b4.Source = ImageSource.FromResource("TutorApp2.Images.Profileicon.png");
+        }
+        async void Move(object sender, EventArgs e)
+        {
+            Console.WriteLine("==move called=");
+            var buttonClickHandler = (Button)sender;
+            Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
+            CircleImage img = (CircleImage)ParentStackLayout.Children[0];
+            //Image img = (Image)((Grid)((ViewCell)listview.Children[0]).Children[0]).Children[0];
+            //ListView listview = w.FindByName<ListView>("listview");
+            //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
+
+            Console.WriteLine("==22                 S called=");
+            List<Task> transition = new List<Task>();
+            transition.Add(img.TranslateTo(0, img.TranslationY-100,2000));
+            await Task.WhenAll(transition);
         }
         void Logout(object sender, EventArgs e)
         {

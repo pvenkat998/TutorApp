@@ -11,8 +11,9 @@
              Title="ホーム">
     <ContentPage.Content>
         <Grid>
+            <ff:CachedImage x:Name="Gif" Source="resource://TutorApp2.Images.awa2.gif" Aspect="AspectFill" />
+
             <Grid>
-                <ff:CachedImage x:Name="Gif" Source="resource://TutorApp2.Images.awa2.gif" Aspect="AspectFill" />
 
                 <Grid.RowDefinitions>
               <RowDefinition Height="93*"></RowDefinition>
@@ -26,9 +27,9 @@
                 <RowDefinition Height="10*"></RowDefinition>
                 <RowDefinition Height="90*"></RowDefinition>
               </Grid.RowDefinitions>
-                <Label Grid.Row="0" Text="Pahon"></Label>
 
-                <!--<Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
+                    <!-- <Label Grid.Row="0" Text="Pahon"></Label>
+                <Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
               <Grid Grid.Row="2" Padding="10,0,10,0" ColumnSpacing="10"> 
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*"></ColumnDefinition>
@@ -86,9 +87,8 @@
                               <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
                               </Grid.GestureRecognizers>
-                              <StackLayout Grid.Row="0" >
 
-                                <plugin:CircleImage
+                                                        <plugin:CircleImage Grid.Row="0" 
                         HeightRequest="150"
                         WidthRequest="150"
                         BorderThickness="0"
@@ -97,8 +97,10 @@
                                     Source="{Binding image}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"/>
-                              </StackLayout>
-                              <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
+                                                    <Image Grid.Row="1" 
+                                    Source="{Binding image}"></Image>
+                                                    <Button Grid.Row="2" Text="Move" Clicked="Move"></Button>
+                                                    <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
                                                 <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
                                             </StackLayout>-->
                             
