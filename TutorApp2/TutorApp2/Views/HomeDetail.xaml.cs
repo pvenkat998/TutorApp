@@ -139,8 +139,10 @@ namespace TutorApp2.Views
                     }
                 }
             }
+
             listteachlistsub=listteachlistsub.Distinct().ToList();
-            listview.ItemsSource = listteachlistsub;
+            pic1.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlistsub[0].email.ToString() + "_dp.jpg");
+            //  listview.ItemsSource = listteachlistsub;
         }
         public HomeDetail()
         {
@@ -250,7 +252,7 @@ namespace TutorApp2.Views
             //ListView listview = w.FindByName<ListView>("listview");
             //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
 
-            Console.WriteLine("==22                 S called=");
+            Console.WriteLine("==22S called=");
             List<Task> transition = new List<Task>();
             transition.Add(img.TranslateTo(0, img.TranslationY-100,2000));
             await Task.WhenAll(transition);
