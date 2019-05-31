@@ -7,7 +7,6 @@
              x:Class="TutorApp2.Views.HomeDetail"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:ffTransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              Title="ホーム">
     <ContentPage.Content>
         <Grid>
@@ -28,8 +27,8 @@
                 <RowDefinition Height="90*"></RowDefinition>
               </Grid.RowDefinitions>
 
-                    <!-- <Label Grid.Row="0" Text="Pahon"></Label>
-                <Button Grid.Row="0" Text="Logout" Clicked="Logout"></Button>-->
+                    <!-- <Label Grid.Row="0" Text="Pahon"></Label>-->
+                   <Button Grid.Row="0" Text="Move" Clicked="Move"></Button>
               <Grid Grid.Row="2" Padding="10,0,10,0" ColumnSpacing="10"> 
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*"></ColumnDefinition>
@@ -67,7 +66,7 @@
                                                     
                               <StackLayout Grid.Row="0" >
                                                         <StackLayout.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
+                                                            <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="aa"/>
                                                         </StackLayout.GestureRecognizers>
                                                         <plugin:CircleImage
                                 HeightRequest="150"  x:Name="pic1" 
@@ -75,12 +74,12 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="Start"
                                 VerticalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Row="1"   >
                                 <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
+                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="aa"/>
                                 </StackLayout.GestureRecognizers>
                                 <plugin:CircleImage
                                 HeightRequest="150" x:Name="pic2"
@@ -88,12 +87,12 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="Start"
                                 VerticalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Row="2"   >
                                 <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding email}"/>
+                                    <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="aa"/>
                                 </StackLayout.GestureRecognizers>
                                 <plugin:CircleImage x:Name="pic3"
                                 HeightRequest="150"
@@ -101,7 +100,7 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="Start"
                                 VerticalOptions="Center"/>
                             </StackLayout>
 

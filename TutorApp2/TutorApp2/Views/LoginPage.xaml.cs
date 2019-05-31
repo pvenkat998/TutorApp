@@ -216,7 +216,7 @@ namespace TutorApp2.Views
                 CrossPermissions.Current.OpenAppSettings();
             }
         }
-        void LOGIN()
+        async void LOGIN()
         {
             AWSConfigs.AWSRegion = "APNortheast1";
 
@@ -275,9 +275,10 @@ namespace TutorApp2.Views
                 {
                     var prop= Application.Current.Properties;
                     prop["username"] = Entry_Username.Text.ToString();
-                    prop["password"] = Entry_Password.Text.ToString(); Application.Current.SavePropertiesAsync();
+                    prop["password"] = Entry_Password.Text.ToString();
+                    await Application.Current.SavePropertiesAsync();
                     System.Diagnostics.Debug.WriteLine("=====HEY========");
-                    Navigation.PushModalAsync(new HomeDetail());
+                    await Navigation.PushModalAsync(new HomeDetail());
                 }
                 else
                 {

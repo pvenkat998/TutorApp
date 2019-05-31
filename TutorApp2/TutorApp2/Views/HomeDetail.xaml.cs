@@ -141,7 +141,6 @@ namespace TutorApp2.Views
             }
 
             listteachlistsub=listteachlistsub.Distinct().ToList();
-            pic1.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlistsub[0].email.ToString() + "_dp.jpg");
             //  listview.ItemsSource = listteachlistsub;
         }
         public HomeDetail()
@@ -232,6 +231,9 @@ namespace TutorApp2.Views
                 }
             }
             BindingContext = listteachlist;
+            pic1.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[0].email.ToString() + "_dp.jpg");
+            pic2.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[1].email.ToString() + "_dp.jpg");
+            pic3.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[2].email.ToString() + "_dp.jpg");
 
             //-----------------------------------FRONTEND-----------------------
             i1.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
@@ -244,17 +246,22 @@ namespace TutorApp2.Views
         }
         async void Move(object sender, EventArgs e)
         {
+            await pic1.TranslateTo(0, pic1.TranslationY);
+            await pic2.TranslateTo(0, pic2.TranslationY);
+            await pic3.TranslateTo(0, pic3.TranslationY);
             Console.WriteLine("==move called=");
             var buttonClickHandler = (Button)sender;
             Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
-            CircleImage img = (CircleImage)ParentStackLayout.Children[0];
-            //Image img = (Image)((Grid)((ViewCell)listview.Children[0]).Children[0]).Children[0];
+            //CircleImage img = (CircleImage)ParentStackLayout.Children[0];
+            //Image img = (Image)((Grid)((ViewCell)listview.Children0]).Children[0]).Children[0];
             //ListView listview = w.FindByName<ListView>("listview");
             //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
 
             Console.WriteLine("==22S called=");
             List<Task> transition = new List<Task>();
-            transition.Add(img.TranslateTo(0, img.TranslationY-100,2000));
+            transition.Add(pic1.TranslateTo(pic1.TranslationX + 300, pic1.TranslationY + 100, 10000));
+            transition.Add(pic2.TranslateTo(pic1.TranslationX + 300, pic2.TranslationY + 100, 10000));
+            transition.Add(pic3.TranslateTo(pic1.TranslationX + 300, pic3.TranslationY + 100, 10000));
             await Task.WhenAll(transition);
         }
         void Logout(object sender, EventArgs e)
