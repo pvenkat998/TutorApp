@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="TutorApp2.Views.Forum" Title="Forum"
              BackgroundColor="White">
     <ContentPage.Content>
@@ -11,9 +12,6 @@
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
-            <Label Text="Welcome to the FORUM"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
             <Button x:Name="Btn_addpost" Text="Add New Post" BackgroundColor="LightGreen" Clicked="AddPost"/>
             <ScrollView Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand">
 
@@ -28,23 +26,21 @@
                                                 <ColumnDefinition Width="20*"></ColumnDefinition>
                                                 <ColumnDefinition Width="80*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Aspect="Fill" Source="{Binding PosterPicPath}">
+                                            <plugin:CircleImage Grid.Column="0" Aspect="Fill" Source="{Binding PosterPicPath}">
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnTappedProf" CommandParameter="{Binding PosterEmail}"/>
                                                 </Image.GestureRecognizers>
-                                            </Image>
+                                            </plugin:CircleImage>
                                             <Grid Grid.Column="1">
                                                 <Grid.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="OnTapped3" CommandParameter="{Binding UID}"/>
                                                 </Grid.GestureRecognizers>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="50*"></RowDefinition>
-                                                    <RowDefinition Height="30*"></RowDefinition>
-                                                    <RowDefinition Height="20*"></RowDefinition>
+                                                    <RowDefinition Height="50*"></RowDefinition>
                                                 </Grid.RowDefinitions>
                                                 <Label Font="20,Bold" TextColor="Black" Grid.Row="0" Text="{Binding Title}"></Label>
                                                 <Label Grid.Row="1" Text="{Binding PosterName}"></Label>
-                                                <Label Grid.Row="2" Text="{Binding PostTime}"></Label>
                                             </Grid>
                                         </Grid>
                                 </ViewCell>

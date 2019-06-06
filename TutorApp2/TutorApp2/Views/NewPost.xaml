@@ -5,41 +5,36 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0"   >
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="30*"></ColumnDefinition>
-                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Back" Grid.Column="0" Clicked="Back"
-                                                            HorizontalOptions="Center"
-                                                    TextColor="#f35e20" />
-                <Label Text="NEW POST" Grid.Column="1"
-                                                            HorizontalOptions="Center"
-                                                    TextColor="#f35e20" />
-                <Button Text="NEW POST" Grid.Column="2" Clicked="NewPost1"
-                                                            HorizontalOptions="Center"
-                                                    TextColor="#f35e20" />
+                <Button TextColor="Black" Text="投稿" Grid.Column="0" Clicked="NewPost1" BackgroundColor="White"
+                                                            HorizontalOptions="Start"
+                                                    />
             </Grid>
-            <StackLayout Grid.Row="1">
-                <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>
+            <!--<StackLayout Grid.Row="1">
                 <Button x:Name="Btn_imageselect" Text="Pick Image" Clicked="Imageselect"/>
+            </StackLayout>-->
 
-            </StackLayout>
-            <StackLayout Grid.Row="2" Orientation="Horizontal"  >
+            <StackLayout Grid.Row="2" Orientation="Horizontal" >
+                <Label Text="タイトル"></Label>
                 <Entry x:Name="PostTitle"  HorizontalOptions="FillAndExpand"
                                                     TextColor="#f35e20" />
             </StackLayout>
-            <StackLayout Grid.Row="3" Orientation="Horizontal"  >
-                <Entry x:Name="PostCont" HorizontalOptions="FillAndExpand"
+            <StackLayout Grid.Row="3" Orientation="Horizontal" HeightRequest="200" >
+                <Editor x:Name="PostCont" HorizontalOptions="FillAndExpand" Placeholder="内容" PlaceholderColor="LightGreen" AutoSize="TextChanges" 
                                                         TextColor="#503026" />
+            </StackLayout>
+            <StackLayout Grid.Row="4">
+                <ImageButton x:Name="Btn_imageselect" HorizontalOptions="Center"  HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"  Clicked="Imageselect"></ImageButton>
             </StackLayout>
             <StackLayout Grid.Row="4" Orientation="Horizontal"  >
                 <Image x:Name="image" HeightRequest="200" Aspect="AspectFit" ></Image>

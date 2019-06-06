@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="TutorApp2.Views.HomeDetail2"
              Title="Detail">
     <Grid>
@@ -9,15 +10,14 @@
             <RowDefinition Height="90*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout Padding="0" Grid.Row="0" >
-            <Label Text="Talk" FontSize="Large" HorizontalOptions="Center" BackgroundColor="LightGreen"/>
+        <StackLayout Padding="0" Grid.Row="0" BackgroundColor="LightGreen">
             <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
 
                 <ListView ItemsSource="{Binding .}"  RowHeight="50">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell >
-                                    <Grid BackgroundColor="White" x:Name="{Binding Reciever}">
+                                <Grid BackgroundColor="White" x:Name="{Binding Reciever}" >
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
                                         </Grid.GestureRecognizers>
@@ -26,7 +26,14 @@
                                                 <ColumnDefinition Width="15*"></ColumnDefinition>
                                                 <ColumnDefinition Width="85*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Image Source="{Binding Rec_ImageSrc}" Grid.Column="0"/>
+                                    <plugin:CircleImage 
+                                        HeightRequest="45"
+                                        WidthRequest="45"
+                                        BorderThickness="0"
+                                        BorderColor="#03A9F4"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" Source="{Binding Rec_ImageSrc}" Grid.Column="0"/>
                                                 <Grid Grid.Column="1">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="AUTO"></RowDefinition>
@@ -37,11 +44,10 @@
                                                             <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                                         </Grid.ColumnDefinitions>
-                                                        <Label Text="{Binding Reciever_Surname}" Font="Bold"  Grid.Column="0"  TextColor="Black"  />
-                                                        <Label Text="{Binding TimeStamp}" HorizontalTextAlignment="End" Grid.Column="1" TextColor="Black" />
+                                            <Label FontSize="15" FontFamily="Yu Gothic" Text="{Binding Reciever_Surname}" Font="Bold"  Grid.Column="0"  TextColor="Black"  />
                                                     </Grid>
                                                     <Label Text="{Binding Text}" HorizontalOptions="Start"
-                                                        TextColor="#f35e20" Grid.Row="1" />
+                                                       FontSize="13" TextColor="#f35e20" Grid.Row="1" />
                                                 </Grid>
                                     </Grid>
                                 </ViewCell>

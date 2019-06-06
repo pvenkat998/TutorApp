@@ -14,9 +14,9 @@ using Xamarin.Forms.Xaml;
 namespace TutorApp2.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfilePage : ContentPage
+	public partial class ProfilePageOld : ContentPage
 	{
-        public ProfilePage()
+        public ProfilePageOld()
         {
             if (App.tarprof.email == App.cur_user.email)
             {
@@ -49,8 +49,8 @@ namespace TutorApp2.Views
             BindingContext = App.tarprof;
 
             InitializeComponent();
-            //w.LowerChild(canvasView);
-            image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "dummy1@example.com" + "_dp.jpg");
+            w.LowerChild(canvasView);
+            image.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.tarprof.email.ToString() + "_dp.jpg");
             if (App.tarprof.gender == "男") { 
             //image2.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
             }
@@ -87,7 +87,7 @@ namespace TutorApp2.Views
         void b4c(object sender, EventArgs e)
         {
             App.tarprof.email = App.cur_user.email;
-            Navigation.PushModalAsync(new ProfilePage());
+            Navigation.PushModalAsync(new ProfilePageOld());
         }
         void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs arg)
         {

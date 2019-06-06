@@ -10,57 +10,61 @@
                 <RowDefinition Height="93*"></RowDefinition>
                 <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid x:Name="w" Grid.Row="0">
-            <skia:SKCanvasView x:Name="canvasView"
+            <Grid x:Name="w" Grid.Row="0" BackgroundColor="White">
+                <!--<skia:SKCanvasView x:Name="canvasView"
                            VerticalOptions="FillAndExpand"
-                           PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>
-            <StackLayout Padding="40,75,40,20" x:Name="we">
+                           PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>-->
+                <Grid BackgroundColor="LightGreen">
+                    <Frame HeightRequest="200" WidthRequest="200" CornerRadius="100" HorizontalOptions="Center" VerticalOptions="Start" Margin="-140,80,0,0" Padding="0" BackgroundColor="Maroon">
+                        <Image HeightRequest="200" WidthRequest="200" x:Name="image" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Start" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="-280,330,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="-100,320,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
 
-                    <plugin:CircleImage
-                                        x:Name="image"
-                                        HeightRequest="170"
-                                        WidthRequest="170"
-                                        BorderThickness="0"
-                                        BorderColor="#03A9F4"
-                                        Aspect="AspectFill"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="MsgRdr" />
-                        </Image.GestureRecognizers>
-                    </plugin:CircleImage>
-                        <StackLayout  HorizontalOptions="Center" Orientation="Horizontal"  HeightRequest="30">
-            <Label Text="熊澤克也" FontSize="19"
-                                TextColor="DarkBlue" 
-                                         />
-                        <!--<plugin:CircleImage
-                                        x:Name="image2"
-                                        BorderThickness="0"
-                                        BorderColor="#03A9F4"
-                                        Aspect="AspectFill"
-                                        >
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="40,310,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
 
-                        </plugin:CircleImage>-->
-                    </StackLayout>
-            <Label FontSize="19" Text="{Binding hitokoto}" 
-                                TextColor="#503026" MaxLines="5"/>
-            <Frame VerticalOptions="EndAndExpand" BackgroundColor="White" CornerRadius="10"  >
-                        <StackLayout VerticalOptions="EndAndExpand">                                                                                                                                                                                                                                                                                                               
-                    <StackLayout Orientation="Horizontal" Spacing="0">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="現在:"
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="120,260,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
+                            <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="170,200,0,00" Padding="0,0,0,0"  BackgroundColor="Black">
+                            <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Frame>
+
+                    <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="200,140,0,0" Padding="0" BackgroundColor="Black">
+                        <Label Text="{Binding high_school}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="210,80,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
+                        <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <!--<Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="220,250,0,0" Padding="0" BackgroundColor="Black">
+                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="230,200,0,0" Padding="0" BackgroundColor="Black">
+                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>-->
+                </Grid>
+                <Frame  VerticalOptions="EndAndExpand" BackgroundColor="White" CornerRadius="10"  >
+                    <StackLayout VerticalOptions="EndAndExpand">
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <Label TextColor="Black"   FontSize="19" FontFamily="Yu Gothic" Text="現在:"
                                     />
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding bach_or_mast}"
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="{Binding bach_or_mast}"
                                     />
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding gakunen}"
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="{Binding gakunen}"
                                     />
-                                <Label FontSize="19" Text="年" FontFamily="Yu Gothic"
+                            <Label TextColor="Black"  FontSize="19" Text="年" FontFamily="Yu Gothic"
                                     />
-                                <Label FontSize="19" Text="{Binding karui_major}" FontFamily="Yu Gothic"
+                            <Label TextColor="Black"  FontSize="19" Text="{Binding karui_major}" FontFamily="Yu Gothic"
                                      />
-                    </StackLayout>
-                            <StackLayout  Orientation="Horizontal" Spacing="0">
-                        <!--<Label FontSize="19" Text="出身高校：">
+                        </StackLayout>
+                        <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <!--<Label FontSize="19" Text="出身高校：">
                                 <Label.FontFamily>
                                     <OnPlatform x:TypeArguments="x:String">
                                         <On Platform="iOS" Value="Lobster-Regular" />
@@ -69,29 +73,29 @@
                                     </OnPlatform>
                                     </Label.FontFamily>
                                 </Label>-->
-                                <Label FontSize="19" Text="出身高校:"></Label>
-                                <Label FontSize="19" Text="{Binding high_school}"></Label>
-                    </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="0">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="中学受験経験:"></Label>
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
+                            <Label TextColor="Black"  FontSize="19" Text="出身高校:"></Label>
+                            <Label TextColor="Black"  FontSize="19" Text="{Binding high_school}"></Label>
                         </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="0">
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="指導可能期間:"></Label>
-                                <Label FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
+                        <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="中学受験経験:"></Label>
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
+                        </StackLayout>
+                        <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="指導可能期間:"></Label>
+                            <Label TextColor="Black"  FontSize="19" FontFamily="Yu Gothic" Text="{Binding chuugaku_juken}"></Label>
+                        </StackLayout>
+                        <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <Label TextColor="Black"  FontSize="19" Text="指導経験:"></Label>
+                            <Label TextColor="Black"  FontSize="19" Text="{Binding shidoukeiken}"></Label>
+                        </StackLayout>
+                        <StackLayout  Orientation="Horizontal" Spacing="0">
+                            <Label TextColor="Black"  FontSize="19" Text="最寄り駅:"></Label>
+                            <Label TextColor="Black"  FontSize="19" Text="{Binding station}"></Label>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="0">
-                        <Label FontSize="19" Text="指導経験:"></Label>
-                        <Label FontSize="19" Text="{Binding shidoukeiken}"></Label>
-                    </StackLayout>
-                    <StackLayout  Orientation="Horizontal" Spacing="0">
-                        <Label FontSize="19" Text="最寄り駅:"></Label>
-                        <Label FontSize="19" Text="{Binding station}"></Label>
-                    </StackLayout>
-                </StackLayout>
-            </Frame>
-            </StackLayout>
-        </Grid>
+                </Frame>
+
+            </Grid>
 
             <Grid Grid.Row="1" ColumnSpacing="-6">
                 <Grid.ColumnDefinitions>

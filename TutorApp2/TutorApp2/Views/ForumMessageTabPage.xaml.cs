@@ -14,8 +14,8 @@ namespace TutorApp2.Views
     {
         public ForumMessageTabPage()
         {
-            Children.Add(new Forum());
             Children.Add(new HomeDetail2());
+            Children.Add(new Forum());
             InitializeComponent();
 
         }

@@ -22,6 +22,7 @@
     <None Remove="Images\awa.gif" />
     <None Remove="Images\awa2.gif" />
     <None Remove="Images\awa3.gif" />
+    <None Remove="Images\choosepic.png" />
     <None Remove="Images\download.png" />
     <None Remove="Images\downloadw.png" />
     <None Remove="Images\female.png" />
@@ -43,6 +44,7 @@
     <EmbeddedResource Include="Images\awa2.gif" />
     <EmbeddedResource Include="Images\awa.gif" />
     <EmbeddedResource Include="Images\awa3.gif" />
+    <EmbeddedResource Include="Images\choosepic.png" />
     <EmbeddedResource Include="Images\downloadw.png" />
     <EmbeddedResource Include="Images\female.png" />
     <EmbeddedResource Include="Images\Forumicon.png" />
@@ -160,6 +162,9 @@
   <ItemGroup>
     <Compile Update="Views\HomeMenuItem.cs">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProfilePageOld.xaml.cs">
+      <DependentUpon>ProfilePageOld.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

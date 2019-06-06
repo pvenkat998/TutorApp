@@ -24,6 +24,7 @@ namespace TutorApp2.Views
         public NewPost ()
 		{
             InitializeComponent ();
+            Btn_imageselect.Source= ImageSource.FromResource("TutorApp2.Images.choosepic.png");
         }
         void Back(object sender,EventArgs e)
         {
