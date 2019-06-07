@@ -33,7 +33,7 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
-                                    <StackLayout IsVisible="{Binding IsIncoming}">
+                                    <Grid IsVisible="{Binding IsIncoming}">
                                             <Grid IsVisible="{Binding IsText}">
                                                 <Grid.ColumnDefinitions WidthRequest="100"  HeightRequest="50">
                                                 <ColumnDefinition Width="50"></ColumnDefinition>
@@ -81,8 +81,8 @@
                                                 </plugin:CircleImage>                                                <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
                 
                                             </Grid>
-                                        </StackLayout>  
-                                    <StackLayout IsVisible="{Binding IsOutgoing}">
+                                        </Grid>  
+                                    <Grid IsVisible="{Binding IsOutgoing}">
                                             <Grid IsVisible="{Binding IsText}" WidthRequest="100"  HeightRequest="50">
                                             <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -93,7 +93,7 @@
                                                 <Label   HorizontalOptions="End" VerticalOptions="Center" Grid.Column="2" TextColor="Blue" Text="{Binding Text}"  ></Label>
                                             </Grid>
                                             <Image HeightRequest="250" WidthRequest="250" IsVisible="{Binding IsPic}" HorizontalOptions="End" Source="{Binding MsgPicSrc}"></Image>
-                                        </StackLayout>
+                                        </Grid>
                                     
                                 </Grid>
                             </ViewCell>

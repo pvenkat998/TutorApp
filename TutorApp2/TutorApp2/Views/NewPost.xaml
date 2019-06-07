@@ -26,8 +26,24 @@
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" >
                 <Label Text="タイトル"></Label>
-                <Entry x:Name="PostTitle"  HorizontalOptions="FillAndExpand"
-                                                    TextColor="#f35e20" />
+                <Picker x:Name="PostTitleS" HorizontalOptions="FillAndExpand" SelectedIndexChanged="ElemTill6"> 
+                    <Picker.Items>
+                        <x:String>小</x:String>
+                        <x:String>中</x:String>
+                        <x:String>高</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Picker x:Name="PostTitleY" HorizontalOptions="FillAndExpand">
+                    <Picker.Items>
+                    </Picker.Items>
+                </Picker>
+                <Picker x:Name="PostTitleT" HorizontalOptions="FillAndExpand">
+                    <Picker.Items>
+                        <x:String>数学</x:String>
+                        <x:String>物理</x:String>
+                        <x:String>社会</x:String>
+                    </Picker.Items>
+                </Picker>
             </StackLayout>
             <StackLayout Grid.Row="3" Orientation="Horizontal" HeightRequest="200" >
                 <Editor x:Name="PostCont" HorizontalOptions="FillAndExpand" Placeholder="内容" PlaceholderColor="LightGreen" AutoSize="TextChanges" 
@@ -36,7 +52,7 @@
             <StackLayout Grid.Row="4">
                 <ImageButton x:Name="Btn_imageselect" HorizontalOptions="Center"  HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"  Clicked="Imageselect"></ImageButton>
             </StackLayout>
-            <StackLayout Grid.Row="4" Orientation="Horizontal"  >
+            <StackLayout Grid.Row="5" Orientation="Horizontal"  >
                 <Image x:Name="image" HeightRequest="200" Aspect="AspectFit" ></Image>
             </StackLayout>
         </Grid>

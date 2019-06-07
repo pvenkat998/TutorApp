@@ -20,6 +20,7 @@ namespace TutorApp2.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewPost : ContentPage
     {
+       
         string uppath = "";
         public NewPost ()
 		{
@@ -51,7 +52,7 @@ namespace TutorApp2.Views
             Post NP = new Post()
             {
                 UID = x.ToString(),
-                Title = PostTitle.Text,
+                Title = PostTitleS.SelectedItem.ToString()+ PostTitleY.SelectedItem.ToString() + PostTitleT.SelectedItem.ToString(),
                 PosterEmail = App.cur_user.email,
                 PosterName=App.cur_user.surname,
                 Grade=App.cur_user.grade,
@@ -63,6 +64,28 @@ namespace TutorApp2.Views
             await App.context.SaveAsync(NP);
             await Navigation.PushModalAsync(new Forum());
 
+        }
+        void ElemTill6(object sender,EventArgs e)
+        {
+            List<string> ShouList = new List<string>();
+            ShouList.Add("1");
+            ShouList.Add("2");
+            ShouList.Add("3");
+            ShouList.Add("4");
+            ShouList.Add("5");
+            ShouList.Add("6");
+            List<string> RemList = new List<string>();
+            RemList.Add("1");
+            RemList.Add("2");
+            RemList.Add("3");
+            if (PostTitleS.SelectedIndex == 0) {
+                PostTitleY.ItemsSource = ShouList;
+            }
+            else if (PostTitleS.SelectedIndex > 0)
+            {
+
+                PostTitleY.ItemsSource = RemList;
+            }
         }
         private async void Imageselect(object sender, EventArgs e)
         {   //gallery call

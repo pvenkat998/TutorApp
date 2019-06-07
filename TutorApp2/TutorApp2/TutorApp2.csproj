@@ -160,9 +160,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\HomeMenuItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Update="Views\HomeMenuItem.cs" />
     <Compile Update="Views\ProfilePageOld.xaml.cs">
       <DependentUpon>ProfilePageOld.xaml</DependentUpon>
     </Compile>

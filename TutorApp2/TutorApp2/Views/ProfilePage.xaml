@@ -15,33 +15,44 @@
                            VerticalOptions="FillAndExpand"
                            PaintSurface="OnCanvasViewPaintSurface"></skia:SKCanvasView>-->
                 <Grid BackgroundColor="LightGreen">
-                    <Frame HeightRequest="200" WidthRequest="200" CornerRadius="100" HorizontalOptions="Center" VerticalOptions="Start" Margin="-140,80,0,0" Padding="0" BackgroundColor="Maroon">
+                    <Frame HeightRequest="200" WidthRequest="200" CornerRadius="100" HorizontalOptions="Start" VerticalOptions="Start" Margin="60,80,0,0" Padding="0" BackgroundColor="Maroon">
                         <Image HeightRequest="200" WidthRequest="200" x:Name="image" Aspect="AspectFill" HorizontalOptions="Center" VerticalOptions="Start" />
                     </Frame>
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="-280,330,0,0" Padding="0,0,0,0" BackgroundColor="Black">
-                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    
+                    
+                    
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="140,10,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Button Clicked="Like" Text="Like" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"  />
                     </Frame>
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="-100,320,0,0" Padding="0,0,0,0" BackgroundColor="Black">
-                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="197.4,22.4,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="日" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="246.1,53.9,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="月" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="278.6,102.6,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="火" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="290,160,0,00" Padding="0,0,0,0"  BackgroundColor="Black">
+                        <Label Text="水" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Frame>
 
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="40,310,0,0" Padding="0,0,0,0" BackgroundColor="Black">
-                        <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="278.6,217.4,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
+                        <Label Text="木" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Frame>
 
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="120,260,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
-                            <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="246.1,266.1,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
+                        <Label Text="金" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Frame>
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="170,200,0,00" Padding="0,0,0,0"  BackgroundColor="Black">
-                            <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                        </Frame>
+                    <!--  for 22.5 and 77.5               -->
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="197.4,298.6,0,00" Padding="0,0,0,0"  BackgroundColor="Black">
+                        <Label Text="土" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="140,310,0,0" Padding="0,0,0,0" BackgroundColor="Black">
+                        <Label Text="Msg" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Frame>
 
-                    <Frame HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="200,140,0,0" Padding="0" BackgroundColor="Black">
-                        <Label Text="{Binding high_school}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </Frame>
-                    <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="Start" Margin="210,80,0,0" Padding="0,0,0,0"  BackgroundColor="Black">
-                        <Label Text="{Binding bach_or_mast}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </Frame>
                     <!--<Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="220,250,0,0" Padding="0" BackgroundColor="Black">
                         <Label Text="{Binding station}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Frame>

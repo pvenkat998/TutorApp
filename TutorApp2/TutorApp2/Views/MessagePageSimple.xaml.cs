@@ -128,6 +128,10 @@ namespace TutorApp2.Models
                 {
                     bool pic = false;
                     bool text = true;
+                    if (s.Message == s.Messageid)
+                    {
+                        text = false;
+                    }
                     string mps = "";
                     TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
                     request.BucketName = "tutorapp" + @"/" + "messagepic";
@@ -140,7 +144,7 @@ namespace TutorApp2.Models
                         if (File.Exists(mps)) { 
                         pic = true;
                         text = false;
-                            App.MessageID.Add(mps);
+                        App.MessageID.Add(mps);
                         }
                     }
                     catch { }
@@ -170,6 +174,10 @@ namespace TutorApp2.Models
                     
                     bool pic = false;
                     bool text = true;
+                    if (s.Message == s.Messageid)
+                    {
+                        text = false;
+                    }
                     string mps = "";
                     TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
                     request.BucketName = "tutorapp" + @"/" + "messagepic";
@@ -184,6 +192,7 @@ namespace TutorApp2.Models
                             text = false;
                             App.MessageID.Add(mps);
                         }
+
                     }
                     catch { }
                     messagelist.Add(new Message
