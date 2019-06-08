@@ -33,10 +33,11 @@
             </Grid>
             <Grid Grid.Row="2">
                 <StackLayout Orientation="Horizontal" Grid.Row="0">
-                <Label Text="名前"></Label><Entry x:Name="Name"></Entry>
+                    <Label Text="名前"></Label>
+                    <Entry x:Name="Name" WidthRequest="200"></Entry>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Grid.Row="1">
-                    <Label Text="メール" WidthRequest="200"></Label>
+                    <Label Text="メール" ></Label>
                     <Entry x:Name="Email" WidthRequest="200"></Entry>
                 </StackLayout>
             </Grid>
