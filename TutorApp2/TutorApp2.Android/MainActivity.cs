@@ -16,7 +16,6 @@ using XLabs.Platform.Device;
 using XLabs.Platform.Services;
 using Plugin.CurrentActivity;
 using FFImageLoading.Forms.Platform;
-
 namespace TutorApp2.Droid
 {
     [Activity(Label = "TutorApp2", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -32,7 +31,6 @@ namespace TutorApp2.Droid
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
-
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CachedImageRenderer.Init(true);
             #region Resolver Init

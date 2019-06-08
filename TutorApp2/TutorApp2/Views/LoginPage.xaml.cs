@@ -306,7 +306,7 @@ namespace TutorApp2.Views
         void Redirsignup(object sender, EventArgs e)
         {
             // await QueryAsync(App.credentials, App.region);
-            Navigation.PushModalAsync(new Signup());
+            Navigation.PushModalAsync(new SignupTemp());
         }
         void Profileredir(object sender, EventArgs e)
         {

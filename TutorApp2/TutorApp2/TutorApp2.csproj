@@ -59,40 +59,40 @@
 
   <ItemGroup>
     <PackageReference Include="Amazon.SQS.ExtendedClient" Version="1.2.1" />
-    <PackageReference Include="AWSSDK.CognitoIdentity" Version="3.3.100.7" />
-    <PackageReference Include="AWSSDK.CognitoSync" Version="3.3.100.7" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.100.7" />
-    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.100.7" />
-    <PackageReference Include="AWSSDK.S3" Version="3.3.101.5" />
-    <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.3.100.7" />
+    <PackageReference Include="AWSSDK.CognitoIdentity" Version="3.3.100.31" />
+    <PackageReference Include="AWSSDK.CognitoSync" Version="3.3.100.31" />
+    <PackageReference Include="AWSSDK.Core" Version="3.3.102.3" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.101.22" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.102.12" />
+    <PackageReference Include="AWSSDK.SimpleNotificationService" Version="3.3.101.20" />
     <PackageReference Include="Humanizer" Version="2.6.2" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
-    <PackageReference Include="Microsoft.NETCore.Targets.NETFramework" Version="4.6.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2-beta1" />
+    <PackageReference Include="Microsoft.NETCore.Targets.NETFramework" Version="4.6.1-beta-23516" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.4.1-beta" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="SkiaSharp" Version="1.68.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.0" />
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.Drawing.Common" Version="4.6.0-preview4.19212.13" />
+    <PackageReference Include="System.Drawing.Common" Version="4.6.0-preview5.19224.8" />
     <PackageReference Include="System.Drawing.Primitives" Version="4.3.0" />
-    <PackageReference Include="System.Memory" Version="4.5.2" />
+    <PackageReference Include="System.Memory" Version="4.5.3" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
-    <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.1.1" />
-    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.4-beta" />
-    <PackageReference Include="Xam.Plugin.Media" Version="4.2.0-beta" />
+    <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.2.0-beta" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.6.0-beta" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.3.0-beta" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.1.1.1-beta" />
-    <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0-alpha01" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.0.0.394984-pre10" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.483098-pre1" />
     <PackageReference Include="Xamarin.Forms.InputKit" Version="3.0.11" />
     <PackageReference Include="XLabs.Forms" Version="2.3.0-pre05" />
   </ItemGroup>
@@ -150,6 +150,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Signup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SignupTemp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -28,7 +28,7 @@
               </Grid.RowDefinitions>
 
                     <!-- <Label Grid.Row="0" Text="Pahon"></Label>-->
-                   <Button Grid.Row="0" Text="Move" Clicked="Move"></Button>
+                    <Button Grid.Row="0" Text="Move" Clicked="Logout"></Button>
               <Grid Grid.Row="2" Padding="10,0,10,0" ColumnSpacing="10"> 
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*"></ColumnDefinition>
