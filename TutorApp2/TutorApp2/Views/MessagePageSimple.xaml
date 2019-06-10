@@ -5,92 +5,65 @@
              xmlns:plugin="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
 
     <ContentPage.Content>
-        <Grid BackgroundColor="LightGreen">
+        <Grid BackgroundColor="LightGreen" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="60*"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             <!--Messages in Row 0 -->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" BackgroundColor="DeepSkyBlue">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Back" Grid.Column="0"></Button>
-                <Label x:Name="Surname" Grid.Column="1" Text=""></Label>
-                <Button x:Name="b2" Clicked="Button2"  Text="shashin" Grid.Column="2"></Button>
-                <Button x:Name="b3" Clicked="Buttonse"  Text="report(sensei persp)" Grid.Column="3"></Button>
-                <Button x:Name="b4" Clicked="Buttonst"  Text="report(stud persp)" Grid.Column="4"></Button>
+                <Button Text="戻る" Grid.Column="0"></Button>
+                <Label x:Name="Surname" Grid.Column="1" Text="" VerticalOptions="Center" FontSize="20"></Label>
+                <Button x:Name="b2" Clicked="Button2" HorizontalOptions="End" Text="写真" Grid.Column="2"></Button>
+                <Button x:Name="b3" Clicked="Buttonse"  HorizontalOptions="End" Text="レポート" Grid.Column="3"></Button>
             </Grid>
-            <StackLayout Grid.Row="1">
+            <BoxView Grid.Row="1" BackgroundColor="Black" HeightRequest="1"></BoxView>
+            <StackLayout Grid.Row="2">
                 <ScrollView>
                 <ListView x:Name="msg" ItemsSource="{Binding .}" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
-                                    <Grid IsVisible="{Binding IsIncoming}">
+                                            <Grid IsVisible="{Binding IsIncoming}">
                                             <Grid IsVisible="{Binding IsText}">
                                                 <Grid.ColumnDefinitions WidthRequest="100"  HeightRequest="50">
-                                                <ColumnDefinition Width="50"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <plugin:CircleImage
-                                        Grid.Column="0"
-                                        HeightRequest="100"
-                                        WidthRequest="100"
-                                        BorderThickness="2"
-                                        BorderColor="#03A9F4"
-                                        Aspect="AspectFill"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="Start" 
-                                                Source="{Binding Rec_ImageSrc}">
+                                                <Frame CornerRadius="10" >
 
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="Profrdr" />
-                                                    </Image.GestureRecognizers>
-                                                </plugin:CircleImage>
-                                                <Label  VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
-                                                <Label FontSize="Micro" Grid.Column="2" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
-
+                                                    <Label  VerticalOptions="Center" Grid.Column="0" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                </Frame>
                                             </Grid>
                                             <Grid IsVisible="{Binding IsPic}">
                                                 <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250">
-                                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90*"></ColumnDefinition>
                                                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
-                                                <plugin:CircleImage
-                                        Grid.Column="0"
-                                        HeightRequest="100"
-                                        WidthRequest="100"
-                                        BorderThickness="2"
-                                        BorderColor="#03A9F4"
-                                        Aspect="AspectFill"
-                                        HorizontalOptions="Start"
-
-                                                Source="{Binding Rec_ImageSrc}">
-
-                                                    <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Tapped="Profrdr" />
-                                                    </Image.GestureRecognizers>
-                                                </plugin:CircleImage>                                                <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
+                                                    <Image HeightRequest="250" Grid.Column="1" Source="{Binding MsgPicSrc}"></Image>
                 
                                             </Grid>
-                                        </Grid>  
-                                    <Grid IsVisible="{Binding IsOutgoing}">
+                                        </Grid>
+
+                                        <Grid IsVisible="{Binding IsOutgoing}">
                                             <Grid IsVisible="{Binding IsText}" WidthRequest="100"  HeightRequest="50">
                                             <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Label  FontSize="Micro" Grid.Column="1" VerticalOptions="End" Text="{Binding TimeStamp, StringFormat=' {0:MM/dd/yyyy hh:mm tt} '}" TextColor="Gray"></Label>
-                                                <Label   HorizontalOptions="End" VerticalOptions="Center" Grid.Column="2" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                <Frame CornerRadius="10">
+                                                    <Label   HorizontalOptions="End" VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                </Frame>
                                             </Grid>
                                             <Image HeightRequest="250" WidthRequest="250" IsVisible="{Binding IsPic}" HorizontalOptions="End" Source="{Binding MsgPicSrc}"></Image>
                                         </Grid>
@@ -103,7 +76,7 @@
                     </ListView>
                 </ScrollView>
             </StackLayout>
-                <Grid ColumnSpacing="2" Grid.Row="2">
+                <Grid ColumnSpacing="2" Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70"></ColumnDefinition>
                         <ColumnDefinition Width="270"></ColumnDefinition>
@@ -113,7 +86,7 @@
                     <Editor Grid.Column="1" AutoSize="TextChanges"   x:Name="Messagetosend" MaxLength="300"></Editor>
                 <Button Grid.Column="2"  x:Name="Btn_SendMessage" Text="Send" Clicked="SendMessage" VerticalOptions="End" HorizontalOptions="End"/>
                 </Grid>
-            <Image x:Name="ChosenImg" Grid.Row="3">
+            <Image x:Name="ChosenImg" Grid.Row="4">
                 
             </Image>
         </Grid>
