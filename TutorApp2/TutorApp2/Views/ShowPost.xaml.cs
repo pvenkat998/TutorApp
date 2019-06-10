@@ -19,7 +19,6 @@ namespace TutorApp2.Views
     public partial class ShowPost : ContentPage
     {
         string uppath = "";
-        string uppathsc = "";
 
         public ShowPost()
         {
@@ -74,12 +73,12 @@ namespace TutorApp2.Views
             if (App.CurrentPost.Comments == null)
             {
                 var com = new List<Comm>();
-                com.Add(new Comm { CID = x, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = comment.Text });
+                com.Add(new Comm { CID = x, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = comment.Text,CommentTime=DateTime.Now });
                 App.CurrentPost.Comments = com;
             }
             else
             {
-                App.CurrentPost.Comments.Add(new Comm { CID = x, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = comment.Text });
+                App.CurrentPost.Comments.Add(new Comm { CID = x, CommentorEmail = App.cur_user.email, CommentorName = App.cur_user.surname, Comment = comment.Text, CommentTime = DateTime.Now });
 
             }
             TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
@@ -97,7 +96,6 @@ namespace TutorApp2.Views
             }
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
-            Commentstatus.Text = "";
         }
         async void Updatesubcomments(object sender, EventArgs e)
         {
@@ -132,7 +130,7 @@ namespace TutorApp2.Views
             uprequest.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), x + "_" + "1.jpg"); //local file name
             try
             {
-                uprequest.FilePath = uppathsc;
+                uprequest.FilePath = uppath;
                 await App.s3utility.UploadAsync(uprequest);
             }
             catch
@@ -141,7 +139,6 @@ namespace TutorApp2.Views
             }
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
-            Commentstatus.Text = "";
         }
         async void ShowReplies(object sender, EventArgs e)
         {
@@ -190,8 +187,6 @@ namespace TutorApp2.Views
                     SubCom.IsVisible = true;
                 }
             }
-            
-
         }
         private async void ImageselectCom(object sender, EventArgs e)
         {   //gallery call
@@ -233,50 +228,7 @@ namespace TutorApp2.Views
             }
 
         }
-        private async void ImageselectSubcom(object sender, EventArgs e)
-        {   //gallery call
-            uppathsc = "";
-            var buttonClickHandler = (Button)sender;
-            Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
 
-            await CrossMedia.Current.Initialize();
-            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
-            {
-                var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera, Permission.Storage });
-                cameraStatus = results[Permission.Camera];
-                storageStatus = results[Permission.Storage];
-            }
-
-            if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
-            {
-                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
-                {
-                    CompressionQuality = 92
-                });
-
-                if (file == null)
-                    return;
-
-                uppathsc = file.Path;
-                Image img = (Image)ParentStackLayout.Children[3];
-                img.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
-            }
-            else
-            {
-                await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
-                //On iOS you may want to send your user to the settings screen.
-                CrossPermissions.Current.OpenAppSettings();
-            }
-
-        }
 
         //below is to display comments
     }

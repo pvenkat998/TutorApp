@@ -30,6 +30,7 @@ namespace TutorApp2.Models
         public string Comment { get; set; }
         public string ParentorChild { get; set; }
         public string ParentCID { get; set; }
+        public DateTime CommentTime { get; set; }
     }
     [DynamoDBTable("forum_posts")]
     public class Post

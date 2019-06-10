@@ -3,122 +3,87 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TutorApp2.Views.ShowPost">
     <ContentPage.Content>
-        <ScrollView Padding="5,0,5,0">
-        <Grid Grid.Column="0" BackgroundColor="White">
+        <ScrollView Padding="0,0,0,0">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="200"></RowDefinition> <!--image-->
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="300"></RowDefinition>
                 </Grid.RowDefinitions>
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer  CommandParameter="{Binding UID}"/>
-            </Grid.GestureRecognizers>
-            <!--<StackLayout  Grid.Row="0" Orientation="Horizontal"  HorizontalOptions="CenterAndExpand">
-                                                <Image Source="{Binding image}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" />
-                                            </StackLayout>-->
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Font="30,Bold" Text="{Binding Title}"  HorizontalOptions="Center"/>
-                    <Label Grid.Column="1" Font="30,Bold" Text="{Binding PosterName}"  HorizontalOptions="Center"/>
-
-                </Grid>    
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"></ColumnDefinition>
-                        <ColumnDefinition Width="50*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding PostPicPath}" HorizontalOptions="Center"></Image>
-                    <Label Grid.Column="1"  Text="{Binding Content}"  />
-
-                </Grid>
-            <Label Grid.Row="2" Font="20,Bold" Text="Comments"></Label>
-            <Grid Grid.Row="4" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition> 
-                    <RowDefinition Height="Auto"></RowDefinition>
+            <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition> <!--image-->
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                <Entry x:Name="comment" Grid.Row="0" ></Entry>
-                    <Button Grid.Row="1" Text="投稿する" Clicked="Updatecomments"></Button>
-                    <Button Grid.Row="2" Text="image select"  Clicked="ImageselectCom"></Button>
-                    <Image Grid.Row="3" x:Name="image"></Image>
-                    <Label Grid.Row="4" x:Name="Commentstatus"></Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  CommandParameter="{Binding UID}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Font="30,Bold" Text="{Binding Title}"  HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" Font="30,Bold" Text="{Binding PosterName}"  HorizontalOptions="Center"/>
+
+                    </Grid>    
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding PostPicPath}" HorizontalOptions="Center"></Image>
+                        <Label Grid.Column="1"  Text="{Binding Content}"  />
+
+                    </Grid>
+                    <Label Grid.Row="2" Font="20,Bold" Text="Comments"></Label>
+                    <ListView x:Name="Comment" Grid.Row="3"  HasUnevenRows="True" >
+
+                        <ListView.ItemTemplate>
+                                <DataTemplate>
+                                  <ViewCell >
+                                    <ViewCell.View>
+                                            <Grid RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" ></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
+                                                <Grid Grid.Row="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding CommentPicPath}" HorizontalOptions="Center"></Image>
+                                                    <Label Grid.Column="1"  Text="{Binding Comment}"  />
+                                                </Grid>
+                                            </Grid>
+                                    </ViewCell.View>
+                                  </ViewCell>
+                                </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
             </Grid>
-            <ListView x:Name="Comment" Grid.Row="3"  HasUnevenRows="True" >
+            <Grid Grid.Row="1" ColumnSpacing="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="270"></ColumnDefinition>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button  Grid.Column="0" x:Name="Btn_imageselect" Text="Photo" Clicked="ImageselectCom"/>
+                    <Editor Grid.Column="1" AutoSize="TextChanges"   x:Name="comment" MaxLength="300"></Editor>
+                    <Button Grid.Column="2"  x:Name="Btn_SendMessage" Text="Send" Clicked="Updatecomments" VerticalOptions="End" HorizontalOptions="End"/>
 
-                <ListView.ItemTemplate>
-                        <DataTemplate>
-                          <ViewCell >
-                            <ViewCell.View>
-                                    <Grid RowSpacing="0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" ></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
-                                        <Grid Grid.Row="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50*"></ColumnDefinition>
-                                                <ColumnDefinition Width="50*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Aspect="AspectFill" Source="{Binding CommentPicPath}" HorizontalOptions="Center"></Image>
-                                            <Label Grid.Column="1"  Text="{Binding Comment}"  />
-
-                                        </Grid>
-                                        <Grid RowSpacing="0" Grid.Row="4" IsVisible="False" BindingContext="{Binding CID}">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="AUTO"></RowDefinition>
-                                                <RowDefinition Height="AUTO"></RowDefinition>
-                                                <RowDefinition Height="AUTO"></RowDefinition>
-                                                <RowDefinition Height="AUTO"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <Entry  Grid.Row="0"  ></Entry>
-                                            <Button  Grid.Row="1" Text="投稿する" Clicked="Updatesubcomments" BindingContext="{Binding .}"></Button>
-                                            <Button Grid.Row="2" Text="subcom image select"  Clicked="ImageselectSubcom"></Button>
-                                            <Image Grid.Row="3"></Image>
-                                        </Grid>
-                                            <!--> Above is just to write subcomment/ Below is to display subcomments<-->
-                                        <ListView  Grid.Row="5" IsVisible="False" HasUnevenRows="True" >
-
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <ViewCell>
-                                                        <ViewCell.View>
-                                                            <Grid RowSpacing="0" >
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                                                    <RowDefinition Height="Auto"></RowDefinition>
-                                                                    <RowDefinition Height="Auto"></RowDefinition>
-                                                                </Grid.RowDefinitions>
-                                                                <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
-                                                                <Label Grid.Row="1" Text="{Binding Comment}"></Label>                                                                  <Label Grid.Row="1" Text="{Binding Comment}"></Label>                                                                <Label Grid.Row="1" Text="{Binding Comment}"></Label>
-                                                                <Image Grid.Row="2" Source="{Binding CommentPicPath}"></Image>
-
-                                                            </Grid>
-                                                        </ViewCell.View>
-                                                    </ViewCell>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </Grid>
-                                        
-                            </ViewCell.View>
-                          </ViewCell>
-                        </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            </Grid>
+            <Image Grid.Row="2" x:Name="image"></Image>
         </Grid>
         </ScrollView>
     </ContentPage.Content>
