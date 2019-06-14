@@ -184,57 +184,55 @@ namespace TutorApp2.Views
             int size = App.searchResponse.Count;
             System.Diagnostics.Debug.WriteLine("=====GGWP ======== " + size);
             string imgsrc, imgsrc2;
-            //ASSIGNING CELLS
-            for (int i = 0; i < 10 && i < size; i = i + 2)
-            {
-                imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg");
+         
 
-                {                        
+                //for (int i = 0; i < 10 && i < size; i = i + 2)
+                //{
+                //    imgsrc = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg");
 
-                    if (size - i != 1)
-                    {
-                        imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i + 1].email.ToString() + "_dp.jpg");
-                        listteachlist.Add(new ListOfTeachers
-                        {
-                            email = App.searchResponse[i].email.ToString(),
-                            name = App.searchResponse[i].surname.ToString(),
-                            karui_major = App.searchResponse[i].gakunen.ToString(),
-                            chuugaku_juken = App.searchResponse[i].gender.ToString(),
-                            gakunen = App.searchResponse[i].station.ToString(),
-                            image = imgsrc,
-                            gender = App.searchResponse[i].gender.ToString(),
-                            email2 = App.searchResponse[i + 1].email.ToString(),
-                            name2 = App.searchResponse[i + 1].surname.ToString(),
-                            karui_major2 = App.searchResponse[i + 1].gakunen.ToString(),
-                            chuugaku_juken2 = App.searchResponse[i + 1].gender.ToString(),
-                            gakunen2 = App.searchResponse[i + 1].station.ToString(),
-                            image2 = imgsrc2,
-                            gender2 = App.searchResponse[i + 1].gender.ToString(),
-                        }
-                );
-                    }
-                    else
-                    {
-                        listteachlist.Add(new ListOfTeachers
-                        {
-                            email = App.searchResponse[i].email.ToString(),
-                            name = App.searchResponse[i].surname.ToString(),
-                            karui_major = App.searchResponse[i].gakunen.ToString(),
-                            chuugaku_juken = App.searchResponse[i].gender.ToString(),
-                            gakunen = App.searchResponse[i].station.ToString(),
-                            image = imgsrc,
-                            gender = App.searchResponse[i].gender.ToString(),
-                        }
-                    );
+                //    {                        
 
-                    }
-                }
-            }
-            BindingContext = listteachlist;
-            pic1.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[0].email.ToString() + "_dp.jpg");
-            pic2.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[1].email.ToString() + "_dp.jpg");
-            pic3.Source = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), listteachlist[2].email.ToString() + "_dp.jpg");
+                //        if (size - i != 1)
+                //        {
+                //            imgsrc2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i + 1].email.ToString() + "_dp.jpg");
+                //            listteachlist.Add(new ListOfTeachers
+                //            {
+                //                email = App.searchResponse[i].email.ToString(),
+                //                name = App.searchResponse[i].surname.ToString(),
+                //                karui_major = App.searchResponse[i].gakunen.ToString(),
+                //                chuugaku_juken = App.searchResponse[i].gender.ToString(),
+                //                gakunen = App.searchResponse[i].station.ToString(),
+                //                image = imgsrc,
+                //                gender = App.searchResponse[i].gender.ToString(),
+                //                email2 = App.searchResponse[i + 1].email.ToString(),
+                //                name2 = App.searchResponse[i + 1].surname.ToString(),
+                //                karui_major2 = App.searchResponse[i + 1].gakunen.ToString(),
+                //                chuugaku_juken2 = App.searchResponse[i + 1].gender.ToString(),
+                //                gakunen2 = App.searchResponse[i + 1].station.ToString(),
+                //                image2 = imgsrc2,
+                //                gender2 = App.searchResponse[i + 1].gender.ToString(),
+                //            }
+                //    );
+                //        }
+                //        else
+                //        {
+                //            listteachlist.Add(new ListOfTeachers
+                //            {
+                //                email = App.searchResponse[i].email.ToString(),
+                //                name = App.searchResponse[i].surname.ToString(),
+                //                karui_major = App.searchResponse[i].gakunen.ToString(),
+                //                chuugaku_juken = App.searchResponse[i].gender.ToString(),
+                //                gakunen = App.searchResponse[i].station.ToString(),
+                //                image = imgsrc,
+                //                gender = App.searchResponse[i].gender.ToString(),
+                //            }
+                //        );
 
+                //        }
+                //    }
+                //}
+                BindingContext = listteachlist;
+      
             //-----------------------------------FRONTEND-----------------------
             i1.Source = ImageSource.FromResource("TutorApp2.Images.male.png");
             i2.Source = ImageSource.FromResource("TutorApp2.Images.female.png");
@@ -246,23 +244,54 @@ namespace TutorApp2.Views
         }
         async void Move(object sender, EventArgs e)
         {
-            await pic1.TranslateTo(0, pic1.TranslationY);
-            await pic2.TranslateTo(0, pic2.TranslationY);
-            await pic3.TranslateTo(0, pic3.TranslationY);
-            Console.WriteLine("==move called=");
-            var buttonClickHandler = (Button)sender;
-            Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
-            //CircleImage img = (CircleImage)ParentStackLayout.Children[0];
-            //Image img = (Image)((Grid)((ViewCell)listview.Children0]).Children[0]).Children[0];
-            //ListView listview = w.FindByName<ListView>("listview");
-            //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
+            List<string> imgstr = new List<string>();
+            for (int i = 0; i < App.searchResponse.Count; i = i + 1)
+            {
+                imgstr.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg"));
+            }
+            while (true)
+            {
+                Console.WriteLine("==move called11=");
+                if (imgstr.Count >= 3) {
+                    var random = new Random();
+                    int index = random.Next(imgstr.Count);
+                    pic1.Source = imgstr[index];
+                    imgstr.RemoveAt(index);
 
-            Console.WriteLine("==22S called=");
-            List<Task> transition = new List<Task>();
-            transition.Add(pic1.TranslateTo(pic1.TranslationX + 300, pic1.TranslationY + 100, 10000));
-            transition.Add(pic2.TranslateTo(pic1.TranslationX + 300, pic2.TranslationY + 100, 10000));
-            transition.Add(pic3.TranslateTo(pic1.TranslationX + 300, pic3.TranslationY + 100, 10000));
-            await Task.WhenAll(transition);
+                    index = random.Next(imgstr.Count);
+                    pic2.Source = imgstr[index];
+                    imgstr.RemoveAt(index);
+
+                    index = random.Next(imgstr.Count);
+                    pic3.Source = imgstr[index];
+                    imgstr.RemoveAt(index);
+                    await pic1.TranslateTo(0, pic1.TranslationY);
+                    await pic2.TranslateTo(0, pic2.TranslationY);
+                    await pic3.TranslateTo(0, pic3.TranslationY);
+                    var buttonClickHandler = (Button)sender;
+                    Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
+                    //CircleImage img = (CircleImage)ParentStackLayout.Children[0];
+                    //Image img = (Image)((Grid)((ViewCell)listview.Children0]).Children[0]).Children[0];
+                    //ListView listview = w.FindByName<ListView>("listview");
+                    //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
+
+                    List<Task> transition = new List<Task>();
+                    int randomx1 = random.Next(500); int randomx2 = random.Next(500); int randomx3 = random.Next(500); int randomy1 = random.Next(500); int randomy2 = random.Next(500); int randomy3 = random.Next(500);
+                    transition.Add(pic1.TranslateTo(pic1.TranslationX + randomx1, pic1.TranslationY + randomy1, 10000));
+                    transition.Add(pic2.TranslateTo(pic1.TranslationX + randomx2, pic2.TranslationY + randomy2, 10000));
+                    transition.Add(pic3.TranslateTo(pic1.TranslationX + randomx3, pic3.TranslationY + randomy3, 10000));
+                    await Task.WhenAll(transition);
+                }
+                else if (imgstr.Count < 3)
+                {
+                    Console.WriteLine("==move called22=");
+                    imgstr.Clear();
+                    for (int i = 0; i < App.searchResponse.Count; i = i + 1)
+                    {
+                        imgstr.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), App.searchResponse[i].email.ToString() + "_dp.jpg"));
+                    }
+                }
+            }
         }
         void Logout(object sender, EventArgs e)
         {
