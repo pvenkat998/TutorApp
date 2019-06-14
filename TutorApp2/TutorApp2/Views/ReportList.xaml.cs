@@ -18,6 +18,10 @@ namespace TutorApp2.Views
         public ReportList ()
 		{
             InitializeComponent ();
+            if (App.cur_user_book.stud_teach== "先生")
+            {
+                NewRep.IsVisible = true;
+            }
             BindingContext = Query();
         }
         List<Report> Query()
@@ -44,6 +48,10 @@ namespace TutorApp2.Views
             Report b  = a.Single(r => r.UID == te);
             await Navigation.PushModalAsync(new ReportOne(b));
 
+        }
+        async void NewReport(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NewReport());
         }
     }
 }

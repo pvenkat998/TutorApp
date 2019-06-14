@@ -268,41 +268,10 @@ namespace TutorApp2.Models
         {
             await Navigation.PushModalAsync(new ChatImages());
         }
-        async void Button3(object sender, EventArgs e)
-        {
-            if (App.cur_user_book.stud_teach == "学生")
-            {
-                await Navigation.PushModalAsync(new ReportList());
-
-            }
-            else
-            {
-                await Navigation.PushModalAsync(new NewReport());
-            }
-        }
         async void Buttonse(object sender, EventArgs e)
         {
-            if (App.cur_user_book.stud_teach == "学生")
-            {
-                await Navigation.PushModalAsync(new ReportList());
+            await Navigation.PushModalAsync(new ReportList());
 
-            }
-            else
-            {
-                await Navigation.PushModalAsync(new NewReport());
-            }
-        }
-        async void Buttonst(object sender, EventArgs e)
-        {
-            if (App.cur_user_book.stud_teach == "学生")
-            {
-                await Navigation.PushModalAsync(new ReportList());
-
-            }
-            else
-            {
-                await Navigation.PushModalAsync(new NewReport());
-            }
         }
         async void Profrdr(object sender, EventArgs e)
         {
