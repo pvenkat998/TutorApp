@@ -50,7 +50,7 @@
                         <Label Text="土" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Frame>
                     <Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="140,310,0,0" Padding="0,0,0,0" BackgroundColor="Black">
-                        <Label Text="Msg" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        <Button Clicked="MsgRdr" Text="Msg" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Black"/>
                     </Frame>
 
                     <!--<Frame  HeightRequest="40" WidthRequest="40" CornerRadius="20" HorizontalOptions="Start" VerticalOptions="Start" Margin="220,250,0,0" Padding="0" BackgroundColor="Black">

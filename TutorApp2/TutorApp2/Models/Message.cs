@@ -18,5 +18,6 @@ namespace TutorApp2.Models
         public bool IsPic { get; set; }
         public bool IsIncoming { get; set; }
         public bool IsOutgoing { get; set; }
+        public string Color { get; set; }
     }
 }

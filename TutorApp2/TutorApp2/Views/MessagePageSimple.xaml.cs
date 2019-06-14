@@ -52,7 +52,8 @@ namespace TutorApp2.Models
                 Sender = App.cur_user.email,
                 Reciever = App.User_Recepient.Email,
                 Message = Messagetosend.Text,
-                TimeStamp = DateTime.Now
+                TimeStamp = DateTime.Now,
+                RecieverName = App.User_Recepient.Username
             };
             TransferUtilityUploadRequest uprequest = new TransferUtilityUploadRequest();
             uprequest.BucketName = "tutorapp" + @"/" + "messagepic";

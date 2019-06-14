@@ -12,6 +12,7 @@ namespace TutorApp2.Models
         public string Messageid { get; set; }
         public string Sender { get; set; }
         public string Reciever { get; set; }
+        public string RecieverName { get; set; }
         public string Message { get; set; }
         public DateTime TimeStamp { get; set; }
     }

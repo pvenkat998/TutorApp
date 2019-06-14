@@ -12,6 +12,8 @@ using System.Diagnostics;
 using Amazon.S3.Transfer;
 using Amazon.S3;
 using System.IO;
+using Amazon.DynamoDBv2.DocumentModel;
+using System.Linq;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TutorApp2
@@ -72,8 +74,11 @@ namespace TutorApp2
             public static string Grade { get; set; }
             public static string PicSrc { get; set; }
         }
+        public static List<Message> SortedList;
+        
         public App()
         {
+           
             System.IO.DirectoryInfo di = new DirectoryInfo((Environment.GetFolderPath(Environment.SpecialFolder.Personal)));
 
             foreach (FileInfo file in di.GetFiles())

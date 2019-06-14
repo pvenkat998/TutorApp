@@ -73,16 +73,25 @@ namespace TutorApp2.Views
         }
         async void Like(object sender, EventArgs e)
         {
-            string x = Guid.NewGuid().ToString();
-            MessageDynamo mes = new MessageDynamo
+            if  (App.SortedList.Any(x => x.Reciever == App.tarprof.email || x.Sender == App.tarprof.email))
+            { 
+            }
+            else
             {
-                Messageid = x,
-                Sender = App.cur_user.email,
-                Reciever = App.tarprof.email,
-                Message = x,
-                TimeStamp = DateTime.Now
-            };
-            await App.context.SaveAsync(mes); 
+
+                string x = Guid.NewGuid().ToString();
+                MessageDynamo mes = new MessageDynamo
+                {
+                    Messageid = x,
+                    Sender = App.cur_user.email,
+                    Reciever = App.tarprof.email,
+                    Message = x,
+                    TimeStamp = DateTime.Now,
+                    RecieverName = App.tarprof.surname,
+                };
+                await App.context.SaveAsync(mes);
+            }
+            await Navigation.PushModalAsync(new HomeDetail2());
         }
         void b1c(object sender, EventArgs e)
         {

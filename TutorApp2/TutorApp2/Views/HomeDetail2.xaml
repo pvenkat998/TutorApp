@@ -17,7 +17,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell >
-                                <Grid BackgroundColor="White" x:Name="{Binding Reciever}" >
+                                <Grid BackgroundColor="{Binding Color}" x:Name="{Binding Reciever}" >
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="{Binding Reciever}"/>
                                         </Grid.GestureRecognizers>
