@@ -23,11 +23,12 @@ namespace TutorApp2.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Xamarians.CropImage.Droid.CropImageServiceAndroid.Initialize(this);
+            Stormlion.ImageCropper.Droid.Platform.Init();
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            Xamarians.CropImage.Droid.CropImageServiceAndroid.Initialize(this);
-
             base.OnCreate(savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
 

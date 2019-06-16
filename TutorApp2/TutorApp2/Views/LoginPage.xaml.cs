@@ -32,6 +32,7 @@ using Amazon.DynamoDBv2.DocumentModel;
 using Xamarin.Essentials;
 using System.Diagnostics;
 using Xamarians.CropImage;
+using Stormlion.ImageCropper;
 
 namespace TutorApp2.Views
 {
@@ -154,12 +155,25 @@ namespace TutorApp2.Views
 
                 path.Text = file.Path;
                 uppath = file.Path;
-                imgPicked.Source = ImageSource.FromStream(() =>
+                //imgPicked.Source = ImageSource.FromStream(() =>
+                //{
+                //    var stream = file.GetStream();
+                //    return stream;
+                //});
+                new ImageCropper()
                 {
-                    var stream = file.GetStream();
-                    return stream;
-                });
-                var cropResult = await CropImageService.Instance.CropImage(file.Path, CropRatioType.Square);
+                    AspectRatioX = 1,
+                    AspectRatioY = 1,
+                    CropShape = ImageCropper.CropShapeType.Oval,
+                    Success = (imageFile) =>
+                    {
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            imgPicked.Source = ImageSource.FromFile(imageFile);
+                        });
+                    }
+                }.Show(this, file.Path);
+                // var cropResult = await CropImageService.Instance.CropImage(file.Path, CropRatioType.Square);
 
                 file.Dispose();
             }

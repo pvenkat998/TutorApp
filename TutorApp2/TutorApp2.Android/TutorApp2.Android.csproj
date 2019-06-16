@@ -82,6 +82,9 @@
     <PackageReference Include="Humanizer">
       <Version>2.6.2</Version>
     </PackageReference>
+    <PackageReference Include="ImageCropper.Forms">
+      <Version>0.1.6</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Azure.Mobile.Client">
       <Version>4.1.2-prerelease.481290</Version>
     </PackageReference>
@@ -146,13 +149,16 @@
       <Version>4.6.0-beta</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
-      <Version>4.3.0-beta</Version>
+      <Version>4.0.1.5</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
       <Version>3.1.1.1-beta</Version>
     </PackageReference>
     <PackageReference Include="Xamarians.CropImage">
       <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Annotations">
+      <Version>28.0.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
       <Version>28.0.0.1</Version>
