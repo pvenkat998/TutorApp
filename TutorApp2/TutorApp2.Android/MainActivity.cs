@@ -26,6 +26,7 @@ namespace TutorApp2.Droid
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            Xamarians.CropImage.Droid.CropImageServiceAndroid.Initialize(this);
 
             base.OnCreate(savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);

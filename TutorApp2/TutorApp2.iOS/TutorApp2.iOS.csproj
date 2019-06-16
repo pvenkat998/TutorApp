@@ -254,6 +254,9 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
       <Version>3.1.1.1-beta</Version>
     </PackageReference>
+    <PackageReference Include="Xamarians.CropImage">
+      <Version>1.0.6</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Auth">
       <Version>1.7.0-alpha01</Version>
     </PackageReference>
@@ -286,5 +289,8 @@
       <Project>{6BA909B3-AAD0-4F70-BBF3-F0DB78B66C23}</Project>
       <Name>TutorApp2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rotate_button.png" />
   </ItemGroup>
 </Project>

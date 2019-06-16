@@ -86,6 +86,7 @@
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.6.0-beta" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.3.0-beta" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.1.1.1-beta" />
+    <PackageReference Include="Xamarians.CropImage" Version="1.0.6" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0-alpha01" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />

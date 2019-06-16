@@ -31,6 +31,7 @@ using Plugin.Permissions.Abstractions;
 using Amazon.DynamoDBv2.DocumentModel;
 using Xamarin.Essentials;
 using System.Diagnostics;
+using Xamarians.CropImage;
 
 namespace TutorApp2.Views
 {
@@ -156,9 +157,11 @@ namespace TutorApp2.Views
                 imgPicked.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
-                    file.Dispose();
                     return stream;
                 });
+                var cropResult = await CropImageService.Instance.CropImage(file.Path, CropRatioType.Square);
+
+                file.Dispose();
             }
             else
             {

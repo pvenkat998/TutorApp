@@ -26,6 +26,7 @@ namespace TutorApp2.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Rg.Plugins.Popup.Popup.Init();
+            Xamarians.CropImage.iOS.CropImageServiceIOS.Initialize();
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
