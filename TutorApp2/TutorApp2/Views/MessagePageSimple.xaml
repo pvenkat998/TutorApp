@@ -27,24 +27,24 @@
                 <Button x:Name="b3" Clicked="Buttonse"  HorizontalOptions="End" Text="レポート" Grid.Column="3"></Button>
             </Grid>
             <BoxView Grid.Row="1" BackgroundColor="Black" HeightRequest="1"></BoxView>
-            <StackLayout Grid.Row="2">
+            <StackLayout Grid.Row="2" Spacing="0">
                 <ScrollView>
-                <ListView x:Name="msg" ItemsSource="{Binding .}" HasUnevenRows="True">
+                <ListView SeparatorVisibility="None" MinimumHeightRequest="0" x:Name="msg"  ItemsSource="{Binding .}" HasUnevenRows="True">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid>
-                                        <Grid IsVisible="{Binding IsIncoming}">
-                                            <Grid IsVisible="{Binding IsText}"  HeightRequest="50">
+                                    <Grid RowSpacing="0" >
+                                        <Grid IsVisible="{Binding IsIncoming}" RowSpacing="0">
+                                            <Grid IsVisible="{Binding IsText}"  Margin="10" RowSpacing="0">
                                                 <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Frame  Padding = "10" CornerRadius="10"  VerticalOptions="Center" HeightRequest="25"  Grid.Column="0">
-                                                    <Label  HorizontalOptions="Start" FlowDirection="MatchParent" VerticalOptions="Center" Grid.Column="0" TextColor="Blue" Text="{Binding Text}"   ></Label>
+                                                <Frame  Padding = "10" CornerRadius="10"  VerticalOptions="FillAndExpand" Grid.Column="0">
+                                                    <Label  HorizontalOptions="Start" FlowDirection="MatchParent" VerticalOptions="FillAndExpand" Grid.Column="0" TextColor="Blue" Text="{Binding Text}"   ></Label>
                                                 </Frame>
                                             </Grid>
-                                            <Grid IsVisible="{Binding IsPic}">
+                                            <Grid IsVisible="{Binding IsPic}" RowSpacing="0">
                                                 <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250">
                                                     <ColumnDefinition Width="90*"></ColumnDefinition>
                                                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
@@ -54,19 +54,19 @@
                                             </Grid>
                                         </Grid>
 
-                                        <Grid IsVisible="{Binding IsOutgoing}"   >
-                                            <Grid IsVisible="{Binding IsText}" HeightRequest="50" >
+                                        <Grid IsVisible="{Binding IsOutgoing}"  RowSpacing="0" >
+                                            <Grid IsVisible="{Binding IsText}" Margin="10" RowSpacing="0">
                                             <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Frame  Padding = "10" CornerRadius="10"  VerticalOptions="Center" HeightRequest="25"  Grid.Column="1">
-                                                    <Label HorizontalOptions="EndAndExpand" FlowDirection="MatchParent" VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                <Frame    Padding = "10" CornerRadius="10"  VerticalOptions="FillAndExpand"   Grid.Column="1">
+                                                    <Label LineBreakMode="WordWrap" HorizontalOptions="EndAndExpand" FlowDirection="MatchParent" VerticalOptions="FillAndExpand" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
                                                 </Frame>
                                             </Grid>
                                         </Grid>
-                                        <Grid IsVisible="{Binding IsPic}">
-                                            <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250">
+                                        <Grid IsVisible="{Binding IsPic}" RowSpacing="0">
+                                            <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250" RowSpacing="0">
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
