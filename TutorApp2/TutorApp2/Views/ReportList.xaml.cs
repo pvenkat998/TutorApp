@@ -18,6 +18,7 @@ namespace TutorApp2.Views
         public ReportList ()
 		{
             InitializeComponent ();
+            backbutton.Source = ImageSource.FromResource("TutorApp2.Images.backbutton.jpg");
             if (App.cur_user_book.stud_teach== "先生")
             {
                 NewRep.IsVisible = true;

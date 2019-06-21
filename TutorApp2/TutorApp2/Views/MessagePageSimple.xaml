@@ -35,13 +35,13 @@
                             <ViewCell>
                                 <Grid>
                                         <Grid IsVisible="{Binding IsIncoming}">
-                                            <Grid IsVisible="{Binding IsText}">
-                                                <Grid.ColumnDefinitions WidthRequest="100"  HeightRequest="50">
+                                            <Grid IsVisible="{Binding IsText}"  HeightRequest="50">
+                                                <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Frame CornerRadius="10" Grid.Column="0" >
-                                                    <Label  VerticalOptions="Center" Grid.Column="0" TextColor="Blue" Text="{Binding Text}"  ></Label>
+                                                <Frame  Padding = "10" CornerRadius="10"  VerticalOptions="Center" HeightRequest="25"  Grid.Column="0">
+                                                    <Label  HorizontalOptions="Start" FlowDirection="MatchParent" VerticalOptions="Center" Grid.Column="0" TextColor="Blue" Text="{Binding Text}"   ></Label>
                                                 </Frame>
                                             </Grid>
                                             <Grid IsVisible="{Binding IsPic}">
@@ -54,17 +54,16 @@
                                             </Grid>
                                         </Grid>
 
-                                        <Grid IsVisible="{Binding IsOutgoing}">
-                                            <Grid IsVisible="{Binding IsText}" WidthRequest="100"  HeightRequest="50">
+                                        <Grid IsVisible="{Binding IsOutgoing}"   >
+                                            <Grid IsVisible="{Binding IsText}" HeightRequest="50" >
                                             <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                                <Frame  Padding = "10" CornerRadius="10"  Grid.Column="1">
+                                                <Frame  Padding = "10" CornerRadius="10"  VerticalOptions="Center" HeightRequest="25"  Grid.Column="1">
                                                     <Label HorizontalOptions="EndAndExpand" FlowDirection="MatchParent" VerticalOptions="Center" Grid.Column="1" TextColor="Blue" Text="{Binding Text}"  ></Label>
                                                 </Frame>
                                             </Grid>
-                                            <Image HeightRequest="250" WidthRequest="250" IsVisible="{Binding IsPic}" HorizontalOptions="End" Source="{Binding MsgPicSrc}"></Image>
                                         </Grid>
                                         <Grid IsVisible="{Binding IsPic}">
                                             <Grid.ColumnDefinitions WidthRequest="250"  HeightRequest="250">

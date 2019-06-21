@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="60*"></ColumnDefinition>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Text="Back" Grid.Column="0"></Button>
+                <ImageButton x:Name="backbutton" Grid.Column="0"></ImageButton>
                 <Label Grid.Column="1" x:Name="PageTitle"></Label>
                 <Button x:Name="NewRep" IsVisible="False" Text="新しいレポート" Clicked="NewReport" Grid.Column="2"></Button>
             </Grid>

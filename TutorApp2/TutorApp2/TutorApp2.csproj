@@ -22,6 +22,7 @@
     <None Remove="Images\awa.gif" />
     <None Remove="Images\awa2.gif" />
     <None Remove="Images\awa3.gif" />
+    <None Remove="Images\backbutton.jpg" />
     <None Remove="Images\choosepic.png" />
     <None Remove="Images\download.png" />
     <None Remove="Images\downloadw.png" />
@@ -44,6 +45,7 @@
     <EmbeddedResource Include="Images\awa2.gif" />
     <EmbeddedResource Include="Images\awa.gif" />
     <EmbeddedResource Include="Images\awa3.gif" />
+    <EmbeddedResource Include="Images\backbutton.jpg" />
     <EmbeddedResource Include="Images\choosepic.png" />
     <EmbeddedResource Include="Images\downloadw.png" />
     <EmbeddedResource Include="Images\female.png" />
