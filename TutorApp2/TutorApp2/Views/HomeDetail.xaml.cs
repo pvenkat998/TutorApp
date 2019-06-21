@@ -244,6 +244,8 @@ namespace TutorApp2.Views
         }
         async void Move(object sender, EventArgs e)
         {
+            var startransX = pic1.TranslationX;
+            var startransY = pic1.TranslationY;
             List<string> imgstr = new List<string>();
             for (int i = 0; i < App.searchResponse.Count; i = i + 1)
             {
@@ -265,9 +267,15 @@ namespace TutorApp2.Views
                     index = random.Next(imgstr.Count);
                     pic3.Source = imgstr[index];
                     imgstr.RemoveAt(index);
-                    await pic1.TranslateTo(0, pic1.TranslationY);
-                    await pic2.TranslateTo(0, pic2.TranslationY);
-                    await pic3.TranslateTo(0, pic3.TranslationY);
+                    pic1.IsVisible = false;
+                    pic2.IsVisible = false;
+                    pic3.IsVisible = false;
+                    await pic1.TranslateTo(startransX, startransY);
+                    await pic2.TranslateTo(startransX, startransY);
+                    await pic3.TranslateTo(startransX, startransY);
+                    pic1.IsVisible = true;
+                    pic2.IsVisible = true;
+                    pic3.IsVisible = true;
                     var buttonClickHandler = (Button)sender;
                     Grid ParentStackLayout = (Grid)buttonClickHandler.Parent;
                     //CircleImage img = (CircleImage)ParentStackLayout.Children[0];
@@ -276,10 +284,10 @@ namespace TutorApp2.Views
                     //Image img = ((Image)((Grid)((ViewCell)((DataTemplate)listview.Children[0]).Children[0]).Children[0]).Children[0]);
 
                     List<Task> transition = new List<Task>();
-                    int randomx1 = random.Next(500); int randomx2 = random.Next(500); int randomx3 = random.Next(500); int randomy1 = random.Next(500); int randomy2 = random.Next(500); int randomy3 = random.Next(500);
-                    transition.Add(pic1.TranslateTo(pic1.TranslationX + randomx1, pic1.TranslationY + randomy1, 10000));
-                    transition.Add(pic2.TranslateTo(pic1.TranslationX + randomx2, pic2.TranslationY + randomy2, 10000));
-                    transition.Add(pic3.TranslateTo(pic1.TranslationX + randomx3, pic3.TranslationY + randomy3, 10000));
+                    int randomx1 = random.Next(-500,500); int randomx2 = random.Next(-500, 500); int randomx3 = random.Next(-500, 500); int randomy1 = random.Next(500); int randomy2 = random.Next(500); int randomy3 = random.Next(500);
+                    transition.Add(pic1.TranslateTo(pic1.TranslationX + randomx1, pic1.TranslationY + randomy1, 1000, Easing.Linear));
+                    transition.Add(pic2.TranslateTo(pic1.TranslationX + randomx2, pic2.TranslationY + randomy2, 1000, Easing.Linear));
+                    transition.Add(pic3.TranslateTo(pic1.TranslationX + randomx3, pic3.TranslationY + randomy3, 1000, Easing.Linear));
                     await Task.WhenAll(transition);
                 }
                 else if (imgstr.Count < 3)

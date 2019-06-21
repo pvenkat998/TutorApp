@@ -58,10 +58,7 @@
 
                             <Grid >
                               <Grid.RowDefinitions>
-                                <RowDefinition Height="33*"></RowDefinition>
-                                <RowDefinition Height="33*"></RowDefinition>
-                                <RowDefinition Height="33*"></RowDefinition>
-                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
                               </Grid.RowDefinitions>
                                                     
                               <StackLayout Grid.Row="0" >
@@ -74,10 +71,10 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Start"
+                                HorizontalOptions="Center"
                                 VerticalOptions="Center"/>
                             </StackLayout>
-                            <StackLayout Grid.Row="1"   >
+                            <StackLayout Grid.Row="0"   >
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="aa"/>
                                 </StackLayout.GestureRecognizers>
@@ -87,10 +84,10 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Start"
+                                HorizontalOptions="Center"
                                 VerticalOptions="Center"/>
                             </StackLayout>
-                            <StackLayout Grid.Row="2"   >
+                            <StackLayout Grid.Row="0"   >
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTapped2" CommandParameter="aa"/>
                                 </StackLayout.GestureRecognizers>
@@ -100,7 +97,7 @@
                                 BorderThickness="0"
                                 BorderColor="#03A9F4"
                                 Aspect="AspectFill"
-                                HorizontalOptions="Start"
+                                HorizontalOptions="Center"
                                 VerticalOptions="Center"/>
                             </StackLayout>
 
