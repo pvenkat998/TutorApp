@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TutorApp2.Views.ShowPostComment">
+    <ContentPage.Content>
+        <ScrollView Padding="0,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="300"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="200"></RowDefinition>
+                        <!--image-->
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer  CommandParameter="{Binding CID}"/>
+                    </Grid.GestureRecognizers>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="1" Font="30,Bold" Text="{Binding CommentorName}"  HorizontalOptions="Center"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" >
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                            <ColumnDefinition Width="50*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="PostPic" Grid.Column="0" Aspect="AspectFill" Source="{Binding CommentPicPath}" HorizontalOptions="Center"></Image>
+                        <Label x:Name="PostCont" Grid.Column="1"  Text="{Binding Comment}"  />
+
+                    </Grid>
+                    <Label Grid.Row="2" Font="20,Bold" Text="Comments"></Label>
+                    <ListView x:Name="Comment" Grid.Row="3"  HasUnevenRows="True" >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <ViewCell.View>
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" ></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label Font="Bold" Grid.Row="0" Text="{Binding CommentorName}"></Label>
+                                            <Grid Grid.Row="1" >
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer  CommandParameter="{Binding CID}" />
+                                                </Grid.GestureRecognizers>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Label  Grid.Column="0" Text="{Binding Comment}"  />
+                                            </Grid>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Row="1" ColumnSpacing="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="270"></ColumnDefinition>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                </Grid>
+                <Image Grid.Row="2" x:Name="image"></Image>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

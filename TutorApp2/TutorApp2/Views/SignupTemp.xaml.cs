@@ -14,28 +14,36 @@ namespace TutorApp2.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignupTemp : ContentPage
     {
+        public int GenerateRandomNo()
+        {
+            int _min = 1000;
+            int _max = 9999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
+        }
         public SignupTemp()
         {
             InitializeComponent();
         }
         void Signup(object sender, EventArgs e)
         {
+
+            int x = GenerateRandomNo();
             try
             {
-
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                mail.From = new MailAddress("pvenkat998@gmail.com");
+                mail.From = new MailAddress("pahonedu@gmail.com");
                 mail.To.Add("animegamingrevolutionary@gmail.com");
-                mail.Subject = "ez";
-                mail.Body = "why so ez";
+                mail.Subject = "Confirmation code ";
+                mail.Body = "The code is" +x ;
 
                 SmtpServer.Port = 587;
                 SmtpServer.Host = "smtp.gmail.com";
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("pvenkat998@gmail.com", "itaminokami");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("pahonedu@gmail.com", "TutorApp7!");
 
                 SmtpServer.Send(mail);
             }
@@ -43,28 +51,9 @@ namespace TutorApp2.Views
             {
                 DisplayAlert("Faild", ex.Message, "OK");
             }
-            try
-            {
 
-                TransferUtilityDownloadRequest request = new TransferUtilityDownloadRequest();
-                request.BucketName = "tutorapp" + @"/" + "profilepic";
-                request.Key = "default.jpg";
-                request.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "default.jpg");
+            Navigation.PushModalAsync(new SignupTempConfPage(Email.Text, Name.Text,x,Password.Text));
 
-                System.Threading.CancellationToken cancellationToken = new System.Threading.CancellationToken();
-                App.s3utility.DownloadAsync(request, cancellationToken).ConfigureAwait(true);
-            }
-            catch
-            {
-
-            }
-            App.userdata_v1 tosave_info = new App.userdata_v1()
-            {
-                email = Email.Text,
-                surname = Name.Text,
-
-            };
-            App.context.SaveAsync(tosave_info);
         }
         void Sensei(object sender, EventArgs e)
         {

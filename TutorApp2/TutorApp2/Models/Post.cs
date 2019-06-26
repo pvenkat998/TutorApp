@@ -32,6 +32,19 @@ namespace TutorApp2.Models
         public string ParentCID { get; set; }
         public DateTime CommentTime { get; set; }
     }
+    public class LRComm
+    {
+        public string CID { get; set; }
+        public string CommentPicPath { get; set; }
+        public string CommentorName { get; set; }
+        public string CommentorEmail { get; set; }
+        public string Comment { get; set; }
+        public string ParentorChild { get; set; }
+        public string ParentCID { get; set; }
+        public int PicCol { get; set; }
+        public int LabCol { get; set; }
+        public DateTime CommentTime { get; set; }
+    }
     [DynamoDBTable("forum_posts")]
     public class Post
     {

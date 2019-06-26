@@ -20,9 +20,9 @@
                 <Label x:Name="longi" Text=""></Label>
                 <Label x:Name="dist" Text=""></Label>
                 <Label x:Name="Lbl_Username" Text="Username" />
-                <Entry x:Name="Entry_Username" Placeholder="Username" Text="{Binding Email}"/>
+                 <Entry x:Name="Entry_Username" x:FieldModifier="public" Placeholder="Username" Text="{Binding Email}"/>
                 <Label x:Name="Lbl_Password" Text="Password" />
-                <Entry x:Name="Entry_Password" Placeholder="Password" Text="{Binding password}"/>
+                <Entry x:Name= "Entry_Password" x:FieldModifier="public" Placeholder="Password" Text="{Binding password}"/>
                 <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignIn"/>
                 <Button x:Name="Btn_Redirsignup" Text="Sign up" Clicked="Redirsignup"/>
                 <Button x:Name="Btn_takephoto" Text="Take Photo" Clicked="Takephoto"/>

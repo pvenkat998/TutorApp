@@ -16,6 +16,7 @@ using Xamarin.Forms.Xaml;
 namespace TutorApp2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class ShowPost : ContentPage
     {
         string uppath = "";
@@ -41,16 +42,25 @@ namespace TutorApp2.Views
             }
             BindingContext = App.CurrentPost;
             InitializeComponent();
+            if (File.Exists(dlreq.FilePath))
+            {
+            }
+            else
+            {
+                PostCont.SetValue(Grid.ColumnProperty, 0);
+            }
             if (App.CurrentPost.Comments == null)
             {
             }
             else
             {
                 List<Comm> worklist = App.CurrentPost.Comments.Where(x => x.ParentCID == null || x.ParentCID == "").ToList();
+                int count = worklist.Count();
+                List<LRComm> comlist = new List<LRComm>();
                 dlreq.BucketName = "tutorapp" + @"/" + "postpics" + @"/"+"commentpics";
                 // choose to load all images or just images in comm but not subcomm 
                 int i;
-                for ( i=0;i< worklist.Count();i++){
+                for ( i=0;i< count; i++){
                     dlreq.Key = worklist[i].CID + "_" + "1.jpg"; //file name up in S3
                     dlreq.FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), worklist[i].CID + "_" + "1.jpg"); //local file name
                     try
@@ -63,9 +73,31 @@ namespace TutorApp2.Views
                         worklist[i].CommentPicPath = "";
 
                     }
+                    comlist.Add(new LRComm { CID = worklist[i].CID });
+                   // comlist[i].CID = worklist[i].CID;
+                    comlist[i].CommentPicPath = worklist[i].CommentPicPath;
+                    comlist[i].CommentorName = worklist[i].CommentorName;
+                    comlist[i].CommentorEmail = worklist[i].CommentorEmail;
+                    comlist[i].Comment = worklist[i].Comment;
+                    comlist[i].ParentorChild = worklist[i].ParentorChild;
+                    comlist[i].ParentCID = worklist[i].ParentCID;
+                    comlist[i].CommentTime = worklist[i].CommentTime;
+                    InitializeComponent();
+                    if (File.Exists(dlreq.FilePath))
+                    {
+                        comlist[i].LabCol = 1;
+                        comlist[i].PicCol = 0;
+                    }
+                    else
+                    {
+                        comlist[i].LabCol = 0;
+                        comlist[i].PicCol = 1;
+                    }
                 }
-                Comment.ItemsSource = worklist;
+                Comment.ItemsSource = comlist;
+                
             }
+
         }
         async void Updatecomments(object sender, EventArgs e)
         {
@@ -97,6 +129,7 @@ namespace TutorApp2.Views
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
         }
+
         async void Updatesubcomments(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -139,6 +172,15 @@ namespace TutorApp2.Views
             }
             await App.context.SaveAsync(App.CurrentPost);
             comment.Text = "";
+        }
+        async void ShowCommentPage(object sender,EventArgs e)
+        {
+            TappedEventArgs eventargs = e as TappedEventArgs;
+
+            string CID = eventargs.Parameter.ToString();
+
+            await Navigation.PushModalAsync(new ShowPostComment(CID));
+
         }
         async void ShowReplies(object sender, EventArgs e)
         {
